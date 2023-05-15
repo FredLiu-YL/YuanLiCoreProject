@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace YuanliCore.Motion.Marzhauser
 {
     /// <summary>
-    /// 
+    /// Marzhauser 控制卡 Library
     /// </summary>
     public static class TangoLib
     {
