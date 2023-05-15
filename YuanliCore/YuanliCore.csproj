@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7794CBB3-58F6-4E99-9AB2-C3A257A361A9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YuanliCore</RootNamespace>
+    <AssemblyName>YuanliCore</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cognex.VisionPro, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Blob, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Blob.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Blob.Controls, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Blob.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.CalibFix, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.CalibFix.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Caliper, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Caliper.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Caliper.Controls, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Caliper.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Controls, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Core, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Dimensioning, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Dimensioning.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.Display.Controls, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.Display.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ImageFile, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.ImageFile.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ImageProcessing, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.ImageProcessing.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.ImageProcessing.Controls, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.ImageProcessing.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.PatInspect, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.PatInspect.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.PatInspect.Controls, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.PatInspect.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.PMAlign, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.PMAlign.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.PMAlign.Controls, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.PMAlign.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.SearchMax, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.SearchMax.dll</HintPath>
+    </Reference>
+    <Reference Include="Cognex.VisionPro.SearchMax.Controls, Version=71.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.SearchMax.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.1.0\lib\net462\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=1.0.1.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.7.0\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.9.1\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Spatial, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Spatial.0.6.0\lib\net461\MathNet.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Coordination, Version=5.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.Coordination.5.1.2\lib\net461\Nito.AsyncEx.Coordination.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Tasks, Version=5.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.Tasks.5.1.2\lib\net461\Nito.AsyncEx.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.Collections.Deque, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.Collections.Deque.1.1.1\lib\net461\Nito.Collections.Deque.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.Disposables, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.Disposables.2.2.1\lib\net461\Nito.Disposables.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive, Version=5.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.5.0.0\lib\net472\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ueyedotnet">
+      <HintPath>..\Library\ueyedotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AffineTransform\CogAffineTransform.cs" />
+    <Compile Include="AffineTransform\HAffineTransform.cs" />
+    <Compile Include="Camera\IDS\ueyeCamera.cs" />
+    <Compile Include="Camera\SimulateCamera.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="CommonExtension\CamerEX.cs" />
+    <Compile Include="CommonExtension\FrameEX.cs" />
+    <Compile Include="CommonExtension\RxLinq.cs" />
+    <Compile Include="CommonExtension\SystemDrawingEx.cs" />
+    <Compile Include="ImageProcess\Blob\BlobParams.cs" />
+    <Compile Include="ImageProcess\Blob\CogBlobControl.xaml.cs">
+      <DependentUpon>CogBlobControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Blob\CogBlobDetector.cs" />
+    <Compile Include="ImageProcess\Blob\CogBlobWindow.xaml.cs">
+      <DependentUpon>CogBlobWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Caliper\CaliperParams.cs" />
+    <Compile Include="ImageProcess\Caliper\Circle\FindCircleParam.cs" />
+    <Compile Include="ImageProcess\Caliper\CogGapCaliper.cs" />
+    <Compile Include="ImageProcess\Caliper\CogCaliperControl.xaml.cs">
+      <DependentUpon>CogCaliperControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Caliper\CogCaliperWindow.xaml.cs">
+      <DependentUpon>CogCaliperWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Caliper\Ellipse\CogEllipseCaliper.cs" />
+    <Compile Include="ImageProcess\Caliper\Ellipse\CogEllipseCaliperControl.xaml.cs">
+      <DependentUpon>CogEllipseCaliperControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Caliper\Ellipse\CogEllipseCaliperWindow.xaml.cs">
+      <DependentUpon>CogEllipseCaliperWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Caliper\Ellipse\FindEllipseParam.cs" />
+    <Compile Include="ImageProcess\Caliper\Line\CogLineCaliper.cs" />
+    <Compile Include="ImageProcess\Caliper\Line\CogLineCaliperControl.xaml.cs">
+      <DependentUpon>CogLineCaliperControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Caliper\Line\CogLineCaliperWindow.xaml.cs">
+      <DependentUpon>CogLineCaliperWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Caliper\Line\FindLineParam.cs" />
+    <Compile Include="ImageProcess\CogCommon.cs" />
+    <Compile Include="ImageProcess\CogDisplayer.xaml.cs">
+      <DependentUpon>CogDisplayer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\CogDisplayText.cs" />
+    <Compile Include="ImageProcess\CogFixture.cs" />
+    <Compile Include="ImageProcess\CogFixtureLocate.cs" />
+    <Compile Include="ImageProcess\CogLineSearch.cs" />
+    <Compile Include="ImageProcess\CogMethod.cs" />
+    <Compile Include="ImageProcess\CogParamEditor.cs" />
+    <Compile Include="ImageProcess\CogProcess.cs" />
+    <Compile Include="ImageProcess\ImageConvert\CogImageConvert.cs" />
+    <Compile Include="ImageProcess\ImageConvert\CogImageConvertParams.cs" />
+    <Compile Include="ImageProcess\ImageConvert\CogImageConvertWindow.xaml.cs">
+      <DependentUpon>CogImageConvertWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\ImageConvert\ImageConvertControl.xaml.cs">
+      <DependentUpon>ImageConvertControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Match\CogSearchMaxTool\CogSearchMax.cs" />
+    <Compile Include="ImageProcess\Match\CogSearchMaxTool\CogSearchMaxControl.xaml.cs">
+      <DependentUpon>CogSearchMaxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Match\CogSearchMaxTool\CogSearchMaxWindow.xaml.cs">
+      <DependentUpon>CogSearchMaxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Match\CogSearchMaxTool\SearchMaxParams.cs" />
+    <Compile Include="ImageProcess\Match\PMAligntool\CogMatcher.cs" />
+    <Compile Include="ImageProcess\Match\PMAligntool\CogMatchWindow.xaml.cs">
+      <DependentUpon>CogMatchWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Match\PMAligntool\PatMaxControl.xaml.cs">
+      <DependentUpon>PatMaxControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\Match\PMAligntool\PatmaxParams.cs" />
+    <Compile Include="ImageProcess\PatternComparison\CogPatInspect.cs" />
+    <Compile Include="ImageProcess\PatternComparison\CogPatInspectControl.xaml.cs">
+      <DependentUpon>CogPatInspectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\PatternComparison\CogPatInspectParams.cs" />
+    <Compile Include="ImageProcess\PatternComparison\CogPatInspectWindow.xaml.cs">
+      <DependentUpon>CogPatInspectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\YuanliVision.cs" />
+    <Compile Include="Interface\AbstractRecipe.cs" />
+    <Compile Include="Interface\IBlobDetector.cs" />
+    <Compile Include="Interface\ICaliper.cs" />
+    <Compile Include="Interface\ICamera.cs" />
+    <Compile Include="Interface\IMatcher.cs" />
+    <Compile Include="Interface\IMotioncontroller.cs" />
+    <Compile Include="Interface\ITransform.cs" />
+    <Compile Include="Interface\Motion\Axis.cs" />
+    <Compile Include="Interface\Motion\AxisInfo.cs" />
+    <Compile Include="Interface\Motion\MotionVelocity.cs" />
+    <Compile Include="Interface\Motion\SignalDI.cs" />
+    <Compile Include="Interface\Motion\SignalDO.cs" />
+    <Compile Include="Logger\LoggerUC.xaml.cs">
+      <DependentUpon>LoggerUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Motion\Marzhauser\TangoController.cs" />
+    <Compile Include="Motion\Marzhauser\TangoEX.cs" />
+    <Compile Include="Motion\SimulateMotionControllor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewControl\Shapes\AngleShape.cs" />
+    <Compile Include="ViewControl\Shapes\ImageCanvas.cs" />
+    <Compile Include="ViewControl\Shapes\RectShape.cs" />
+    <Compile Include="ViewControl\Shapes\ROICircle.cs" />
+    <Compile Include="ViewControl\Shapes\ROICross.cs" />
+    <Compile Include="ViewControl\Shapes\ROICrossBox.cs" />
+    <Compile Include="ViewControl\Shapes\ROIDoubleRect.cs" />
+    <Compile Include="ViewControl\Shapes\ROILine.cs" />
+    <Compile Include="ViewControl\Shapes\ROIPolygon.cs" />
+    <Compile Include="ViewControl\Shapes\ROIRectangle.cs" />
+    <Compile Include="ViewControl\Shapes\ROIRotatedRect.cs" />
+    <Compile Include="ViewControl\Shapes\ROIShape.cs" />
+    <Compile Include="ViewControl\Shapes\ViewerCanvas.cs" />
+    <Compile Include="ViewControl\ViewConvert.cs" />
+    <Compile Include="ViewControl\VirtualCanvas.xaml.cs">
+      <DependentUpon>VirtualCanvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewControl\ZoomableCanvas\LinkedListExtensions.cs" />
+    <Compile Include="ViewControl\ZoomableCanvas\MathExtensions.cs" />
+    <Compile Include="ViewControl\ZoomableCanvas\PriorityQuadTree.cs" />
+    <Compile Include="ViewControl\ZoomableCanvas\PriorityQueue.cs" />
+    <Compile Include="ViewControl\ZoomableCanvas\RectExtensions.cs" />
+    <Compile Include="ViewControl\ZoomableCanvas\VirtualPanel.cs" />
+    <Compile Include="ViewControl\ZoomableCanvas\ZoomableCanvas.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Component\" />
+    <Folder Include="ImageProcess\CogPatInspectTool\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ImageProcess\Blob\CogBlobControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Blob\CogBlobWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Caliper\CogCaliperControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Caliper\CogCaliperWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Caliper\Ellipse\CogEllipseCaliperControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Caliper\Ellipse\CogEllipseCaliperWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Caliper\Line\CogLineCaliperControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Caliper\Line\CogLineCaliperWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\CogDisplayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\ImageConvert\CogImageConvertWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\ImageConvert\ImageConvertControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Match\CogSearchMaxTool\CogSearchMaxControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Match\CogSearchMaxTool\CogSearchMaxWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Match\PMAligntool\CogMatchWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\Match\PMAligntool\PatMaxControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\PatternComparison\CogPatInspectControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\PatternComparison\CogPatInspectWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Logger\LoggerUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewControl\VirtualCanvas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.4.7.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.7.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.7.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.7.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>
