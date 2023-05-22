@@ -81,14 +81,7 @@ namespace YuanliCore.ImageProcess
             }
 
         }
-        public void EditParameter(System.Drawing.Bitmap image)
-        {
-            if (image == null) throw new Exception("Image is null");
-            BitmapSource bmp = image.ToBitmapSource();
-            EditParameter(bmp);
-
-
-        }
+    
         /// <summary>
         /// 已經定位過的影像作編輯
         /// </summary>
@@ -221,6 +214,25 @@ namespace YuanliCore.ImageProcess
             differenceImage.ToBitmap().Save("D:\\11122.bmp");
             var result = FindBlob(differenceImage);
             return result;
+        }
+        public override void SetCogToolParameter(ICogTool cogTool)
+        {
+            var tool = cogTool as CogPatInspectTool;
+
+            var param = RunParams as CogPatInspectParams;
+            param.RunParams = tool.RunParams;
+         
+            param.Pattern = tool.Pattern;
+        }
+        public override ICogTool GetCogTool()
+        {
+            var param = (CogPatInspectParams)RunParams;
+    
+            patInspectTool.Pose = CogTransform;
+            patInspectTool.RunParams = param.RunParams;
+            patInspectTool.Pattern = param.Pattern;
+
+            return patInspectTool;
         }
         public override void Run()
         {
