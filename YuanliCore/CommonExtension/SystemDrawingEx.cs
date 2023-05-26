@@ -131,7 +131,7 @@ namespace System.Drawing
         /// <param name="Image">image对象</param>
         /// <param name="imageFormat">后缀名</param>
         /// <returns></returns>
-        public static Frame<byte[]>  ImageToBytes(this Image Image, System.Drawing.Imaging.ImageFormat imageFormat)
+        public static Frame<byte[]>  ImageToBytes(this Image Image)
         {
             if (Image == null) { return null; }
             byte[] data = null;
@@ -139,7 +139,8 @@ namespace System.Drawing
             {
                 using (Bitmap Bitmap = new Bitmap(Image))
                 {
-                    Bitmap.Save(ms, imageFormat);
+                 
+                    Bitmap.Save(ms, Image.RawFormat);
                     ms.Position = 0;
                     data = new byte[ms.Length];
                     ms.Read(data, 0, Convert.ToInt32(ms.Length));

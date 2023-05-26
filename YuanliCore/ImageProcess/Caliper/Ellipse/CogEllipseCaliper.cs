@@ -56,7 +56,23 @@ namespace YuanliCore.ImageProcess.Caliper
 
             Dispose();
         }
-       
+        public override void EditParameter(ICogImage cogImage)
+        {
+   
+            if (cogImage == null) throw new Exception("Image is null");
+            cogCaliperWindow = new CogEllipseCaliperWindow(cogImage);
+
+
+            cogCaliperWindow.CaliperParam = (FindEllipseParam)RunParams;
+            cogCaliperWindow.ShowDialog();
+
+
+            RunParams = cogCaliperWindow.CaliperParam;
+
+
+            Dispose();
+
+        }
         public void CogEditParameter()
         {
             if (CogFixtureImage == null) throw new Exception("locate is not yet complete");
@@ -111,7 +127,7 @@ namespace YuanliCore.ImageProcess.Caliper
         public override void SetCogToolParameter(ICogTool cogTool)
         {
             var tool = cogTool as CogFindEllipseTool;
-
+         
             var param = RunParams as FindEllipseParam;
             param.RunParams = tool.RunParams;
            
@@ -123,6 +139,7 @@ namespace YuanliCore.ImageProcess.Caliper
 
             return EllipsecaliperTool;
         }
+
         public override void Run()
         {
             if (CogFixtureImage == null) throw new Exception("Image does not exist");

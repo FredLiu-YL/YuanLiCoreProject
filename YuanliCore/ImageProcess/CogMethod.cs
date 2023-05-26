@@ -24,18 +24,25 @@ namespace YuanliCore.ImageProcess
         /// 對位後的圖片(使用Vision pro 方法校正過 )
         /// </summary>
         public ICogImage CogFixtureImage { get; set; }
+   
+
         public CogTransform2DLinear CogTransform { get; set; }
         public MethodName MethodName { get => RunParams.Methodname; set { RunParams.Methodname = value; } }
 
         public abstract void Dispose();
       
         public abstract void SetCogToolParameter(ICogTool cogTool);
+
         public abstract ICogTool GetCogTool();
+ 
         /// <summary>
         /// 開啟編輯參數視窗
         /// </summary>
         /// <param name="image"></param>
         public abstract void EditParameter(BitmapSource image);
+
+        public abstract void EditParameter(ICogImage cogImage);
+
         /// <summary>
         /// 開啟編輯參數視窗
         /// </summary>
@@ -48,6 +55,9 @@ namespace YuanliCore.ImageProcess
 
 
         }
+       
+        
+        
         public abstract CogParameter RunParams { get; set; }
 
 

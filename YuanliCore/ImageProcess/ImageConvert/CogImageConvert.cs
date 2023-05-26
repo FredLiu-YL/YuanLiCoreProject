@@ -72,6 +72,33 @@ namespace YuanliCore.ImageProcess
             }
 
         }
+        public override void EditParameter(ICogImage cogImage)
+        {
+            try {
+
+                if (cogImage == null) throw new Exception("Image is null");
+
+                cogImageConvertWindow = new CogImageConvertWindow(cogImage);
+
+                CogImageConvertParams param = (CogImageConvertParams)RunParams;
+                cogImageConvertWindow.ImageConvertParam = param;
+                cogImageConvertWindow.ShowDialog();
+
+                CogImageConvertParams patmaxparams = cogImageConvertWindow.ImageConvertParam;
+
+                param = patmaxparams;
+
+                Dispose();
+
+            }
+            catch (Exception ex) {
+
+                throw ex;
+            }
+            finally {
+
+            }
+        }
         public void EditParameter(System.Drawing.Bitmap image)
         {
             if (image == null) throw new Exception("Image is null");

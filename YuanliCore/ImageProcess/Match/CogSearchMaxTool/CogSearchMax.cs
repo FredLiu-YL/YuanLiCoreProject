@@ -73,7 +73,36 @@ namespace YuanliCore.ImageProcess.Match
             }
 
         }
-     
+        public override void EditParameter(ICogImage cogImage)
+        {
+            try {
+
+                if (cogImage == null) throw new Exception("Image is null");
+
+                cogMatchWindow = new CogSearchMaxWindow(cogImage);
+
+                var param = (SearchMaxParams)RunParams;
+                cogMatchWindow.PatmaxParam = param;
+                cogMatchWindow.ShowDialog();
+
+                SearchMaxParams patmaxparams = cogMatchWindow.PatmaxParam;
+
+                var sampleImage = cogMatchWindow.GetPatternImage();
+
+                param = patmaxparams;
+                if (sampleImage != null)
+                    param.PatternImage = sampleImage.ToByteFrame();
+                Dispose();
+
+            }
+            catch (Exception ex) {
+
+                throw ex;
+            }
+            finally {
+
+            }
+        }
         /// <summary>
         /// 已經定位過的影像作編輯
         /// </summary>
@@ -202,6 +231,8 @@ namespace YuanliCore.ImageProcess.Match
 
             return alignTool;
         }
+
+        
     }
 
 }

@@ -58,7 +58,18 @@ namespace YuanliCore.ImageProcess.Caliper
 
             Dispose();
         }
-      
+        public override void EditParameter(ICogImage cogImage)
+        {
+            cogCaliperWindow = new CogCaliperWindow(cogImage);
+
+            cogCaliperWindow.CaliperParam = (CaliperParams)RunParams;
+            cogCaliperWindow.ShowDialog();
+
+            RunParams = cogCaliperWindow.CaliperParam;
+
+            Dispose();
+
+        }
         public void CogEditParameter()
         {
             if (CogFixtureImage == null) throw new Exception("locate is not yet complete");

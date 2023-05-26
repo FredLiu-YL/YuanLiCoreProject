@@ -16,7 +16,7 @@ namespace YuanliCore.ImageProcess.Blob
     {
         private CogBlobTool blobTool;
         private CogBlobWindow cogBlobWindow;
-
+  
         public CogBlobDetector()
         {
 
@@ -36,6 +36,8 @@ namespace YuanliCore.ImageProcess.Blob
         }
         public override CogParameter RunParams { get; set; }
         public BlobDetectorResult[] DetectorResults { get; set; }
+
+
         public override void Dispose()
         {
             if (cogBlobWindow != null)
@@ -56,6 +58,18 @@ namespace YuanliCore.ImageProcess.Blob
 
 
             Dispose();
+        }
+
+        public override void EditParameter(ICogImage cogImage) 
+        {
+            cogBlobWindow = new CogBlobWindow(cogImage);
+            cogBlobWindow.BlobParam = (BlobParams)RunParams;
+            cogBlobWindow.ShowDialog();
+
+            RunParams = cogBlobWindow.BlobParam;
+
+            Dispose();
+
         }
         public void CogEditParameter()
         {
@@ -155,7 +169,7 @@ namespace YuanliCore.ImageProcess.Blob
                 Record = blobTool.CreateLastRunRecord().SubRecords[0];
             }
 
-
+ 
             return results;
         }
         public override void SetCogToolParameter(ICogTool cogTool)
