@@ -25,10 +25,11 @@ namespace YuanliCore.Logger
     public partial class LoggerUC : UserControl, INotifyPropertyChanged
     {
         private string mainLog;
-        private string message;
+      
 
         private static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
         private static readonly DependencyProperty MachineNameProperty = DependencyProperty.Register(nameof(MachineName), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("Machine", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
+        private static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata(" Log資訊", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
 
         public LoggerUC()
         {
@@ -47,7 +48,12 @@ namespace YuanliCore.Logger
         }
 
         public string MainLog { get => mainLog; set => SetValue(ref mainLog, value); }
-
+        public string Title
+        {
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
+        }
+       
 
         private static void AddMessageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -65,7 +71,8 @@ namespace YuanliCore.Logger
 
             string str = $"{dateTime.ToString("G")} :{  dateTime.Millisecond}   {Message} \r\n";
             string path = $"{systemPath}\\AutoFocusMachine";
-            if (!Directory.Exists(path)) ; Directory.CreateDirectory(path);
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
 
             File.AppendAllText($"{path}\\Log.txt", str);

@@ -9,7 +9,7 @@
               x:Name="Logger">
 
     <Grid DataContext="{Binding ElementName=Logger}" >
-        <GroupBox Grid.Row="2" FontSize="20" Header="Log資訊">
+        <GroupBox Grid.Row="2" FontSize="20" Header="{Binding Title}"  >
             <TextBox  Name="TextBoxLog"   VerticalScrollBarVisibility="Visible"   Text="{Binding MainLog}" MaxLines="30"    />
         </GroupBox>
     </Grid>

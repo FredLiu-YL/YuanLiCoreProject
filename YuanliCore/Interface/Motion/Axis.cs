@@ -60,7 +60,7 @@ namespace YuanliCore.Interface
             await Task.Run(() => { controller.HomeCommand(AxisID); });
             isBusy = false;
         }
-        public async Task Stop()
+        public void Stop()
         {
             controller.StopCommand(AxisID);
             isStop = true;

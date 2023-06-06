@@ -98,7 +98,7 @@ namespace YuanliCore.ImageProcess.Match
 
         private void SetImage()
         {
-            tool.InputImage = (CogImage8Grey)Image;
+            tool.InputImage =  Image;
         }
 
         private void RefreshPatmaxParam()
