@@ -207,7 +207,6 @@
     <Compile Include="CommonExtension\FrameEX.cs" />
     <Compile Include="CommonExtension\RxLinq.cs" />
     <Compile Include="CommonExtension\SystemDrawingEx.cs" />
-    <Compile Include="Communication\TCPIP\HostCommunication.cs" />
     <Compile Include="ImageProcess\Blob\BlobParams.cs" />
     <Compile Include="ImageProcess\Blob\CogBlobControl.xaml.cs">
       <DependentUpon>CogBlobControl.xaml</DependentUpon>
@@ -330,7 +329,6 @@
     <Compile Include="ViewControl\ZoomableCanvas\ZoomableCanvas.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Communication\Rs232\" />
     <Folder Include="Component\" />
     <Folder Include="ImageProcess\CogPatInspectTool\" />
   </ItemGroup>
