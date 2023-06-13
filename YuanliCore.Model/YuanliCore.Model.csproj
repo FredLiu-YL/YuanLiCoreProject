@@ -116,6 +116,7 @@
     <Compile Include="CommonExtension\RxLinq.cs" />
     <Compile Include="CommonExtension\SystemDrawingEx.cs" />
     <Compile Include="Communication\TCPIP\HostCommunication.cs" />
+    <Compile Include="Component\AutoFocus\AutoFocusSystem.cs" />
     <Compile Include="Interface\AbstractRecipe.cs" />
     <Compile Include="Interface\ICamera.cs" />
     <Compile Include="Interface\IMotioncontroller.cs" />
