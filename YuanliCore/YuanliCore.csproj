@@ -314,7 +314,6 @@
     <Compile Include="ViewControl\ZoomableCanvas\ZoomableCanvas.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Component\" />
     <Folder Include="ImageProcess\CogPatInspectTool\" />
   </ItemGroup>
   <ItemGroup>
