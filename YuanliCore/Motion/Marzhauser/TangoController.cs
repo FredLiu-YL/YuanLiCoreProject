@@ -143,25 +143,25 @@ namespace YuanliCore.Motion.Marzhauser
                 {
                     case 1:
                         return posX;
-                        break;
+                       
 
                     case 2:
                         return posY;
-                        break;
+                    
 
 
                     case 3:
                         return posZ;
-                        break;
+                
 
 
                     case 4:
                         return posA;
-                        break;
+                    
 
                     default:
                         throw new Exception("Id Error");
-                        break;
+                       
                 }
             }
             catch (Exception ex)
@@ -221,7 +221,7 @@ namespace YuanliCore.Motion.Marzhauser
         {
             Int32 loc_err = TangoLib.LSX_GetAxisDirection(1, out int plXD, out int plYD, out int plZD, out int plAD);
 
-            switch (id)
+         /*   switch (id)
             {
                 case 1:
                     return (AxisDirection)plXD;
@@ -243,7 +243,7 @@ namespace YuanliCore.Motion.Marzhauser
 
                 default:
                     break;
-            }
+            }*/
 
 
             return AxisDirection.Forward;
@@ -277,12 +277,14 @@ namespace YuanliCore.Motion.Marzhauser
                     loc_err = TangoLib.LSX_SetAxisDirection(1, plXD, (int)direction, plZD, plAD);
                     break;
 
+              case 3:        
                     loc_err = TangoLib.LSX_SetAxisDirection(1, plXD, plYD, (int)direction, plAD);
-                case 3:
+              
                     break;
 
+                 case 4:       
                     loc_err = TangoLib.LSX_SetAxisDirection(1, plXD, plYD, plZD, (int)direction);
-                case 4:
+            
                     break;
 
                 default:
@@ -345,28 +347,28 @@ namespace YuanliCore.Motion.Marzhauser
                 case 1:
                     MotionVelocity velocityX = new MotionVelocity(motionVelX, motionAccVelX, motionDecVelX);
                     return velocityX;
-                    break;
+                 
 
                 case 2:
                     MotionVelocity velocityY = new MotionVelocity(motionVelY, motionAccVelY, motionDecVelY);
                     return velocityY;
-                    break;
+                 
 
 
                 case 3:
                     MotionVelocity velocityZ = new MotionVelocity(motionVelZ, motionAccVelZ, motionDecVelZ);
                     return velocityZ;
-                    break;
+                 
 
 
                 case 4:
                     MotionVelocity velocityA = new MotionVelocity(motionVelA, motionAccVelA, motionDecVelA);
                     return velocityA;
-                    break;
+                   
 
                 default:
                     throw new NotImplementedException("Axis  does not exist");
-                    break;
+               
             }
         }
 

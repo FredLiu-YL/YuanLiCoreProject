@@ -45,6 +45,19 @@ namespace YuanliCore.ImageProcess
             UpdateImage(bitmap);
 
         }
+
+        /// <summary>
+        /// 直接傳入cognex的圖像格式  ，為了符合cog 的 變換矩陣流程
+        /// </summary>
+        /// <param name="cogImage"></param>
+        public CogPatInspectWindow(ICogImage cogImage)
+        {
+
+            InitializeComponent();
+
+            CogImage = cogImage;
+
+        }
         /// <summary>
         /// 直接傳入cognex的圖像格式  ，為了符合cog 的 變換矩陣流程
         /// </summary>

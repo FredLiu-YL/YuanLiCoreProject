@@ -72,6 +72,35 @@ namespace YuanliCore.ImageProcess.Match
             }
 
         }
+        public override void EditParameter(ICogImage cogImage)
+        {
+            try {
+
+                if (cogImage == null) throw new Exception("Image is null");
+                cogMatchWindow = new CogMatchWindow(cogImage);
+
+                var param = (PatmaxParams)RunParams;
+                cogMatchWindow.PatmaxParam = param;
+                cogMatchWindow.ShowDialog();
+                PatmaxParams patmaxparams = cogMatchWindow.PatmaxParam;
+                var sampleImage = cogMatchWindow.GetPatternImage();
+
+                param = patmaxparams;
+                if (sampleImage != null)
+                    param.PatternImage = sampleImage.ToByteFrame();
+                Dispose();
+
+            }
+            catch (Exception ex) {
+
+                throw ex;
+            }
+            finally {
+
+            }
+
+        }
+
         public void EditParameter(System.Drawing.Bitmap image)
         {
             if (image == null) throw new Exception("Image is null");

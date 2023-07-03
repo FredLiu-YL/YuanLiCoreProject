@@ -90,7 +90,38 @@ namespace YuanliCore.ImageProcess
             }
 
         }
+        public override void EditParameter(ICogImage cogImage)
+        {
+            try
+            {
 
+                if (cogImage == null) throw new Exception("Image is null");
+
+                CogPatInspectWindow = new CogPatInspectWindow(cogImage);
+
+                CogPatInspectParams param = (CogPatInspectParams)RunParams;
+                CogPatInspectWindow.PatInspectParams = param;
+                CogPatInspectWindow.ShowDialog();
+
+
+                CogPatInspectParams inspectparams = CogPatInspectWindow.PatInspectParams;
+
+                param = inspectparams;
+
+                Dispose();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+
+            }
+
+        }
         /// <summary>
         /// 已經定位過的影像作編輯
         /// </summary>

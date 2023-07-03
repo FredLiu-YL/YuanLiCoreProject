@@ -45,7 +45,7 @@ namespace YuanliCore.ImageProcess
 
         public BitmapSource ReadImage(string fileName)
         {
-            CogImageFileTool cog;
+  
             CogImageFile cogImage = new CogImageFile();
             cogImage.Open(fileName, CogImageFileModeConstants.Read);
             CogImage8Grey img = (CogImage8Grey)cogImage[0];

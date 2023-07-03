@@ -143,23 +143,23 @@ namespace System
         /// <returns>Parameter a or b, whichever is smaller.</returns>
         /// <param name="a">The first of two 8-bit signed integers to compare.</param>
         /// <param name="b">The second of two 8-bit signed integers to compare.</param>
-        [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        public static sbyte AtMost(this sbyte a, sbyte b) { return Math.Min(a, b); }
+  //      [CLSCompliant(false)]
+   //     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+   //     public static sbyte AtMost(this sbyte a, sbyte b) { return Math.Min(a, b); }
         /// <summary>Returns the smaller of two 16-bit unsigned integers.</summary>
         /// <returns>Parameter a or b, whichever is smaller.</returns>
         /// <param name="a">The first of two 16-bit unsigned integers to compare.</param>
         /// <param name="b">The second of two 16-bit unsigned integers to compare.</param>
-        [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        public static ushort AtMost(this ushort a, ushort b) { return Math.Min(a, b); }
+   //     [CLSCompliant(false)]
+   //     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+   //     public static ushort AtMost(this ushort a, ushort b) { return Math.Min(a, b); }
         /// <summary>Returns the smaller of two 32-bit unsigned integers.</summary>
         /// <returns>Parameter a or b, whichever is smaller.</returns>
         /// <param name="a">The first of two 32-bit unsigned integers to compare.</param>
         /// <param name="b">The second of two 32-bit unsigned integers to compare.</param>
-        [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        public static uint AtMost(this uint a, uint b) { return Math.Min(a, b); }
+  //      [CLSCompliant(false)]
+ //       [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+ //       public static uint AtMost(this uint a, uint b) { return Math.Min(a, b); }
         /// <summary>Returns the smaller of two 64-bit unsigned integers.</summary>
         /// <returns>Parameter a or b, whichever is smaller.</returns>
         /// <param name="a">The first of two 64-bit unsigned integers to compare.</param>
@@ -222,33 +222,33 @@ namespace System
         /// <param name="value">The value to restrict between a and b.</param>
         /// <param name="a">The first of two 8-bit signed integers to compare.</param>
         /// <param name="b">The second of two 8-bit signed integers to compare.</param>
-        [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        public static sbyte Clamp(this sbyte value, sbyte a, sbyte b) { return a < b ? Math.Min(Math.Max(value, a), b) : Math.Max(Math.Min(value, a), b); }
+  //      [CLSCompliant(false)]
+   //     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+  //      public static sbyte Clamp(this sbyte value, sbyte a, sbyte b) { return a < b ? Math.Min(Math.Max(value, a), b) : Math.Max(Math.Min(value, a), b); }
         /// <summary>Returns the value constrained inclusively between two 16-bit unsigned integers.</summary>
         /// <returns>A value between a and b inclusively.</returns>
         /// <param name="value">The value to restrict between a and b.</param>
         /// <param name="a">The first of two 16-bit unsigned integers to compare.</param>
         /// <param name="b">The second of two 16-bit unsigned integers to compare.</param>
-        [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        public static ushort Clamp(this ushort value, ushort a, ushort b) { return a < b ? Math.Min(Math.Max(value, a), b) : Math.Max(Math.Min(value, a), b); }
+    //    [CLSCompliant(false)]
+   //     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+   //     public static ushort Clamp(this ushort value, ushort a, ushort b) { return a < b ? Math.Min(Math.Max(value, a), b) : Math.Max(Math.Min(value, a), b); }
         /// <summary>Returns the value constrained inclusively between two 32-bit unsigned integers.</summary>
         /// <returns>A value between a and b inclusively.</returns>
         /// <param name="value">The value to restrict between a and b.</param>
         /// <param name="a">The first of two 32-bit unsigned integers to compare.</param>
         /// <param name="b">The second of two 32-bit unsigned integers to compare.</param>
-        [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        public static uint Clamp(this uint value, uint a, uint b) { return a < b ? Math.Min(Math.Max(value, a), b) : Math.Max(Math.Min(value, a), b); }
+    //    [CLSCompliant(false)]
+   //     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+   //     public static uint Clamp(this uint value, uint a, uint b) { return a < b ? Math.Min(Math.Max(value, a), b) : Math.Max(Math.Min(value, a), b); }
         /// <summary>Returns the value constrained inclusively between two 64-bit unsigned integers.</summary>
         /// <returns>A value between a and b inclusively.</returns>
         /// <param name="value">The value to restrict between a and b.</param>
         /// <param name="a">The first of two 64-bit unsigned integers to compare.</param>
         /// <param name="b">The second of two 64-bit unsigned integers to compare.</param>
-        [CLSCompliant(false)]
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-        public static ulong Clamp(this ulong value, ulong a, ulong b) { return a < b ? Math.Min(Math.Max(value, a), b) : Math.Max(Math.Min(value, a), b); }
+    //    [CLSCompliant(false)]
+    //    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+    //    public static ulong Clamp(this ulong value, ulong a, ulong b) { return a < b ? Math.Min(Math.Max(value, a), b) : Math.Max(Math.Min(value, a), b); }
 
         /// <summary>Rounds a decimal value to the nearest integer.</summary>
         /// <returns>The integer nearest parameter value. If value is halfway between two integers, one of which is even and the other odd, then the even number is returned.</returns>
@@ -584,8 +584,8 @@ namespace System
         /// <summary>Returns a value indicating the sign of an 8-bit signed integer.</summary>
         /// <returns>A number indicating the sign of value.Number Description -1 value is less than zero. 0 value is equal to zero. 1 value is greater than zero.</returns>
         /// <param name="value">A signed number.</param>
-        [CLSCompliant(false)]
-        public static int Sign(this sbyte value) { return Math.Sign(value); }
+    //    [CLSCompliant(false)]
+   //     public static int Sign(this sbyte value) { return Math.Sign(value); }
 
         /// <summary>Returns the square root of a specified number.</summary>
         /// <returns><see cref="Math.Sqrt"/> for details.</returns>

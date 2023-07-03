@@ -385,7 +385,7 @@ namespace YuanliCore.Views.CanvasShapes
             get
             {
                 GeometryGroup geometry = new GeometryGroup();
-                int w = 100, h = 100;
+      //          int w = 100, h = 100;
             //    _rectangle1Geometry = new RectangleGeometry(new Rect(new Point(Column1,Row1) , new Point(Column2, Row2) ));
                 _rectangle1Geometry = new RectangleGeometry(new Rect(LengthX - InnerLengthX    , LengthY - InnerLengthY   , InnerLengthX*2, InnerLengthY*2));
   
