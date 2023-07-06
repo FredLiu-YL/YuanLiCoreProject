@@ -31,7 +31,7 @@ namespace YuanliCore.Motion
 
         public IEnumerable<SignalDI> IutputSignals => throw new NotImplementedException();
 
-        public IEnumerable<SignalDO> InputSignals => throw new NotImplementedException();
+        public IEnumerable<SignalDO> OutputSignals => throw new NotImplementedException();
 
         public AxisDirection GetAxisDirectionCommand(int id)
         {

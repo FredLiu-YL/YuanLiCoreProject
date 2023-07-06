@@ -15,7 +15,7 @@ namespace YuanliCore.ImageProcess
         /// <summary>
         /// 計算後的結果
         /// </summary>
-        public CogResult MethodResult { get; set; }
+        public CogBenchmark MethodResult { get; set; }
         /// <summary>
         /// 計算後的結果 圖片(Vision pro 用)
         /// </summary>

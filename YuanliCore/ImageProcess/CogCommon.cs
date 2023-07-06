@@ -184,7 +184,7 @@ namespace YuanliCore.ImageProcess
         protected abstract void LoadCogRecipe(string directoryPath, int id);
     }
 
-    public class CogResult
+    public class CogBenchmark
     {
         public Point EndPoint { get; protected set; }
         public Point BeginPoint { get; protected set; }

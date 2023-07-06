@@ -27,7 +27,7 @@ namespace YuanliCore.Interface
 
     }
    
-    public class CaliperResult : CogResult
+    public class CaliperResult : CogBenchmark
     {
         public CaliperResult(Point beginPoint, Point centerPoint, Point endPoint)
         {
@@ -45,7 +45,7 @@ namespace YuanliCore.Interface
     }
 
 
-    public class LineCaliperResult: CogResult
+    public class LineCaliperResult: CogBenchmark
     {
         public LineCaliperResult(Point beginPoint, Point endPoint, Point centerPoint ,double line)
         {
@@ -62,7 +62,7 @@ namespace YuanliCore.Interface
     }
 
 
-    public class EllipseCaliperResult : CogResult
+    public class EllipseCaliperResult : CogBenchmark
     {
         public EllipseCaliperResult()
         {
