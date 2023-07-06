@@ -44,11 +44,17 @@ namespace YuanliCore.ImageProcess
         }
         public override CogParameter RunParams { get; set; }
         public BlobDetectorResult[] DetectorResults { get; internal set; }
+        public double ContrastThreshold { get; set; }
+        public double AreaThreshold { get; set; }
 
         public override void Dispose()
         {
             if (CogPatInspectWindow != null)
                 CogPatInspectWindow.Dispose();
+            if (patInspectTool != null)
+                patInspectTool.Dispose();
+            if (blobTool != null)
+                blobTool.Dispose();
 
         }
 
@@ -251,7 +257,8 @@ namespace YuanliCore.ImageProcess
 
             var differenceImage = patInspectTool.Result.GetDifferenceImage(CogPatInspectDifferenceImageConstants.Absolute);
             differenceImage.ToBitmap().Save("D:\\11122.bmp");
-            var result = FindBlob(differenceImage);
+
+            var result = FindBlob(differenceImage, (int)ContrastThreshold, (int)AreaThreshold);
             return result;
         }
         public override void SetCogToolParameter(ICogTool cogTool)
