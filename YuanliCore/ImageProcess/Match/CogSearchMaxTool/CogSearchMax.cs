@@ -20,15 +20,17 @@ namespace YuanliCore.ImageProcess.Match
         private CogSearchMaxTool alignTool;
         private CogSearchMaxWindow cogMatchWindow;
 
-        public CogSearchMax(int id =1) 
+        public CogSearchMax(string toolName ="", int id =1) 
         {
             alignTool = new CogSearchMaxTool();
+            alignTool.Name =toolName;
             RunParams.Id = id;
         }
-        public CogSearchMax(CogParameter matcherParams)
+        public CogSearchMax(CogParameter matcherParams , string toolName )
         {
 
             alignTool = new CogSearchMaxTool();
+            alignTool.Name = toolName;
             RunParams = matcherParams;
         }
         public override CogParameter RunParams { get; set; } = new SearchMaxParams(101);

@@ -21,7 +21,7 @@ namespace YuanliCore.ImageProcess
         private CogImageConvertTool convertTool;
         private CogImageConvertWindow cogImageConvertWindow;
 
-        public CogImageConverter(int id =50)//ID需要自行設定 不然存檔會重複覆蓋 ， ID預設從 50開始
+        public CogImageConverter(string toolName = "", int id =50)//ID需要自行設定 不然存檔會重複覆蓋 ， ID預設從 50開始
         {
             convertTool = new CogImageConvertTool();
             RunParams.Id = id;

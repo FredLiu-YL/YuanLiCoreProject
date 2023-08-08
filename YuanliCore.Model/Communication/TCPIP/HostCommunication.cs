@@ -78,12 +78,12 @@ namespace YuanliCore.Communication
                 if (tcpClient==null || !tcpClient.Connected)
                     
                     tcpClient = tcpListener.AcceptTcpClient();
-        
+                int notMessageCount = 0;
                 while (isReceiver)
                 {
 
 
-
+                    int id = Thread.CurrentThread.ManagedThreadId;
                     stream = tcpClient.GetStream();
                     Console.WriteLine("等待 A 機器傳送訊息...");
 
@@ -96,7 +96,15 @@ namespace YuanliCore.Communication
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
                     Console.WriteLine("接收到訊息: " + message);
-
+                    if(message=="")
+                    {
+                        notMessageCount++;
+                        if (notMessageCount > 10)
+                        {
+                            tcpClient.Close();
+                            throw new Exception(" Is Disconnect"); 
+                        }
+                    }
                     // 執行相應的動作，例如切換 Home 狀態
                     ReceiverMessage?.Invoke(message);
                         // 執行 Home 相關的動作

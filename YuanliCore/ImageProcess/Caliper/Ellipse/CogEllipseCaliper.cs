@@ -20,7 +20,7 @@ namespace YuanliCore.ImageProcess.Caliper
         private CogFindEllipseTool EllipsecaliperTool;
         private CogEllipseCaliperWindow cogCaliperWindow;
 
-        public CogEllipseCaliper(int id = 20) //ID需要自行設定 不然存檔會重複覆蓋 ，Caliper 系列 ID預設從 20開始
+        public CogEllipseCaliper(string toolName = "",  int id = 20) //ID需要自行設定 不然存檔會重複覆蓋 ，Caliper 系列 ID預設從 20開始
         {
 
             EllipsecaliperTool = new CogFindEllipseTool();
