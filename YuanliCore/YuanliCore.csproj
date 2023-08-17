@@ -206,6 +206,7 @@
     <Compile Include="CommonExtension\IBlobDetector.cs" />
     <Compile Include="CommonExtension\ICaliper.cs" />
     <Compile Include="CommonExtension\IMatcher.cs" />
+    <Compile Include="CommonExtension\ISharpness.cs" />
     <Compile Include="CommonExtension\Matrix2D.cs" />
     <Compile Include="ImageProcess\Blob\BlobParams.cs" />
     <Compile Include="ImageProcess\Blob\CogBlobControl.xaml.cs">
@@ -247,6 +248,14 @@
     <Compile Include="ImageProcess\CogDisplayText.cs" />
     <Compile Include="ImageProcess\CogFixture.cs" />
     <Compile Include="ImageProcess\CogFixtureLocate.cs" />
+    <Compile Include="ImageProcess\CogImageSharpnessTool\CogFindImageSharpness.cs" />
+    <Compile Include="ImageProcess\CogImageSharpnessTool\CogFindImageSharpnessControl.xaml.cs">
+      <DependentUpon>CogFindImageSharpnessControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\CogImageSharpnessTool\CogFindImageSharpnessWindow.xaml.cs">
+      <DependentUpon>CogFindImageSharpnessWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageProcess\CogImageSharpnessTool\ImageSharpnessParam.cs" />
     <Compile Include="ImageProcess\CogLineSearch.cs" />
     <Compile Include="ImageProcess\CogMethod.cs" />
     <Compile Include="ImageProcess\CogParamEditor.cs" />
@@ -350,6 +359,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ImageProcess\CogDisplayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\CogImageSharpnessTool\CogFindImageSharpnessControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImageProcess\CogImageSharpnessTool\CogFindImageSharpnessWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
