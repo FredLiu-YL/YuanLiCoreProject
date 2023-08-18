@@ -29,21 +29,28 @@ namespace YuanliCore.Communication
 
 
             tcpListener = new TcpListener(ip, port);
-  
+
             buffer = new byte[1024];
 
             Open();
 
 
         }
+        /// <summary>
+        /// 接收到訊息
+        /// </summary>
         public event Action<string> ReceiverMessage;
+       /// <summary>
+       /// 確認連線成功
+       /// </summary>
+        public event Action ReceiverIsConnect;
         public event Action<Exception> ReceiverException;
 
 
         public void Open()
         {
             tcpListener.Start();
-          
+
             receiverTask = Task.Run(Receiver);
 
         }
@@ -53,7 +60,7 @@ namespace YuanliCore.Communication
             // 關閉客戶端連線
             tcpClient.Close();
             tcpListener.Stop();
-           
+
         }
         public bool IsConnect { get; set; }
 
@@ -64,7 +71,7 @@ namespace YuanliCore.Communication
             NetworkStream stream = tcpClient.GetStream();
 
             // 傳送指定的 Home 訊息給 B 機器        
-            byte[] data = Encoding.ASCII.GetBytes(message );
+            byte[] data = Encoding.ASCII.GetBytes(message);
             stream.Write(data, 0, data.Length);
 
         }
@@ -72,13 +79,13 @@ namespace YuanliCore.Communication
         private async Task Receiver()
         {
 
-            try                
+            try
             {
                 isReceiver = true;
-                if (tcpClient==null || !tcpClient.Connected)
-                    
+                if (tcpClient == null || !tcpClient.Connected)
                     tcpClient = tcpListener.AcceptTcpClient();
                 int notMessageCount = 0;
+                ReceiverIsConnect?.Invoke();
                 while (isReceiver)
                 {
 
@@ -96,32 +103,32 @@ namespace YuanliCore.Communication
                     string message = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
                     Console.WriteLine("接收到訊息: " + message);
-                    if(message=="")
+                    if (message == "")
                     {
                         notMessageCount++;
                         if (notMessageCount > 10)
                         {
                             tcpClient.Close();
-                            throw new Exception(" Is Disconnect"); 
+                            throw new Exception(" Is Disconnect");
                         }
                     }
                     // 執行相應的動作，例如切換 Home 狀態
                     ReceiverMessage?.Invoke(message);
-                        // 執行 Home 相關的動作
-            //            Send(message);
-                   
+                    // 執行 Home 相關的動作
+                    //            Send(message);
+
 
 
                     await Task.Delay(200);
                 }
-               
+
             }
             catch (Exception ex)
             {
                 ReceiverException?.Invoke(ex);
                 receiverTask = Task.Run(Receiver);
-              //  Close();
-                 
+                //  Close();
+
             }
         }
 
@@ -162,8 +169,8 @@ namespace YuanliCore.Communication
         {
             try
             {
-                if(!tcpClient.Connected)
-                tcpClient.Connect(ipAddress, port);
+                if (!tcpClient.Connected)
+                    tcpClient.Connect(ipAddress, port);
                 isReceiver = true;
 
                 receiverTask = Task.Run(Receiver);
@@ -196,7 +203,7 @@ namespace YuanliCore.Communication
         {
             isReceiver = false;
             stream.Close();
-             receiverTask.Wait();
+            receiverTask.Wait();
 
             tcpClient.Close();
             tcpClient.Dispose();
@@ -213,7 +220,7 @@ namespace YuanliCore.Communication
             // 傳送指定的 Home 訊息給 B 機器        
             byte[] data = Encoding.ASCII.GetBytes(message);
             stream.Write(data, 0, data.Length);
- 
+
         }
 
         private async Task Receiver()
@@ -237,7 +244,7 @@ namespace YuanliCore.Communication
                     if (message == "errTest123") throw new Exception($"Error Test . ThreadID :{Thread.CurrentThread.ManagedThreadId }");
                     // 執行相應的動作，例如切換 Home 狀態
                     ReceiverMessage?.Invoke(message);
-                    
+
 
                     await Task.Delay(200);
                 }
