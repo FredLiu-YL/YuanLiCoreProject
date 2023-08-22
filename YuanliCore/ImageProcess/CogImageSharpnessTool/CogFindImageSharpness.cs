@@ -27,6 +27,12 @@ namespace YuanliCore.ImageProcess
             sharpnessTool = new CogImageSharpnessTool();
             RunParams = new ImageSharpnessParam(0);
         }
+        public CogFindImageSharpness(string toolName = "", int id = 70) //ID需要自行設定 不然存檔會重複覆蓋 ，沒分類 系列 ID預設從 70開始
+        {
+
+            sharpnessTool = new CogImageSharpnessTool();
+            RunParams = new ImageSharpnessParam(id);
+        }
         public CogFindImageSharpness(CogParameter caliperParams)
         {
 
