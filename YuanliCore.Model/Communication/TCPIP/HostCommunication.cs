@@ -43,7 +43,7 @@ namespace YuanliCore.Communication
        /// <summary>
        /// 確認連線成功
        /// </summary>
-        public event Action ReceiverIsConnect;
+        public event Action<bool> ReceiverIsConnect;
         public event Action<Exception> ReceiverException;
 
 
@@ -85,7 +85,7 @@ namespace YuanliCore.Communication
                 if (tcpClient == null || !tcpClient.Connected)
                     tcpClient = tcpListener.AcceptTcpClient();
                 int notMessageCount = 0;
-                ReceiverIsConnect?.Invoke();
+                ReceiverIsConnect?.Invoke(true);
                 while (isReceiver)
                 {
 
@@ -126,6 +126,7 @@ namespace YuanliCore.Communication
             catch (Exception ex)
             {
                 ReceiverException?.Invoke(ex);
+                ReceiverIsConnect?.Invoke(false);
                 receiverTask = Task.Run(Receiver);
                 //  Close();
 

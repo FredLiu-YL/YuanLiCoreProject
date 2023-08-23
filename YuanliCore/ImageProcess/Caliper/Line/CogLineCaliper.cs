@@ -19,6 +19,12 @@ namespace YuanliCore.ImageProcess.Caliper
     {
         private CogFindLineTool linecaliperTool;
         private CogLineCaliperWindow cogCaliperWindow;
+        public CogLineCaliper(string toolName = "", int id = 20) //ID需要自行設定 不然存檔會重複覆蓋 ，Caliper 系列 ID預設從 20開始
+        {
+
+            linecaliperTool = new CogFindLineTool();
+            RunParams = new FindLineParam(id);
+        }
 
         public CogLineCaliper()
         {

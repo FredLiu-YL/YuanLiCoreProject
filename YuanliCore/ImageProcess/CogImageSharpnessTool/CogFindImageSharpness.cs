@@ -54,11 +54,11 @@ namespace YuanliCore.ImageProcess
             cogCaliperWindow = new CogFindImageSharpnessWindow(image);
 
 
-            cogCaliperWindow.CaliperParam = (ImageSharpnessParam)RunParams;
+            cogCaliperWindow.SharpnessParam = (ImageSharpnessParam)RunParams;
             cogCaliperWindow.ShowDialog();
 
 
-            RunParams = cogCaliperWindow.CaliperParam;
+            RunParams = cogCaliperWindow.SharpnessParam;
 
 
             Dispose();
@@ -70,10 +70,10 @@ namespace YuanliCore.ImageProcess
             if (cogImage == null) throw new Exception("Image is null");
             cogCaliperWindow = new CogFindImageSharpnessWindow(cogImage);
 
-            cogCaliperWindow.CaliperParam = (ImageSharpnessParam)RunParams;
+            cogCaliperWindow.SharpnessParam = (ImageSharpnessParam)RunParams;
             cogCaliperWindow.ShowDialog();
 
-            RunParams = cogCaliperWindow.CaliperParam;
+            RunParams = cogCaliperWindow.SharpnessParam;
 
             Dispose();
         }
@@ -84,15 +84,15 @@ namespace YuanliCore.ImageProcess
             cogCaliperWindow = new CogFindImageSharpnessWindow(CogFixtureImage);
 
 
-            cogCaliperWindow.CaliperParam = (ImageSharpnessParam)RunParams;
-            cogCaliperWindow.CaliperParam.Region.SelectedSpaceName = "@\\Fixture";
+            cogCaliperWindow.SharpnessParam = (ImageSharpnessParam)RunParams;
+            cogCaliperWindow.SharpnessParam.Region.SelectedSpaceName = "@\\Fixture";
             //  cogCaliperWindow.CaliperParam.Region.SelectedSpaceName = "@\\Fixture";
 
 
             cogCaliperWindow.ShowDialog();
 
 
-            RunParams = cogCaliperWindow.CaliperParam;
+            RunParams = cogCaliperWindow.SharpnessParam;
 
 
             Dispose();

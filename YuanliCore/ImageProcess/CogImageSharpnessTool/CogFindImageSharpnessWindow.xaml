@@ -34,7 +34,7 @@
             <RowDefinition Height="3.0*"/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
-        <local:FindImageSharpnessControl Image="{Binding CogImage}" CaliperParam="{Binding CaliperParam}"   />
+        <local:FindImageSharpnessControl Image="{Binding CogImage}" CaliperParam="{Binding SharpnessParam}"   />
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.4*"/>

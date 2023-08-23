@@ -27,7 +27,7 @@ namespace YuanliCore.ImageProcess
     {
         //  private Frame<byte[]> frame;
         private ICogImage cogImage;
-        private ImageSharpnessParam caliperParam = new ImageSharpnessParam(0);
+        private ImageSharpnessParam sharpnessParam = new ImageSharpnessParam(0);
         private bool isDispose =false;
         private bool isFullSelect = true;
         private bool isCenterSelect;
@@ -57,7 +57,7 @@ namespace YuanliCore.ImageProcess
         }
         //   public Frame<byte[]> Frame { get => frame; set => SetValue(ref frame, value); }
         public ICogImage CogImage { get => cogImage; set => SetValue(ref cogImage, value); }
-        public ImageSharpnessParam CaliperParam { get => caliperParam; set => SetValue(ref caliperParam, value); }
+        public ImageSharpnessParam SharpnessParam { get => sharpnessParam; set => SetValue(ref sharpnessParam, value); }
         public bool IsFullSelect   {  get => isFullSelect; set {  SetValue(ref isFullSelect, value);  SetResultSelect(); }  }
         public bool IsCenterSelect { get => isCenterSelect; set { SetValue(ref isCenterSelect, value); SetResultSelect(); } }
 
@@ -72,7 +72,7 @@ namespace YuanliCore.ImageProcess
 
         public ICommand OpenCommand => new RelayCommand(() =>
         {
-            switch (CaliperParam.ResultOutput) {
+            switch (SharpnessParam.ResultOutput) {
                 case ResultSelect.Full:
                     IsFullSelect = true;
                     break;
@@ -109,13 +109,13 @@ namespace YuanliCore.ImageProcess
         private void SetResultSelect()
         {
             if (IsFullSelect)
-                CaliperParam.ResultOutput = ResultSelect.Full;
+                SharpnessParam.ResultOutput = ResultSelect.Full;
             else if (IsCenterSelect)
-                CaliperParam.ResultOutput = ResultSelect.Center;
+                SharpnessParam.ResultOutput = ResultSelect.Center;
             else if (IsBeginSelect)
-                CaliperParam.ResultOutput = ResultSelect.Begin;
+                SharpnessParam.ResultOutput = ResultSelect.Begin;
             else if (IsEndSelect)
-                CaliperParam.ResultOutput = ResultSelect.End;
+                SharpnessParam.ResultOutput = ResultSelect.End;
 
 
         }

@@ -57,6 +57,7 @@ namespace YuanliCore.Logger
 
         private static void AddMessageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
+           
             var dp = d as LoggerUC;
             dp.AddMessage();
 
@@ -66,10 +67,11 @@ namespace YuanliCore.Logger
 
         private void AddMessage()
         {
+            if (Message == null || Message=="") return;
             string systemPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             DateTime dateTime = DateTime.Now;
 
-            string str = $"{dateTime.ToString("G")} :{  dateTime.Millisecond}   {Message} \r\n";
+            string str = $"{dateTime.ToString("G")}:{  dateTime.Millisecond}   {Message} \r\n";
             string path = $"{systemPath}\\AutoFocusMachine";
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
@@ -80,7 +82,7 @@ namespace YuanliCore.Logger
             MainLog += str;
 
             TextBoxLog.ScrollToEnd();
-
+ 
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
