@@ -133,7 +133,7 @@ namespace YuanliCore.ImageProcess
 
             var param = RunParams as ImageSharpnessParam;
             param.RunParams = tool.RunParams;
-     
+            param.Region = tool.Region;
         }
         public override void Run()
         {
@@ -145,6 +145,7 @@ namespace YuanliCore.ImageProcess
         {
             var param = (ImageSharpnessParam)RunParams;
             sharpnessTool.RunParams = param.RunParams;
+            sharpnessTool.Region = param.Region;
             return sharpnessTool;
         }
     }
