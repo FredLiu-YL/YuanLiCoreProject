@@ -200,14 +200,11 @@
   <ItemGroup>
     <Compile Include="AffineTransform\CogAffineTransform.cs" />
     <Compile Include="AffineTransform\HAffineTransform.cs" />
-    <Compile Include="Camera\IDS\ueyeCamera.cs" />
-    <Compile Include="Camera\SimulateCamera.cs" />
     <Compile Include="CommonExtension\FrameEX_VP.cs" />
     <Compile Include="CommonExtension\IBlobDetector.cs" />
     <Compile Include="CommonExtension\ICaliper.cs" />
     <Compile Include="CommonExtension\IMatcher.cs" />
     <Compile Include="CommonExtension\ISharpness.cs" />
-    <Compile Include="CommonExtension\Matrix2D.cs" />
     <Compile Include="ImageProcess\Blob\BlobParams.cs" />
     <Compile Include="ImageProcess\Blob\CogBlobControl.xaml.cs">
       <DependentUpon>CogBlobControl.xaml</DependentUpon>
@@ -293,34 +290,7 @@
       <DependentUpon>CogPatInspectWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ImageProcess\YuanliVision.cs" />
-    <Compile Include="Motion\Marzhauser\TangoController.cs" />
-    <Compile Include="Motion\Marzhauser\TangoEX.cs" />
-    <Compile Include="Motion\SimulateMotionControllor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewControl\Shapes\AngleShape.cs" />
-    <Compile Include="ViewControl\Shapes\ImageCanvas.cs" />
-    <Compile Include="ViewControl\Shapes\RectShape.cs" />
-    <Compile Include="ViewControl\Shapes\ROICircle.cs" />
-    <Compile Include="ViewControl\Shapes\ROICross.cs" />
-    <Compile Include="ViewControl\Shapes\ROICrossBox.cs" />
-    <Compile Include="ViewControl\Shapes\ROIDoubleRect.cs" />
-    <Compile Include="ViewControl\Shapes\ROILine.cs" />
-    <Compile Include="ViewControl\Shapes\ROIPolygon.cs" />
-    <Compile Include="ViewControl\Shapes\ROIRectangle.cs" />
-    <Compile Include="ViewControl\Shapes\ROIRotatedRect.cs" />
-    <Compile Include="ViewControl\Shapes\ROIShape.cs" />
-    <Compile Include="ViewControl\Shapes\ViewerCanvas.cs" />
-    <Compile Include="ViewControl\ViewConvert.cs" />
-    <Compile Include="ViewControl\VirtualCanvas.xaml.cs">
-      <DependentUpon>VirtualCanvas.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewControl\ZoomableCanvas\LinkedListExtensions.cs" />
-    <Compile Include="ViewControl\ZoomableCanvas\MathExtensions.cs" />
-    <Compile Include="ViewControl\ZoomableCanvas\PriorityQuadTree.cs" />
-    <Compile Include="ViewControl\ZoomableCanvas\PriorityQueue.cs" />
-    <Compile Include="ViewControl\ZoomableCanvas\RectExtensions.cs" />
-    <Compile Include="ViewControl\ZoomableCanvas\VirtualPanel.cs" />
-    <Compile Include="ViewControl\ZoomableCanvas\ZoomableCanvas.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ImageProcess\CogPatInspectTool\" />
@@ -399,10 +369,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ImageProcess\PatternComparison\CogPatInspectWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ViewControl\VirtualCanvas.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
