@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YuanliCore.Interface.Motion;
+using YuanliCore.Interface;
 
-namespace YuanliCore.Interface
+
+namespace YuanliCore.Motion
 {
     public class Axis
     {
@@ -20,6 +21,10 @@ namespace YuanliCore.Interface
             this.AxisID = axisNum;
         }
 
+        
+        public bool IsOpen { get; }
+        public bool IsRunning { get; }
+        
         /// <summary>
         /// 運動軸編號
         /// </summary>
@@ -34,13 +39,13 @@ namespace YuanliCore.Interface
         public double Position { get => GetPositon(); }
 
         /// <summary>
-        /// 軟體正極限
-        /// </summary>
-        public double LimitN { get => GetLimitN(); set => SetLimitN(value); }
-        /// <summary>
         /// 軟體負極限
         /// </summary>
-        public double LimitP { get => GetLimitP(); set => SetLimitP(value); }
+        public double PositionNEL { get => GetLimitN(); set => SetLimitN(value); }
+        /// <summary>
+        /// 軟體正極限
+        /// </summary>
+        public double PositionPEL { get => GetLimitP(); set => SetLimitP(value); }
         /// <summary>
         /// 運動軸方向
         /// </summary>
@@ -49,10 +54,24 @@ namespace YuanliCore.Interface
         /// <summary>
         /// 運動軸速度
         /// </summary>
-        public MotionVelocity AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
+        public VelocityParams AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
+
+  
+
+        public HomeModes HomeMode { get; set; }
+       
+        
+        public void Open()
+        {
 
 
+        }
+        public void Close()
+        {
 
+
+        }
+      
         public async Task HomeAsync()
         {
             if (isBusy) return;
@@ -169,23 +188,25 @@ namespace YuanliCore.Interface
 
         private void SetLimitN(double limit)
         {
-            controller.SetLimitCommand(AxisID, limit, LimitP);
+            controller.SetLimitCommand(AxisID, limit, PositionPEL);
         }
         private void SetLimitP(double limit)
         {
-            controller.SetLimitCommand(AxisID, LimitN, limit);
+            controller.SetLimitCommand(AxisID, PositionNEL, limit);
         }
-        private MotionVelocity GetVelocity()
+        private VelocityParams GetVelocity()
         {
-            return controller.GetSpeedCommand(AxisID);
+            // return controller.GetSpeedCommand(AxisID);
+            throw new NotImplementedException();
         }
-        private void SetVelocity(MotionVelocity axisVelocity)
+        private void SetVelocity(VelocityParams axisVelocity)
         {
-
-            double velocity = axisVelocity.FainalVelocity;
+            throw new NotImplementedException();
+            /*double velocity = axisVelocity.FainalVelocity;
             double accVelocity = axisVelocity.AccVelocity;
             double decVelocity = axisVelocity.DecVelocity;
-            controller.SetSpeedCommand(AxisID, axisVelocity);
+
+            controller.SetSpeedCommand(AxisID, axisVelocity);*/
 
 
         }
@@ -198,5 +219,22 @@ namespace YuanliCore.Interface
 
         Forward,
         Backward
+    }
+
+    public enum MotionDirections
+    {
+        Backward = -1,
+        Forward = 1
+    }
+
+
+    public enum HomeModes
+    {
+        ORG = 0,
+        EL = 1,
+        Index = 2,
+        Block = 3,
+        CurPos = 4,
+        ELAndIndex = 5
     }
 }

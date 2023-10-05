@@ -136,6 +136,7 @@
     <Compile Include="Interface\ITransform.cs" />
     <Compile Include="Interface\Motion\Axis.cs" />
     <Compile Include="Interface\Motion\AxisInfo.cs" />
+    <Compile Include="Interface\Motion\VelocityParam.cs" />
     <Compile Include="Interface\Motion\MotionVelocity.cs" />
     <Compile Include="Interface\Motion\SignalDI.cs" />
     <Compile Include="Interface\Motion\SignalDO.cs" />
@@ -146,6 +147,13 @@
     <Compile Include="Motion\Marzhauser\TangoEX.cs" />
     <Compile Include="Motion\SimulateMotionControllor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControl\Motion\AxisMotionUC.xaml.cs">
+      <DependentUpon>AxisMotionUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Motion\AxisMoveControl.xaml.cs">
+      <DependentUpon>AxisMoveControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Motion\UserControlAxisConfig.cs" />
     <Compile Include="ViewControl\Shapes\AngleShape.cs" />
     <Compile Include="ViewControl\Shapes\ImageCanvas.cs" />
     <Compile Include="ViewControl\Shapes\RectShape.cs" />
@@ -176,6 +184,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Logger\LoggerUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControl\Motion\AxisMotionUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControl\Motion\AxisMoveControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YuanliCore.Interface.Motion
+namespace YuanliCore.Motion
 {
     public struct MotionVelocity
     {

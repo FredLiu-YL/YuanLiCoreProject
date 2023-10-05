@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="goonδ.Bonding.AxisMoveControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:goonδ.Bonding"
+              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+              x:Name="AxisMove"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ControlTemplate  x:Key="FilletTextBox" TargetType="{x:Type TextBox}">
+                <Border   BorderBrush="Black" BorderThickness="2" CornerRadius="10">
+                    <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                </Border>
+            </ControlTemplate>
+            <ControlTemplate   x:Key="WhiteTextBox" TargetType="{x:Type TextBox}">
+                <Border  BorderBrush="White" BorderThickness="2" CornerRadius="10">
+                    <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                </Border>
+            </ControlTemplate>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Grid  DataContext="{Binding ElementName=AxisMove}"   >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button  Margin="1" Content="{iconPacks:Entypo Kind=ArrowBoldLeft,  Height=30,  Width=30}"    Grid.Column="0" Grid.Row="1"  FontSize="20"  Visibility="{Binding IsvisibleX}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseDownCommand}" CommandParameter="MoveX-"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseUpCommand}" CommandParameter="MoveX-"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseLeaveCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button  Margin="1" Content="{iconPacks:Entypo Kind=ArrowBoldRight, Height=30,  Width=30}"    Grid.Column="2" Grid.Row="1"  FontSize="20"  Visibility="{Binding IsvisibleX}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseDownCommand}" CommandParameter="MoveX+"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseUpCommand}" CommandParameter="MoveX+"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseLeaveCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button  Margin="1" Content="{iconPacks:Entypo Kind=ArrowBoldUp, Height=30,  Width=30}"  Grid.Column="1"   Grid.Row="0"  Visibility="{Binding IsvisibleY}" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseDownCommand}" CommandParameter="MoveY+"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseUpCommand}" CommandParameter="MoveY+"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseLeaveCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+        </Button>
+        <Button  Margin="1" Content="{iconPacks:Entypo Kind=ArrowBoldDown, Height=30,  Width=30}" Grid.Column="1" Grid.Row="2"  Visibility="{Binding IsvisibleY}" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseDownCommand}" CommandParameter="MoveY-"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseUpCommand}" CommandParameter="MoveY-"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseLeaveCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button  Margin="1" Content="{iconPacks:Material Kind=RotateLeft, Height=30,  Width=30}" Grid.Column="2" Grid.Row="2"  Visibility="{Binding IsvisibleR}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseDownCommand}" CommandParameter="RotateLeft"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseUpCommand}" CommandParameter="RotateLeft"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseLeaveCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button  Margin="1" Content="{iconPacks:Material Kind=RotateRight, Height=30,  Width=30}" Grid.Column="0" Grid.Row="0"  Visibility="{Binding IsvisibleR}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseDownCommand}" CommandParameter="RotateRight"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="PreviewMouseUp">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseUpCommand}" CommandParameter="RotateRight"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction  Command="{Binding AxisMoveMouseLeaveCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <ComboBox Margin="1" Grid.Column="1"  Grid.Row="1" SelectedIndex="0"  Text="{Binding MoveDistance}" FontSize="16" IsEditable="True" IsReadOnly="False" VerticalContentAlignment="Center">
+            <Label Content="連續運動"/>
+            <Label Content="10"/>
+        </ComboBox>
+    </Grid>
+</UserControl>
