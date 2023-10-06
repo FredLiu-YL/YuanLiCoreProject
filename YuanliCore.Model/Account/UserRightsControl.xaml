@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="YuanliCore.Account.UserRightsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:material ="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:YuanliCore.Account" 
+             mc:Ignorable="d" x:Name="UserRightsUC">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+
+            <local:EnumToBoolConverter x:Key="EnumToBool"></local:EnumToBoolConverter>
+
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{x:Null}" />
+                <Setter Property="BorderBrush" Value="{Binding ButtonBorderBrush}" />
+                <Setter Property="BorderThickness" Value="2" />
+                <Setter Property="Height" Value="{Binding ButtonHeight}" />
+                <Setter Property="Width" Value="{Binding ButtonWidth}" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Top" />
+            </Style>
+
+            <Style TargetType="{x:Type material:PackIcon}">
+                <Setter Property="material:PackIcon.Foreground" Value="{Binding PackIconForeground}" />
+                <Setter Property="material:PackIcon.Height" Value="{Binding PackIconHeight}" />
+                <Setter Property="material:PackIcon.Width" Value="{Binding PackIconWidth}" />
+                <Setter Property="material:PackIcon.Width" Value="{Binding PackIconWidth}" />
+            </Style>
+
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="{Binding LabelFontSize}" />
+                <Setter Property="Foreground" Value="{Binding LabelForeground}"/>
+                <Setter Property="FontFamily" Value="{Binding LabelFontFamily}" />
+                <Setter Property="FontWeight" Value="UltraBlack"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Horizontal" DataContext="{Binding ElementName=UserRightsUC}">
+        <Button Content="{material:PackIcon  Kind=AccountGroup}" Command="{Binding UserManagerCommand}" ToolTip="使用者管理" 
+                IsEnabled="{Binding  Account.CurrentAccount.Right, Converter={StaticResource EnumToBool} , ConverterParameter=Administrator }"/>
+        <Button Margin="3,0" Content="{material:PackIcon  Kind=ExitRun}" Command="{Binding LogoutCommand}"  ToolTip="登入/登出"/>
+        <Label  Content="{Binding RightAndName}" ToolTip="{Binding RightAndNameToolTip}" />
+        <!--<Label  Content="{Binding Account.CurrentAccount.Name}"/>-->
+    </StackPanel>
+</UserControl>

@@ -667,8 +667,8 @@ namespace YuanliCore.CameraLib.IDS
         [Conditional("L201")]
         public static void ThrowIfNoAuthorization(this uEye.Camera cam)
         {
-            cam.Information.GetCameraInfo(out CameraInfo camInfo);
-            if (camInfo.ID != "StrokePae") throw new UnauthorizedAccessException("Unauthorized Access. Code:201");
+           // cam.Information.GetCameraInfo(out CameraInfo camInfo);
+          // if (camInfo.ID != "StrokePae") throw new UnauthorizedAccessException("Unauthorized Access. Code:201");
         }
     }
 

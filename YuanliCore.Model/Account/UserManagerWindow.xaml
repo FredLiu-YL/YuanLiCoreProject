@@ -1,0 +1,46 @@
+﻿<Window x:Class="YuanliCore.Account.UserManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign ="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:design="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        xmlns:local="clr-namespace:YuanliCore.Account"
+        mc:Ignorable="d"
+        x:Name="userManagerWin"
+        Title="UserManagerWindow" Height="460" Width="810">
+    <Grid Background="White" DataContext="{Binding ElementName=userManagerWin}" Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="5" Grid.Row="0" Width="120" Height="90" Foreground="Black" Background="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+            <materialDesign:PackIcon Kind="AccountGroup" Width="80" Height="80"></materialDesign:PackIcon>
+        </Label>
+
+        <Label Grid.Column="5" Grid.Row="1" Content="Users" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
+        <DataGrid x:Name="dataGrid" Grid.ColumnSpan="6" Grid.Row="2" ItemsSource="{Binding UserAccount.Accounts}" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" Background="Transparent">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*" Foreground="Black"/>
+                <DataGridTextColumn Header="Rights" Binding="{Binding Right}" Width="5*" Foreground="Black"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Column="0" Grid.Row="3" Margin="5" Content="LogMessage" Command="{Binding LogUserCommand}" FontWeight="DemiBold" Foreground="#FF000000" Background="#FFF7F7F7" BorderBrush="Black" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button Grid.Column="3" Grid.Row="3" Margin="5" Content="Add User" Command="{Binding AddUserCommand}" FontWeight="DemiBold" Foreground="#FF000000" Background="#FFF7F7F7" BorderBrush="Black" BorderThickness="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button Grid.Column="4" Grid.Row="3" Margin="5" Content="Edit User" Command="{Binding EditUserCommand}" CommandParameter="{Binding ElementName=dataGrid, Path=SelectedIndex}" FontWeight="DemiBold" BorderThickness="2" Foreground="#FF000000" Background="#FFF7F7F7" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button Grid.Column="5" Grid.Row="3" Margin="5" Content="Delete User"  Command="{Binding DeleteUserCommand}" CommandParameter="{Binding ElementName=dataGrid, Path=SelectedIndex}" FontWeight="DemiBold" BorderThickness="2" Foreground="#FF000000" Background="#FFF7F7F7" BorderBrush="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+    </Grid>
+</Window>

@@ -121,9 +121,29 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\SignInWindow.xaml.cs">
+      <DependentUpon>SignInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\UserAccount.cs" />
+    <Compile Include="Account\UserAddWindow.xaml.cs">
+      <DependentUpon>UserAddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\UserEditWindow.xaml.cs">
+      <DependentUpon>UserEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\UserLogWindow.xaml.cs">
+      <DependentUpon>UserLogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\UserManagerWindow.xaml.cs">
+      <DependentUpon>UserManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\UserRightsControl.xaml.cs">
+      <DependentUpon>UserRightsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Camera\IDS\ueyeCamera.cs" />
     <Compile Include="Camera\SimulateCamera.cs" />
     <Compile Include="CommonExtension\CamerEX.cs" />
+    <Compile Include="CommonExtension\CommandEX.cs" />
     <Compile Include="CommonExtension\FrameEX.cs" />
     <Compile Include="CommonExtension\Matrix2D.cs" />
     <Compile Include="CommonExtension\RxLinq.cs" />
@@ -186,6 +206,30 @@
     <Folder Include="Communication\Rs232\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Account\SignInWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Account\UserAddWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Account\UserEditWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Account\UserLogWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Account\UserManagerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Account\UserRightsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Logger\LoggerUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

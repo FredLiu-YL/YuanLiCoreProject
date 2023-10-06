@@ -1,0 +1,77 @@
+﻿<Window x:Class="goonγ.UserEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign ="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:design="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+        xmlns:local="clr-namespace:goonγ"
+        AllowsTransparency="True" 
+        WindowStyle="None"
+        mc:Ignorable="d"
+        x:Name="UserEditWin"
+        Height="230" Width="440" BorderThickness="5" BorderBrush="SteelBlue" MouseLeftButtonDown="Window_MouseLeftButtonDown" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <local:RightsNameConverter x:Key="RightsNameConverter"/>
+            <BooleanToVisibilityConverter x:Key="VisibilityConvert"></BooleanToVisibilityConverter>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid DataContext="{Binding ElementName=UserEditWin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Content="修改使用者密碼" Margin="10,5" FontFamily="Arial" FontSize="32" FontWeight="Bold" Foreground="SteelBlue" VerticalContentAlignment="Center"/>
+
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"></ColumnDefinition>
+                <ColumnDefinition Width="90"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.RowSpan="3" Grid.Column="1" Foreground="SteelBlue" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <materialDesign:PackIcon Kind="AccountBox" Width="50" Height="50"></materialDesign:PackIcon>
+            </Label>
+
+            <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" >
+                <Label Content="帳號" Width="80" FontSize="15" Foreground="SteelBlue" FontFamily="Arial" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox Name="id" Width="230" FontSize="15" IsEnabled="False" Text="{Binding UserName}" BorderBrush="SkyBlue" BorderThickness="1" VerticalAlignment="Center" input:InputMethod.IsInputMethodEnabled="False" KeyDown="AccountNumber_KeyDown"></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                <Label Content="舊密碼" Width="80" FontSize="15" Foreground="SteelBlue" FontFamily="Arial" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
+                <!--<PasswordBox Name="oldPpassword" Width="230" FontSize="15" local:PasswordHelper.Attach="True" local:PasswordHelper.Password="{Binding OldPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyDown="Password_KeyDown" VerticalAlignment="Center" BorderBrush="SkyBlue"  BorderThickness="1" ></PasswordBox>-->
+                <TextBox Name="oldPpassword" Width="230" FontSize="15" BorderBrush="SkyBlue" BorderThickness="1" Text="{Binding OldPassword}" input:InputMethod.IsInputMethodEnabled="False" KeyDown="Password_KeyDown" VerticalAlignment="Center" ></TextBox>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
+                <Label Content="新密碼" Width="80" FontSize="15" Foreground="SteelBlue" FontFamily="Arial" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
+                <!--<PasswordBox Name="newPassword" Width="230" FontSize="15" local:PasswordHelper.Attach="True" local:PasswordHelper.Password="{Binding NewPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyDown="Password_KeyDown" VerticalAlignment="Center" BorderBrush="SkyBlue"  BorderThickness="1" ></PasswordBox>-->
+                <TextBox Name="newPassword" Width="230" FontSize="15" BorderBrush="SkyBlue" BorderThickness="1" Text="{Binding NewPassword}" input:InputMethod.IsInputMethodEnabled="False" KeyDown="Password_KeyDown" VerticalAlignment="Center"></TextBox>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Margin="20,5" Content="舊密碼或新密碼未輸入!!" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18" Foreground="Red" FontFamily="Arial" Visibility="{Binding IsMessageDisplay, Converter={StaticResource VisibilityConvert}}" FontWeight="Bold"></Label>
+            <Button Grid.Column="1" Content="確定" Margin="5,3,5,3" Width="80" FontSize="15" Click="OKButton_Click" IsDefault="False" Background="SteelBlue" Foreground="White"/>
+            <Button Grid.Column="2" Content="取消" Margin="10,3" Width="80" FontSize="15" IsCancel="True" Background="SteelBlue" Foreground="White"/>
+        </Grid>
+    </Grid>
+</Window>
