@@ -167,16 +167,19 @@
     <Compile Include="Motion\Marzhauser\TangoEX.cs" />
     <Compile Include="Motion\SimulateMotionControllor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControl\Microscope\BXFMUC.xaml.cs">
+    <Compile Include="UserControls\FileInfoWindow.xaml.cs">
+      <DependentUpon>FileInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Microscope\BXFMUC.xaml.cs">
       <DependentUpon>BXFMUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\Motion\AxisMotionUC.xaml.cs">
+    <Compile Include="UserControls\Motion\AxisMotionUC.xaml.cs">
       <DependentUpon>AxisMotionUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\Motion\AxisMoveControl.xaml.cs">
+    <Compile Include="UserControls\Motion\AxisMoveControl.xaml.cs">
       <DependentUpon>AxisMoveControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\Motion\UserControlAxisConfig.cs" />
+    <Compile Include="UserControls\Motion\UserControlAxisConfig.cs" />
     <Compile Include="ViewControl\Shapes\AngleShape.cs" />
     <Compile Include="ViewControl\Shapes\ImageCanvas.cs" />
     <Compile Include="ViewControl\Shapes\RectShape.cs" />
@@ -234,15 +237,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControl\Microscope\BXFMUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl\Motion\AxisMotionUC.xaml">
+    <Page Include="UserControls\FileInfoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControl\Motion\AxisMoveControl.xaml">
+    <Page Include="UserControls\Microscope\BXFMUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Motion\AxisMotionUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Motion\AxisMoveControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
