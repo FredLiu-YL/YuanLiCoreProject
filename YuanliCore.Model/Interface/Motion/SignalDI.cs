@@ -8,7 +8,15 @@ namespace YuanliCore.Interface
 {
     public class SignalDI
     {
+        public SignalDI(string name)
+        {
+            Name = name;
 
+
+        }
+
+
+        public string Name { get; set; }
 
     }
 }

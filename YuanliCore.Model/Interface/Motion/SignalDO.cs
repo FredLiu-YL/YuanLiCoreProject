@@ -9,6 +9,16 @@ namespace YuanliCore.Interface
     public class SignalDO
     {
 
+        public SignalDO(string name ) 
+        {
+            Name = name;
+
+
+        }
+
+
+        public string Name { get; set; }
+
 
     }
 }

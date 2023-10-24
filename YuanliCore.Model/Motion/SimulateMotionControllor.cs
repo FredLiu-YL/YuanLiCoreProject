@@ -10,9 +10,9 @@ namespace YuanliCore.Motion
 {
     public class SimulateMotionControllor : IMotionController
     {
-        private double[] simulatePosition; //暫存虛擬座標
+        private double[] simulatePosition; //暫存虛擬座標 模擬驅動器內的位置
         private IEnumerable<Axis> axes;
-        public SimulateMotionControllor(IEnumerable< AxisInfo> axisInfos)
+        public SimulateMotionControllor(IEnumerable< AxisInfo> axisInfos, IEnumerable<string> doNames, IEnumerable<string> diNames)
         {
             List<double> axesPos = new List<double>();
 
@@ -22,16 +22,20 @@ namespace YuanliCore.Motion
                 return new Axis(this, info.AxisID);
                 
                 }).ToArray();
-            simulatePosition = axesPos.ToArray();   
+            simulatePosition = axesPos.ToArray();
+
+            OutputSignals =  doNames.Select(n=>new SignalDO(n));
+
+            IutputSignals = diNames.Select(n => new SignalDI(n));
         }
 
         public bool IsOpen => throw new NotImplementedException();
 
         public IEnumerable<Axis> Axes => axes;
 
-        public IEnumerable<SignalDI> IutputSignals => throw new NotImplementedException();
+        public IEnumerable<SignalDI> IutputSignals { get; set; }
 
-        public IEnumerable<SignalDO> OutputSignals => throw new NotImplementedException();
+        public IEnumerable<SignalDO> OutputSignals { get; set; }
 
         public AxisDirection GetAxisDirectionCommand(int id)
         {
