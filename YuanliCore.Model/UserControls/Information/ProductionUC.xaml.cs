@@ -24,30 +24,6 @@ namespace YuanliCore.Model.Information
     /// </summary>
     public partial class ProductionUC : UserControl, INotifyPropertyChanged
     {
-        //private ListBox topListBoxItem;
-        //public ListBox TopListBoxItem { get => topListBoxItem; set => SetValue(ref topListBoxItem, value); }
-
-        private ObservableCollection<ObservableCollection<Button>> topListBoxItemSource = new ObservableCollection<ObservableCollection<Button>>();
-        public ObservableCollection<ObservableCollection<Button>> TopListBoxItemSource { get => topListBoxItemSource; set => SetValue(ref topListBoxItemSource, value); }
-
-
-        private ObservableCollection<Button> outerListBox = new ObservableCollection<Button>();
-        public ObservableCollection<Button> OuterListBox { get => outerListBox; set => SetValue(ref outerListBox, value); }
-        //    <ListBox.ItemTemplate>
-        //        <DataTemplate>
-        //            <Button Content = "{Binding}" />
-        //        </ DataTemplate >
-        //    </ ListBox.ItemTemplate >
-
-        private ObservableCollection<ObservableCollection<string>> buttonRows = new ObservableCollection<ObservableCollection<string>>();
-        public ObservableCollection<ObservableCollection<string>> ButtonRows { get => buttonRows; set => SetValue(ref buttonRows, value); }
-
-        private ObservableCollection<ObservableCollection<ButtonState>> buttonRows_New = new ObservableCollection<ObservableCollection<ButtonState>>();
-        public ObservableCollection<ObservableCollection<ButtonState>> ButtonRows_New { get => buttonRows_New; set => SetValue(ref buttonRows_New, value); }
-
-
-
-
         //CassetteUC
         public class ButtonState
         {
@@ -63,14 +39,9 @@ namespace YuanliCore.Model.Information
         {
             try
             {
-                AddButtonAction = new RelayCommand<(int, int)>(key =>
-                {
-                    int variable1 = key.Item1;
-                    int variable2 = key.Item2;
-                    AddButton(variable1, variable2);
-                });
+                AddButtonAction = new RelayCommand<int>(key => { AddButton(key); });
                 CassetteUC = new ObservableCollection<CassetteUC>();
-                AddButton(3, 25);
+                AddButton(25);
             }
             catch (Exception ex)
             {
@@ -79,16 +50,6 @@ namespace YuanliCore.Model.Information
             }
 
         }
-
-
-
-
-
-
-
-        //public static readonly DependencyProperty AddShapeActionProperty = DependencyProperty.Register(nameof(AddShapeAction), typeof(ICommand), typeof(ProductionUC),
-        //                                                                            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
         public static readonly DependencyProperty AutoSaveIsCheckedProperty = DependencyProperty.Register(nameof(AutoSaveIsChecked), typeof(bool), typeof(ProductionUC),
                                                                                      new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -126,63 +87,24 @@ namespace YuanliCore.Model.Information
 
 
 
-        //private ObservableCollection<CassetteUC> cassetteUC = new ObservableCollection<CassetteUC>();
-        //public ObservableCollection<CassetteUC> CassetteUC { get => cassetteUC; set => SetValue(ref cassetteUC, value); }
-
-        //--------------------------------
-
-        //public static readonly DependencyProperty CassetteUC2Property = DependencyProperty.Register(nameof(CassetteUC2), typeof(CassetteUC), typeof(ProductionUC),
-        //                                                                       new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-        //public CassetteUC CassetteUC2
-        //{
-        //    get => (CassetteUC)GetValue(CassetteUC2Property);
-        //    set => SetValue(CassetteUC2Property, value);
-        //}
-
-        //--------------------------------
-
         public static readonly DependencyProperty CassetteUCProperty = DependencyProperty.Register(nameof(CassetteUC), typeof(ObservableCollection<CassetteUC>), typeof(ProductionUC),
                                                                                                      new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));//new PropertyMetadata(null));
-                                                                                                     
+
         public ObservableCollection<CassetteUC> CassetteUC
         {
             get => (ObservableCollection<CassetteUC>)GetValue(CassetteUCProperty);
             set { SetValue(CassetteUCProperty, value); }
         }
 
-        public void AddButton(int Cols, int Rows)
+        public void AddButton(int Rows)
         {
             try
             {
-                ButtonRows.Clear();
-                TopListBoxItemSource.Clear();
-                ButtonRows_New.Clear();
-                OuterListBox.Clear();
+                CassetteUC.Clear();
                 for (int i = 1; i <= Rows; i++)
                 {
-                    var row = new ObservableCollection<string>();
-                    var row2 = new ObservableCollection<Button>();
-                    var row3 = new ObservableCollection<ButtonState>();
-                    for (int j = 1; j <= Cols; j++)
-                    {
-                        row.Add("Button " + (i * 3 - 3 + j));
-                        Button newButton = new Button();
-                        newButton.Content = "Button " + (i * 3 - 3 + j);
-                        newButton.Command = ListBoxButton_Command2;
-                        newButton.Tag = (i * 3 - 3 + j); // 將內容存儲在Tag屬性中
-                        newButton.Width = 50;
-                        newButton.Height = 20;
-                        newButton.Background = Brushes.Black;
-                        //newButton.Click += ListBoxButton_Click2;
-                        OuterListBox.Add(newButton);
-                        row2.Add(newButton);
-                        row3.Add(new ButtonState { Context = "Button " + (i * 3 - 3 + j), IsClick = false });
-                    }
-                    CassetteUC.Add(new CassetteUC { Btn1_IsClik = false, Btn2_IsClik = false, Btn3_IsClik = false });
-
-                    ButtonRows.Add(row);
-                    TopListBoxItemSource.Add(row2);
-                    ButtonRows_New.Add(row3);
+                    //CassetteUC.Add(new CassetteUC { Btn1_IsClik = false, Btn2_IsClik = false, Btn3_IsClik = false });
+                    CassetteUC.Add(new CassetteUC());
                 }
             }
             catch (Exception ex)
@@ -191,69 +113,6 @@ namespace YuanliCore.Model.Information
                 throw ex;
             }
         }
-
-        public ICommand ListBoxButtonCommand => new RelayCommand(() =>
-        {
-            //if (parameter != null)
-            //{
-            //    // parameter 包含按钮的数据，可以根据需要进行处理
-            //    // 例如，你可以访问Button的Tag属性来识别按钮
-            //    //var buttonData = parameter as YourButtonDataClass;
-            //}
-        });
-
-
-
-        private void ListBoxButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Click="ListBoxButton_Click"
-            try
-            {
-                Button clickedButton = sender as Button;
-
-                if (clickedButton != null)
-                {
-                    string buttonText = clickedButton.Tag as string;
-                    if (buttonText != null)
-                    {
-                        Brush now = clickedButton.Background;
-                        //MessageBox.Show("Button " + buttonText + "被點擊了！");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
-        private void ListBoxButton_Click2(object sender, RoutedEventArgs e)
-        {
-            // Click="ListBoxButton_Click"
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        public ICommand ListBoxButton_Command2 => new RelayCommand(async () =>
-        {
-            try
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        });
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = null)

@@ -94,6 +94,9 @@ namespace YuanliCore.Model.Information
                 Btn2_Background = Click_Off;
                 Btn3_Background = Click_Off;
 
+                Btn1_IsClik = false;
+                Btn2_IsClik = false;
+                Btn3_IsClik = false;
             }
             catch (Exception ex)
             {

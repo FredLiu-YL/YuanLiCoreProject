@@ -30,37 +30,6 @@
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Wafer" Style="{StaticResource MaterialDesignGroupBox}">
             <StackPanel Margin="-5" Orientation="Horizontal">
-                <ListBox Grid.Column="0" Name="TopListBox" ItemsSource="{Binding ButtonRows }" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <ListBox ItemsSource="{Binding}" HorizontalContentAlignment="Stretch" Margin="0,-5,0,-5">
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Columns="{Binding Count}"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                  Click="ListBoxButton_Click"    
-                                  Content="{Binding }"
-                                  Tag ="{Binding}"
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Top"
-                                  Margin="-5,-5,-5,-5"
-                                  Height="20"  
-                                  Width="50"   
-                                  FontSize="10"          
-                                  Command="{Binding ListBoxButtonCommand}"
-                                  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                  Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                                  ToolTip="{Binding}" />
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
                 <ListBox Name="myListBox"  ItemsSource="{Binding CassetteUC}">
                 </ListBox>
             </StackPanel>
