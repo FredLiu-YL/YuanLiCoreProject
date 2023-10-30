@@ -170,6 +170,12 @@
     <Compile Include="UserControls\FileInfoWindow.xaml.cs">
       <DependentUpon>FileInfoWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Information\CassetteUC.xaml.cs">
+      <DependentUpon>CassetteUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Information\ProductionUC.xaml.cs">
+      <DependentUpon>ProductionUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Microscope\BXFMUC.xaml.cs">
       <DependentUpon>BXFMUC.xaml</DependentUpon>
     </Compile>
@@ -240,6 +246,14 @@
     <Page Include="UserControls\FileInfoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Information\CassetteUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Information\ProductionUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Microscope\BXFMUC.xaml">
       <SubType>Designer</SubType>

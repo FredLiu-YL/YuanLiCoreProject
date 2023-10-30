@@ -1,0 +1,50 @@
+﻿<UserControl  x:Class="YuanliCore.Model.Information.CassetteUC"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Name="Cassette"
+        mc:Ignorable="d" Height="20" Width="150" Loaded="MainGrid_Loaded">
+    <UserControl.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.bluegrey.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.cyan.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid DataContext="{Binding ElementName=Cassette}" >
+        <StackPanel Orientation="Horizontal" >
+            <Button
+              Background="{Binding Btn1_Background}"
+              Command="{Binding Btn1_Command}"
+              Height="20" Width="50"
+              Content=""
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+              Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+              ToolTip="MaterialDesignFlatDarkButton" />
+            <Button
+              Background="{Binding Btn2_Background}"
+              Command="{Binding Btn2_Command}"
+              Height="20" Width="50"
+              Content=""
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+              Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+              ToolTip="MaterialDesignFlatDarkButton" />
+            <Button
+              Background="{Binding Btn3_Background}"
+              Command="{Binding Btn3_Command}"
+              Height="20" Width="50"
+              Content=""
+              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+              Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+              ToolTip="MaterialDesignFlatDarkButton" />
+        </StackPanel>
+        
+
+    </Grid>
+</UserControl>
