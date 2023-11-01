@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using YuanliCore.Model.Interface;
 
 namespace YuanliCore.Model.Microscope
 {
@@ -23,13 +24,21 @@ namespace YuanliCore.Model.Microscope
     /// </summary>
     public partial class BXFMUC : UserControl, INotifyPropertyChanged
     {
+
+        private static readonly DependencyProperty MicroscopeProperty = DependencyProperty.Register(nameof(Microscope), typeof(IMicroscope), typeof(BXFMUC), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+     
         public BXFMUC()
         {
             InitializeComponent();
          
         }
 
-
+        public IMicroscope Microscope
+        {
+            get => (IMicroscope)GetValue(MicroscopeProperty);
+            set => SetValue(MicroscopeProperty, value);
+        }
 
 
 

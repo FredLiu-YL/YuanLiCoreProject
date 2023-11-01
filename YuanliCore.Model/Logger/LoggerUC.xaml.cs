@@ -28,8 +28,8 @@ namespace YuanliCore.Logger
       
 
         private static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
-        private static readonly DependencyProperty MachineNameProperty = DependencyProperty.Register(nameof(MachineName), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("Machine", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
-        private static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata(" Log資訊", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
+        private static readonly DependencyProperty MachineNameProperty = DependencyProperty.Register(nameof(MachineName), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("Machine", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        private static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata(" Log資訊", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public LoggerUC()
         {

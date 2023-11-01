@@ -108,7 +108,7 @@
                                      Header="Intensity" Style="{StaticResource MaterialDesignGroupBox}">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="4234" FontSize="20" Width="50" />
-                        <Slider Maximum="50" Minimum="0" Width="180" Value="35" />
+                        <Slider Maximum="50" Minimum="0" Width="180" Value="35"   />
                     </StackPanel>
 
                 </GroupBox>
