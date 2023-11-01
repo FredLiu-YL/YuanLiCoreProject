@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Name="Cassette"
-        mc:Ignorable="d" Height="20" Width="150" Loaded="MainGrid_Loaded">
+        mc:Ignorable="d" Height="20" Width="120" Loaded="MainGrid_Loaded" Margin="0,0,0,0">
     <UserControl.Resources>
         <ResourceDictionary >
             <ResourceDictionary.MergedDictionaries>
@@ -17,12 +17,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid DataContext="{Binding ElementName=Cassette}" >
+    <Grid DataContext="{Binding ElementName=Cassette}" Margin="0,0,0,0">
         <StackPanel Orientation="Horizontal" >
             <Button
               Background="{Binding Btn1_Background}"
               Command="{Binding Btn1_Command}"
-              Height="20" Width="50"
+              Height="20" Width="40"
               Content=""
               IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
               Style="{StaticResource MaterialDesignFlatDarkBgButton}"
@@ -30,7 +30,7 @@
             <Button
               Background="{Binding Btn2_Background}"
               Command="{Binding Btn2_Command}"
-              Height="20" Width="50"
+              Height="20" Width="40"
               Content=""
               IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
               Style="{StaticResource MaterialDesignFlatDarkBgButton}"
@@ -38,13 +38,11 @@
             <Button
               Background="{Binding Btn3_Background}"
               Command="{Binding Btn3_Command}"
-              Height="20" Width="50"
+              Height="20" Width="40"
               Content=""
               IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
               Style="{StaticResource MaterialDesignFlatDarkBgButton}"
               ToolTip="MaterialDesignFlatDarkButton" />
         </StackPanel>
-        
-
     </Grid>
 </UserControl>
