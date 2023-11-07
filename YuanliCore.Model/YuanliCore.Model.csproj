@@ -159,8 +159,8 @@
     <Compile Include="Interface\Motion\AxisInfo.cs" />
     <Compile Include="Interface\Motion\VelocityParam.cs" />
     <Compile Include="Interface\Motion\MotionVelocity.cs" />
-    <Compile Include="Interface\Motion\SignalDI.cs" />
-    <Compile Include="Interface\Motion\SignalDO.cs" />
+    <Compile Include="Interface\Motion\DigitalInput.cs" />
+    <Compile Include="Interface\Motion\DigitalOutput.cs" />
     <Compile Include="Logger\LoggerUC.xaml.cs">
       <DependentUpon>LoggerUC.xaml</DependentUpon>
     </Compile>

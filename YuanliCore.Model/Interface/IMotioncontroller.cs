@@ -17,8 +17,8 @@ namespace YuanliCore.Interface
 
 
         IEnumerable<Axis> Axes { get; }
-        IEnumerable<SignalDI> IutputSignals { get; }
-        IEnumerable<SignalDO> OutputSignals { get; }
+        IEnumerable<DigitalInput> IutputSignals { get; }
+        IEnumerable<DigitalOutput> OutputSignals { get; }
 
 
 
@@ -26,8 +26,8 @@ namespace YuanliCore.Interface
 
 
         Axis[] SetAxesParam(IEnumerable<AxisInfo> axisInfos);
-        SignalDO[] SetOutputs(IEnumerable<string> names);
-        SignalDI[] SetInputs(IEnumerable<string> names);
+        DigitalOutput[] SetOutputs(IEnumerable<string> names);
+        DigitalInput[] SetInputs(IEnumerable<string> names);
 
         void StopCommand(int id);
         void MoveCommand( int id,  double distance);

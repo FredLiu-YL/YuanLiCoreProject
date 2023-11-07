@@ -24,18 +24,18 @@ namespace YuanliCore.Motion
                 }).ToArray();
             simulatePosition = axesPos.ToArray();
 
-            OutputSignals =  doNames.Select(n=>new SignalDO(n));
+            OutputSignals =  doNames.Select(n=>new DigitalOutput(n));
 
-            IutputSignals = diNames.Select(n => new SignalDI(n));
+            IutputSignals = diNames.Select(n => new DigitalInput(n));
         }
 
         public bool IsOpen => throw new NotImplementedException();
 
         public IEnumerable<Axis> Axes => axes;
 
-        public IEnumerable<SignalDI> IutputSignals { get; set; }
+        public IEnumerable<DigitalInput> IutputSignals { get; set; }
 
-        public IEnumerable<SignalDO> OutputSignals { get; set; }
+        public IEnumerable<DigitalOutput> OutputSignals { get; set; }
 
         public AxisDirection GetAxisDirectionCommand(int id)
         {
@@ -89,7 +89,7 @@ namespace YuanliCore.Motion
             throw new NotImplementedException();
         }
 
-        public SignalDI[] SetInputs(IEnumerable<string> names)
+        public DigitalInput[] SetInputs(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }
@@ -99,7 +99,7 @@ namespace YuanliCore.Motion
             throw new NotImplementedException();
         }
 
-        public SignalDO[] SetOutputs(IEnumerable<string> names)
+        public DigitalOutput[] SetOutputs(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace YuanliCore.Interface
 {
-    public class SignalDO
+    public class DigitalOutput
     {
 
-        public SignalDO(string name ) 
+        public DigitalOutput(string name ) 
         {
             Name = name;
 

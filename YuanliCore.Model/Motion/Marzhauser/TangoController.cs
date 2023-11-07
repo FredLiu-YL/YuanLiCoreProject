@@ -29,9 +29,9 @@ namespace YuanliCore.Motion.Marzhauser
 
 
 
-        public IEnumerable<SignalDI> IutputSignals => throw new NotImplementedException();
+        public IEnumerable<DigitalInput> IutputSignals => throw new NotImplementedException();
 
-        public IEnumerable<SignalDO> OutputSignals => throw new NotImplementedException();
+        public IEnumerable<DigitalOutput> OutputSignals => throw new NotImplementedException();
 
         public IEnumerable<Axis> Axes => GetDefaultAxes();
 
@@ -177,12 +177,12 @@ namespace YuanliCore.Motion.Marzhauser
             throw new NotImplementedException();
         }
 
-        public SignalDO[] SetOutputs(IEnumerable<string> names)
+        public DigitalOutput[] SetOutputs(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }
 
-        public SignalDI[] SetInputs(IEnumerable<string> names)
+        public DigitalInput[] SetInputs(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }

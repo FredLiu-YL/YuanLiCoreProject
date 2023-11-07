@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace YuanliCore.Interface
 {
-    public class SignalDI
+    public class DigitalInput
     {
-        public SignalDI(string name)
+        public DigitalInput(string name)
         {
             Name = name;
 
