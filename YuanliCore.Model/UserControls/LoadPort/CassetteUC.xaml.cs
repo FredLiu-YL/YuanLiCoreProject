@@ -25,37 +25,40 @@ namespace YuanliCore.Model.LoadPort
     /// 
     public partial class CassetteUC : UserControl, INotifyPropertyChanged
     {
-        public bool Btn1_IsClik { get => btn1_IsClik; set => SetValue(ref btn1_IsClik, value); }   
-        public bool Btn2_IsClik { get => btn2_IsClik; set => SetValue(ref btn2_IsClik, value); }
-        public bool Btn3_IsClik { get => btn3_IsClik; set => SetValue(ref btn3_IsClik, value); }
-        public bool Btn_IsEnable { get => btn_IsEnable; set => SetValue(ref btn_IsEnable, value); }
-        public Brush Btn1_Background { get => btn1_Background; set => SetValue(ref btn1_Background, value); }
-        public Brush Btn2_Background { get => btn2_Background; set => SetValue(ref btn2_Background, value); }
-        public Brush Btn3_Background { get => btn3_Background; set => SetValue(ref btn3_Background, value); }
+        public bool Top_IsClik { get => top_IsClik; set => SetValue(ref top_IsClik, value); }
+        public bool Back_IsClik { get => back_IsClik; set => SetValue(ref back_IsClik, value); }
+        public bool Micro_IsClik { get => micro_IsClik; set => SetValue(ref micro_IsClik, value); }
+        public bool Wafer_IsEnable { get => wafer_IsEnable; set => SetValue(ref wafer_IsEnable, value); }
+        public Brush Top_Background { get => top_Background; set => SetValue(ref top_Background, value); }
+        public Brush Back_Background { get => back_Background; set => SetValue(ref back_Background, value); }
+        public Brush Micro_Background { get => micro_Background; set => SetValue(ref micro_Background, value); }
+        public string WaferInfo { get => waferInfo; set => SetValue(ref waferInfo, value); }
 
         public Brush Click_On;
 
         public Brush Click_Off;
-
-        public CassetteUC(bool isEnable)
+        public CassetteUC(bool isEnable, string pwaferInfo)
         {
             InitializeComponent();
 
-            Btn_IsEnable = isEnable;
+            Wafer_IsEnable = isEnable;
+            WaferInfo = pwaferInfo;
         }
-        private bool btn1_IsClik = true;
+        private bool top_IsClik = true;
 
-        private bool btn2_IsClik = true;
+        private bool back_IsClik = true;
 
-        private bool btn3_IsClik = true;
+        private bool micro_IsClik = true;
 
-        private bool btn_IsEnable;
+        private bool wafer_IsEnable;
 
-        private Brush btn1_Background;
+        private Brush top_Background;
 
-        private Brush btn2_Background;
+        private Brush back_Background;
 
-        private Brush btn3_Background;
+        private Brush micro_Background;
+
+        private string waferInfo;
 
         private SolidColorBrush PrimaryHueLightBrush = Application.Current.Resources["PrimaryHueLightBrush"] as SolidColorBrush;
 
@@ -88,13 +91,13 @@ namespace YuanliCore.Model.LoadPort
                     }
                 }
 
-                Btn1_Background = Click_Off;
-                Btn2_Background = Click_Off;
-                Btn3_Background = Click_Off;
+                Top_Background = Click_Off;
+                Back_Background = Click_Off;
+                Micro_Background = Click_Off;
 
-                Btn1_IsClik = false;
-                Btn2_IsClik = false;
-                Btn3_IsClik = false;
+                Top_IsClik = false;
+                Back_IsClik = false;
+                Micro_IsClik = false;
             }
             catch (Exception ex)
             {
@@ -102,19 +105,19 @@ namespace YuanliCore.Model.LoadPort
                 throw ex;
             }
         }
-        public ICommand Btn1_Command => new RelayCommand(async () =>
+        public ICommand Top_Command => new RelayCommand(async () =>
         {
             try
             {
-                if (Btn1_IsClik == true)
+                if (Top_IsClik == true)
                 {
-                    Btn1_IsClik = false;
-                    Btn1_Background = Click_Off;
+                    Top_IsClik = false;
+                    Top_Background = Click_Off;
                 }
                 else
                 {
-                    Btn1_IsClik = true;
-                    Btn1_Background = Click_On;
+                    Top_IsClik = true;
+                    Top_Background = Click_On;
                 }
             }
             catch (Exception ex)
@@ -123,19 +126,19 @@ namespace YuanliCore.Model.LoadPort
                 throw ex;
             }
         });
-        public ICommand Btn2_Command => new RelayCommand(async () =>
+        public ICommand Back_Command => new RelayCommand(async () =>
         {
             try
             {
-                if (Btn2_IsClik == true)
+                if (Back_IsClik == true)
                 {
-                    Btn2_IsClik = false;
-                    Btn2_Background = Click_Off;
+                    Back_IsClik = false;
+                    Back_Background = Click_Off;
                 }
                 else
                 {
-                    Btn2_IsClik = true;
-                    Btn2_Background = Click_On;
+                    Back_IsClik = true;
+                    Back_Background = Click_On;
                 }
             }
             catch (Exception ex)
@@ -144,19 +147,19 @@ namespace YuanliCore.Model.LoadPort
                 throw ex;
             }
         });
-        public ICommand Btn3_Command => new RelayCommand(async () =>
+        public ICommand Micro_Command => new RelayCommand(async () =>
         {
             try
             {
-                if (Btn3_IsClik == true)
+                if (Micro_IsClik == true)
                 {
-                    Btn3_IsClik = false;
-                    Btn3_Background = Click_Off;
+                    Micro_IsClik = false;
+                    Micro_Background = Click_Off;
                 }
                 else
                 {
-                    Btn3_IsClik = true;
-                    Btn3_Background = Click_On;
+                    Micro_IsClik = true;
+                    Micro_Background = Click_On;
                 }
             }
             catch (Exception ex)

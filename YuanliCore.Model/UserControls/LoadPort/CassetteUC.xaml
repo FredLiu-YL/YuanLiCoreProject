@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Name="Cassette"
-        mc:Ignorable="d" Height="10" Width="120" Loaded="MainGrid_Loaded"  >
+        mc:Ignorable="d" Height="14" Width="140" Loaded="MainGrid_Loaded"  >
     <UserControl.Resources>
         <ResourceDictionary >
             <ResourceDictionary.MergedDictionaries>
@@ -19,36 +19,37 @@
     </UserControl.Resources>
     <Grid DataContext="{Binding ElementName=Cassette}" >
         <Grid.ColumnDefinitions >
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
-      
+        <TextBlock Text="{Binding WaferInfo}" Grid.Column="0" FontSize="8" Width="11"/>
         <Button
-             Grid.Column="0"
-              Background="{Binding Btn1_Background}"
-              Command="{Binding Btn1_Command}"
-              Height="10" Width="40"
+             Grid.Column="1"
+              Background="{Binding Top_Background}"
+              Command="{Binding Top_Command}"
+              Height="14" Width="40"
               Content=""
-              IsEnabled="{Binding Btn_IsEnable}"
-              Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-              ToolTip="MaterialDesignFlatDarkButton" />
-            <Button
-                Grid.Column="1"
-              Background="{Binding Btn2_Background}"
-              Command="{Binding Btn2_Command}"
-              Height="10" Width="40"
-              Content=""
-              IsEnabled="{Binding Btn_IsEnable}"
+              IsEnabled="{Binding Wafer_IsEnable}"
               Style="{StaticResource MaterialDesignFlatDarkBgButton}"
               ToolTip="MaterialDesignFlatDarkButton" />
             <Button
                 Grid.Column="2"
-              Background="{Binding Btn3_Background}"
-              Command="{Binding Btn3_Command}"
-              Height="10" Width="40"
+              Background="{Binding Back_Background}"
+              Command="{Binding Back_Command}"
+              Height="14" Width="40"
               Content=""
-              IsEnabled="{Binding Btn_IsEnable}"
+              IsEnabled="{Binding Wafer_IsEnable}"
+              Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+              ToolTip="MaterialDesignFlatDarkButton" />
+            <Button
+                Grid.Column="3"
+              Background="{Binding Micro_Background}"
+              Command="{Binding Micro_Command}"
+              Height="14" Width="40"
+              Content=""
+              IsEnabled="{Binding Wafer_IsEnable}"
               Style="{StaticResource MaterialDesignFlatDarkBgButton}"
               ToolTip="MaterialDesignFlatDarkButton" />
         
