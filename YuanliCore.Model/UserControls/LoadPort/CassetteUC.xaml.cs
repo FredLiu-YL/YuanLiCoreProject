@@ -17,7 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 
-namespace YuanliCore.Model.Information
+namespace YuanliCore.Model.LoadPort
 {
     /// <summary>
     /// CassetteUC.xaml 的互動邏輯
@@ -25,42 +25,40 @@ namespace YuanliCore.Model.Information
     /// 
     public partial class CassetteUC : UserControl, INotifyPropertyChanged
     {
+        public bool Btn1_IsClik { get => btn1_IsClik; set => SetValue(ref btn1_IsClik, value); }   
+        public bool Btn2_IsClik { get => btn2_IsClik; set => SetValue(ref btn2_IsClik, value); }
+        public bool Btn3_IsClik { get => btn3_IsClik; set => SetValue(ref btn3_IsClik, value); }
+        public bool Btn_IsEnable { get => btn_IsEnable; set => SetValue(ref btn_IsEnable, value); }
+        public Brush Btn1_Background { get => btn1_Background; set => SetValue(ref btn1_Background, value); }
+        public Brush Btn2_Background { get => btn2_Background; set => SetValue(ref btn2_Background, value); }
+        public Brush Btn3_Background { get => btn3_Background; set => SetValue(ref btn3_Background, value); }
+
+        public Brush Click_On;
+
+        public Brush Click_Off;
+
+        public CassetteUC(bool isEnable)
+        {
+            InitializeComponent();
+
+            Btn_IsEnable = isEnable;
+        }
+        private bool btn1_IsClik = true;
+
+        private bool btn2_IsClik = true;
+
+        private bool btn3_IsClik = true;
+
+        private bool btn_IsEnable;
+
+        private Brush btn1_Background;
+
+        private Brush btn2_Background;
+
+        private Brush btn3_Background;
 
         private SolidColorBrush PrimaryHueLightBrush = Application.Current.Resources["PrimaryHueLightBrush"] as SolidColorBrush;
 
-        //Color blueGreyColor2 = (Color)Application.Current.FindResource(new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.bluegrey.xaml", UriKind.RelativeOrAbsolute));
-
-
-        //Color blueGreyColor = (Color)Application.Current.FindResource("PrimaryHueMidBrush");
-
-
-        private bool btn1_IsClik = true;
-        public bool Btn1_IsClik { get => btn1_IsClik; set => SetValue(ref btn1_IsClik, value); }
-
-        private bool btn2_IsClik = true;
-        public bool Btn2_IsClik { get => btn2_IsClik; set => SetValue(ref btn2_IsClik, value); }
-
-        private bool btn3_IsClik = true;
-        public bool Btn3_IsClik { get => btn3_IsClik; set => SetValue(ref btn3_IsClik, value); }
-
-
-        private Brush btn1_Background;
-        public Brush Btn1_Background { get => btn1_Background; set => SetValue(ref btn1_Background, value); }
-
-        private Brush btn2_Background;
-        public Brush Btn2_Background { get => btn2_Background; set => SetValue(ref btn2_Background, value); }
-
-        private Brush btn3_Background;
-        public Brush Btn3_Background { get => btn3_Background; set => SetValue(ref btn3_Background, value); }
-
-        public Brush Click_On = Brushes.Red;
-
-        public Brush Click_Off = Brushes.Yellow;
-
-        public CassetteUC()
-        {
-            InitializeComponent();
-        }
         private void MainGrid_Loaded(object sender, RoutedEventArgs e)
         {
             try

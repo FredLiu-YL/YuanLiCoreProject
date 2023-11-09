@@ -171,7 +171,7 @@
     <Compile Include="UserControls\FileInfoWindow.xaml.cs">
       <DependentUpon>FileInfoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Information\CassetteUC.xaml.cs">
+    <Compile Include="UserControls\LoadPort\CassetteUC.xaml.cs">
       <DependentUpon>CassetteUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Microscope\BXFMUC.xaml.cs">
@@ -245,7 +245,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Information\CassetteUC.xaml">
+    <Page Include="UserControls\LoadPort\CassetteUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
