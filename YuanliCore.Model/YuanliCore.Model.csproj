@@ -148,6 +148,7 @@
     <Compile Include="CommonExtension\Matrix2D.cs" />
     <Compile Include="CommonExtension\RxLinq.cs" />
     <Compile Include="CommonExtension\SystemDrawingEx.cs" />
+    <Compile Include="Communication\ICIM.cs" />
     <Compile Include="Communication\TCPIP\HostCommunication.cs" />
     <Compile Include="Component\AutoFocus\AutoFocusSystem.cs" />
     <Compile Include="Interface\AbstractRecipe.cs" />
