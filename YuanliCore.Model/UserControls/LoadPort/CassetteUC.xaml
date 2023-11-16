@@ -27,31 +27,31 @@
         <TextBlock Text="{Binding WaferInfo}" Grid.Column="0" FontSize="8" Width="11"/>
         <Button
              Grid.Column="1"
-              Background="{Binding Top_Background}"
+              Background="{Binding WorkStatus.BackGroundTop }"
               Command="{Binding Top_Command}"
               Height="14" Width="40"
               Content=""
-              IsEnabled="{Binding Wafer_IsEnable}"
+              IsEnabled="{Binding Wafer_IsEnable }"
               Style="{StaticResource MaterialDesignFlatDarkBgButton}"
               ToolTip="MaterialDesignFlatDarkButton" />
-            <Button
+        <Button
                 Grid.Column="2"
-              Background="{Binding Back_Background}"
+              Background="{Binding WorkStatus.BackGroundBack}"
               Command="{Binding Back_Command}"
               Height="14" Width="40"
               Content=""
               IsEnabled="{Binding Wafer_IsEnable}"
               Style="{StaticResource MaterialDesignFlatDarkBgButton}"
               ToolTip="MaterialDesignFlatDarkButton" />
-            <Button
+        <Button
                 Grid.Column="3"
-              Background="{Binding Micro_Background}"
+              Background="{Binding WorkStatus.BackGroundMicro}"
               Command="{Binding Micro_Command}"
               Height="14" Width="40"
               Content=""
               IsEnabled="{Binding Wafer_IsEnable}"
               Style="{StaticResource MaterialDesignFlatDarkBgButton}"
               ToolTip="MaterialDesignFlatDarkButton" />
-        
+
     </Grid>
 </UserControl>
