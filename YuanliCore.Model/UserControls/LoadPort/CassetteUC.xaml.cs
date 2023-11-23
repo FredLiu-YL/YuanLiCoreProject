@@ -25,100 +25,96 @@ namespace YuanliCore.Model.LoadPort
     /// 
     public partial class CassetteUC : UserControl, INotifyPropertyChanged
     {
-        public bool Top_IsClik { get => top_IsClik; set => SetValue(ref top_IsClik, value); }
-        public bool Back_IsClik { get => back_IsClik; set => SetValue(ref back_IsClik, value); }
-        public bool Micro_IsClik { get => micro_IsClik; set => SetValue(ref micro_IsClik, value); }
+        private bool wafer_IsEnable;
+
+        private string waferInfo;
+
+        private WorkItem workStatus = new WorkItem();
+
+        private bool isFirstLoaded;
+
+        private SolidColorBrush PrimaryHueLightBrush = Application.Current.Resources["PrimaryHueLightBrush"] as SolidColorBrush;
+        public CassetteUC(bool isEnable, string pwaferInfo)
+        {
+            InitializeComponent();
+
+            isFirstLoaded = false;
+
+            Wafer_IsEnable = isEnable;
+            WaferInfo = pwaferInfo;
+        }
+        private void MainGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (isFirstLoaded == false)
+                {
+                    WorkStatus.IsTop = false;
+                    WorkStatus.IsBack = false;
+                    WorkStatus.IsMicro = false;
+
+                    ResourceDictionary dictionary = new ResourceDictionary();
+                    dictionary.Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.bluegrey.xaml", UriKind.RelativeOrAbsolute);
+
+                    if (dictionary.Count > 0)
+                    {
+                        // 资源字典已加载
+                        object blueGreyColorResource1 = dictionary["PrimaryHueLightBrush"];
+                        if (blueGreyColorResource1 != null && blueGreyColorResource1 is SolidColorBrush)
+                        {
+                            SolidColorBrush brush = (SolidColorBrush)blueGreyColorResource1;
+                            Color blueGreyColor = brush.Color;
+                            Click_Off = brush;
+                            // 现在你可以使用 blueGreyColor
+                        }
+                        // 资源字典已加载
+                        object blueGreyColorResource2 = dictionary["PrimaryHueDarkBrush"]; //PrimaryHueDarkForegroundBrush
+                        if (blueGreyColorResource2 != null && blueGreyColorResource2 is SolidColorBrush)
+                        {
+                            SolidColorBrush brush = (SolidColorBrush)blueGreyColorResource2;
+                            Color blueGreyColor = brush.Color;
+                            Click_On = brush;
+                            // 现在你可以使用 blueGreyColor
+                        }
+                    }
+                    WorkStatus.BackGroundTop = Click_Off;
+                    WorkStatus.BackGroundBack = Click_Off;
+                    WorkStatus.BackGroundMicro = Click_Off;
+                    //AddButtonAction = new RelayCommand<int>(key => { AddButton(key); });
+                    isFirstLoaded = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public event Action<WorkItem> WorkItemChange;
+        public WorkItem WorkStatus { get => workStatus; set => SetValue(ref workStatus, value); }
         public bool Wafer_IsEnable { get => wafer_IsEnable; set => SetValue(ref wafer_IsEnable, value); }
-        public Brush Top_Background { get => top_Background; set => SetValue(ref top_Background, value); }
-        public Brush Back_Background { get => back_Background; set => SetValue(ref back_Background, value); }
-        public Brush Micro_Background { get => micro_Background; set => SetValue(ref micro_Background, value); }
+        
         public string WaferInfo { get => waferInfo; set => SetValue(ref waferInfo, value); }
 
         public Brush Click_On;
 
         public Brush Click_Off;
-        public CassetteUC(bool isEnable, string pwaferInfo)
-        {
-            InitializeComponent();
-
-            Wafer_IsEnable = isEnable;
-            WaferInfo = pwaferInfo;
-        }
-        private bool top_IsClik = true;
-
-        private bool back_IsClik = true;
-
-        private bool micro_IsClik = true;
-
-        private bool wafer_IsEnable;
-
-        private Brush top_Background;
-
-        private Brush back_Background;
-
-        private Brush micro_Background;
-
-        private string waferInfo;
-
-        private SolidColorBrush PrimaryHueLightBrush = Application.Current.Resources["PrimaryHueLightBrush"] as SolidColorBrush;
-
-        private void MainGrid_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ResourceDictionary dictionary = new ResourceDictionary();
-                dictionary.Source = new Uri("pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.bluegrey.xaml", UriKind.RelativeOrAbsolute);
-
-                if (dictionary.Count > 0)
-                {
-                    // 资源字典已加载
-                    object blueGreyColorResource1 = dictionary["PrimaryHueLightBrush"];
-                    if (blueGreyColorResource1 != null && blueGreyColorResource1 is SolidColorBrush)
-                    {
-                        SolidColorBrush brush = (SolidColorBrush)blueGreyColorResource1;
-                        Color blueGreyColor = brush.Color;
-                        Click_Off = brush;
-                        // 现在你可以使用 blueGreyColor
-                    }
-                    // 资源字典已加载
-                    object blueGreyColorResource2 = dictionary["PrimaryHueDarkBrush"]; //PrimaryHueDarkForegroundBrush
-                    if (blueGreyColorResource2 != null && blueGreyColorResource2 is SolidColorBrush)
-                    {
-                        SolidColorBrush brush = (SolidColorBrush)blueGreyColorResource2;
-                        Color blueGreyColor = brush.Color;
-                        Click_On = brush;
-                        // 现在你可以使用 blueGreyColor
-                    }
-                }
-
-                Top_Background = Click_Off;
-                Back_Background = Click_Off;
-                Micro_Background = Click_Off;
-
-                Top_IsClik = false;
-                Back_IsClik = false;
-                Micro_IsClik = false;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
         public ICommand Top_Command => new RelayCommand(async () =>
         {
             try
             {
-                if (Top_IsClik == true)
+                if (WorkStatus.IsTop == true)
                 {
-                    Top_IsClik = false;
-                    Top_Background = Click_Off;
+                    WorkStatus.IsTop = false;
+                    WorkStatus.BackGroundTop = Click_Off;
                 }
                 else
                 {
-                    Top_IsClik = true;
-                    Top_Background = Click_On;
+                    WorkStatus.IsTop = true;
+                    WorkStatus.BackGroundTop = Click_On;
                 }
+
+                WorkItemChange?.Invoke(WorkStatus);
             }
             catch (Exception ex)
             {
@@ -130,16 +126,18 @@ namespace YuanliCore.Model.LoadPort
         {
             try
             {
-                if (Back_IsClik == true)
+                if (WorkStatus.IsBack == true)
                 {
-                    Back_IsClik = false;
-                    Back_Background = Click_Off;
+                    WorkStatus.IsBack = false;
+                    WorkStatus.BackGroundBack = Click_Off;
                 }
                 else
                 {
-                    Back_IsClik = true;
-                    Back_Background = Click_On;
+                    WorkStatus.IsBack = true;
+                    WorkStatus.BackGroundBack = Click_On;
                 }
+
+                WorkItemChange?.Invoke(WorkStatus);
             }
             catch (Exception ex)
             {
@@ -151,16 +149,18 @@ namespace YuanliCore.Model.LoadPort
         {
             try
             {
-                if (Micro_IsClik == true)
+                if (WorkStatus.IsMicro == true)
                 {
-                    Micro_IsClik = false;
-                    Micro_Background = Click_Off;
+                    WorkStatus.IsMicro = false;
+                    WorkStatus.BackGroundMicro = Click_Off;
                 }
                 else
                 {
-                    Micro_IsClik = true;
-                    Micro_Background = Click_On;
+                    WorkStatus.IsMicro = true;
+                    WorkStatus.BackGroundMicro = Click_On;
                 }
+
+                WorkItemChange?.Invoke(WorkStatus);
             }
             catch (Exception ex)
             {
@@ -169,9 +169,47 @@ namespace YuanliCore.Model.LoadPort
             }
         });
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
+            T oldValue = field;
+            field = value;
+            OnPropertyChanged(propertyName, oldValue, value);
+        }
+
+        protected virtual void OnPropertyChanged<T>(string name, T oldValue, T newValue)
+        {
+            // oldValue 和 newValue 目前沒有用到，代爾後需要再實作。
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+    }
+    public class WorkItem : INotifyPropertyChanged
+    {
+        private bool isTop;
+
+        private bool isBack;
+
+        private bool isMicro;
+
+        private Brush backGroundTop;
+
+        private Brush backGroundBack;
+
+        private Brush backGroundMicro;
+
+        public bool IsTop { get => isTop; set => SetValue(ref isTop, value); }
+        public bool IsBack { get => isBack; set => SetValue(ref isBack, value); }
+        public bool IsMicro { get => isMicro; set => SetValue(ref isMicro, value); }
+
+        public Brush BackGroundTop { get => backGroundTop; set => SetValue(ref backGroundTop, value); }
+        public Brush BackGroundBack { get => backGroundBack; set => SetValue(ref backGroundBack, value); }
+        public Brush BackGroundMicro { get => backGroundMicro; set => SetValue(ref backGroundMicro, value); }
+
+
+        //變更顏色-
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
