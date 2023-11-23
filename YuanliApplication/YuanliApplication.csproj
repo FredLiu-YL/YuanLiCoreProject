@@ -132,13 +132,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\YuanliCore.CogVision\YuanliCore.CogVision.csproj">
+      <Project>{7794CBB3-58F6-4E99-9AB2-C3A257A361A9}</Project>
+      <Name>YuanliCore.CogVision</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YuanliCore.Model\YuanliCore.Model.csproj">
       <Project>{14946968-1DA0-4F66-ABD0-10D45D580E00}</Project>
       <Name>YuanliCore.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\YuanliCore\YuanliCore.csproj">
-      <Project>{7794cbb3-58f6-4e99-9ab2-c3a257a361a9}</Project>
-      <Name>YuanliCore</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
