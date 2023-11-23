@@ -30,7 +30,13 @@ namespace YuanliCore.Views
     public partial class VirtualCanvas : UserControl, INotifyPropertyChanged
     {
         public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register(nameof(ImageSource), typeof(BitmapSource), typeof(VirtualCanvas),
-                                                                                                    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+                                                                                                    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(async(obj, e) =>
+                                                                                                    {
+                                                                                                        var canvas = obj as VirtualCanvas;
+                                                                                                        await Task.Delay(50);
+                                                                                                        canvas.MainCanvas.ZoomFitParent();
+                                                                                                    
+                                                                                                    })));
 
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(nameof(ItemsSource), typeof(ObservableCollection<ROIShape>), typeof(VirtualCanvas),
                                                                                                     new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));

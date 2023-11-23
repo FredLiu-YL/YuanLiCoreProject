@@ -17,6 +17,7 @@ namespace YuanliCore.Views.CanvasShapes
         public static readonly DependencyProperty LengthXProperty;
         public static readonly DependencyProperty LengthYProperty;
         public static readonly DependencyProperty OrientationProperty;
+        public static readonly DependencyProperty IsCenterShowProperty;
         private Geometry thisgeometry;
         private Transform RotateTrans = null;
         private RectangleGeometry _TranslateGeometry = new RectangleGeometry();
@@ -68,7 +69,14 @@ namespace YuanliCore.Views.CanvasShapes
             get => (double)GetValue(OrientationProperty);
             set => SetValue(OrientationProperty, value);
         }
-
+        /// <summary>
+        /// 顯示中心十字
+        /// </summary>
+        public bool IsCenterShow
+        {
+            get => (bool)GetValue(IsCenterShowProperty);
+            set => SetValue(IsCenterShowProperty, value);
+        }
         /// <summary>
         /// 中心十字
         /// </summary>
@@ -101,7 +109,7 @@ namespace YuanliCore.Views.CanvasShapes
             {
                 double DrawX = X - ShapeLeft;
                 double DrawY = Y - ShapeTop;
-                _TranslateGeometry.Rect = new Rect(DrawX  / 2, DrawY  / 2, DrawX, DrawY);
+                _TranslateGeometry.Rect = new Rect(DrawX / 2, DrawY / 2, DrawX, DrawY);
                 _TranslateGeometry.Transform = RotateTrans;
                 return _TranslateGeometry;
             }
@@ -154,6 +162,8 @@ namespace YuanliCore.Views.CanvasShapes
             XProperty = DependencyProperty.Register("X", typeof(double), typeof(ROIRotatedRect), new FrameworkPropertyMetadata(0.0, options, OnDataChanged));
             YProperty = DependencyProperty.Register("Y", typeof(double), typeof(ROIRotatedRect), new FrameworkPropertyMetadata(0.0, options, OnDataChanged));
             OrientationProperty = DependencyProperty.Register("Orientation", typeof(double), typeof(ROIRotatedRect), new FrameworkPropertyMetadata(0.0, options, OnDataChanged));
+            IsCenterShowProperty = DependencyProperty.Register("IsCenterShow", typeof(bool), typeof(ROIRotatedRect), new FrameworkPropertyMetadata(true, options));
+
         }
 
         /// <summary>
@@ -169,13 +179,15 @@ namespace YuanliCore.Views.CanvasShapes
         /// </summary>
         public void GeometryAction()
         {
-            pairs.Add(_TranslateGeometry, Pos => {
+            pairs.Add(_TranslateGeometry, Pos =>
+            {
                 var position = Pos - new Point(X - ShapeLeft - 1, Y - ShapeTop - 1);
                 X += position.X;
                 Y += position.Y;
             });
 
-            pairs.Add(_ResizeGeometry, Pos => {
+            pairs.Add(_ResizeGeometry, Pos =>
+            {
                 var position = Pos - new Point(X - ShapeLeft - 1, Y - ShapeTop - 1);
                 Transform rotTransform = new RotateTransform(Orientation);
                 var org = rotTransform.Transform(new Point(position.X, position.Y));
@@ -183,7 +195,8 @@ namespace YuanliCore.Views.CanvasShapes
                 LengthY = Math.Abs(org.Y);
             });
 
-            pairs.Add(_RotateGeometry, Pos => {
+            pairs.Add(_RotateGeometry, Pos =>
+            {
                 var position = Pos - new Point(X - ShapeLeft - 1, Y - ShapeTop - 1);
                 var angle = -Math.Atan2(position.Y, position.X) * 180 / Math.PI;
                 angle = angle < 0 ? angle + 360 : angle;
@@ -230,7 +243,7 @@ namespace YuanliCore.Views.CanvasShapes
         /// <summary>
         /// 需通過返回定義圖形基元的 Geometry 類型的對象來實現 DefiningGeometry
         /// </summary>
-        protected override Geometry DefiningGeometry 
+        protected override Geometry DefiningGeometry
         {
             get
             {
@@ -268,8 +281,12 @@ namespace YuanliCore.Views.CanvasShapes
             pen = new Pen(Stroke, StrokeThickness);
             dc.DrawGeometry(Fill, pen, DefiningGeometry);
 
-            pen = new Pen(CenterCrossBrush, StrokeThickness / 2);
-            dc.DrawGeometry(Fill, pen, CenterCrossGeometry);
+            if (IsCenterShow)
+            {
+                pen = new Pen(CenterCrossBrush, StrokeThickness / 2);
+                dc.DrawGeometry(Fill, pen, CenterCrossGeometry);
+            }
+
 
             if (IsInteractived)
             {
@@ -285,7 +302,7 @@ namespace YuanliCore.Views.CanvasShapes
                     dc.DrawGeometry(Brushes.Transparent, pen, RotateGeometry);
                 }
 
-                if(IsMoveEnabled)
+                if (IsMoveEnabled)
                     dc.DrawGeometry(Brushes.Transparent, transparentPen, TranslateGeometry);
             }
         }

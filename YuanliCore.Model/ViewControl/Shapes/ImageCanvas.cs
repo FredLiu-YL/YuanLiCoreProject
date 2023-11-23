@@ -196,6 +196,8 @@ namespace YuanliCore.Views.CanvasShapes
 
             FitCrossLine(canvas, imgSrc);
             if (canvas.AutoFitParent) FitParent(canvas, imgSrc);
+
+
         }
 
         /// <summary>
