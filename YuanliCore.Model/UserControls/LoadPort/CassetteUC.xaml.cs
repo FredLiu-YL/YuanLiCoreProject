@@ -34,7 +34,12 @@ namespace YuanliCore.Model.LoadPort
         private bool isFirstLoaded;
 
         private SolidColorBrush PrimaryHueLightBrush = Application.Current.Resources["PrimaryHueLightBrush"] as SolidColorBrush;
-        public CassetteUC(bool isEnable, string pwaferInfo)
+        public CassetteUC()
+        {
+            InitializeComponent();
+        }
+
+         public CassetteUC(bool isEnable, string pwaferInfo)
         {
             InitializeComponent();
 
