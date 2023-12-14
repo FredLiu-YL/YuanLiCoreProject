@@ -185,6 +185,9 @@
       <DependentUpon>AxisMoveControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Motion\UserControlAxisConfig.cs" />
+    <Compile Include="UserControls\SignalUC.xaml.cs">
+      <DependentUpon>SignalUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewControl\Shapes\AngleShape.cs" />
     <Compile Include="ViewControl\Shapes\ImageCanvas.cs" />
     <Compile Include="ViewControl\Shapes\RectShape.cs" />
@@ -259,6 +262,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Motion\AxisMoveControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\SignalUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

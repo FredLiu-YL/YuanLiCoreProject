@@ -39,7 +39,7 @@ namespace YuanliCore.Model.LoadPort
             InitializeComponent();
         }
 
-         public CassetteUC(bool isEnable, string pwaferInfo)
+        public CassetteUC(bool isEnable, string pwaferInfo)
         {
             InitializeComponent();
 
