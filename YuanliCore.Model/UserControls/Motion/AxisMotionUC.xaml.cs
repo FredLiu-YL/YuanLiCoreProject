@@ -422,13 +422,13 @@ namespace YuanliCore.Motion
                     break;
             }
         }
-
+        //沒在用
         private async void StartAxisStatus()
         {
             var b = Thread.CurrentThread.ManagedThreadId;
             Task.Run(GetAxisStatus);
         }
-
+        //沒在用
         private async Task GetAxisStatus()
         {
             isGetStatus = true;

@@ -10,7 +10,7 @@
              xmlns:usercontrols="clr-namespace:YuanliCore.Motion"
              mc:Ignorable="d" 
              x:Name="AxisMotion"
-             d:DesignHeight="60" d:DesignWidth="1250" Loaded="AxisMotion_Loaded" Unloaded="AxisMotion_Unloaded">
+             d:DesignHeight="80" d:DesignWidth="1250" Loaded="AxisMotion_Loaded" Unloaded="AxisMotion_Unloaded">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
