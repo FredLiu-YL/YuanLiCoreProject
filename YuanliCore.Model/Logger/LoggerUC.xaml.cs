@@ -25,7 +25,7 @@ namespace YuanliCore.Logger
     public partial class LoggerUC : UserControl, INotifyPropertyChanged
     {
         private string mainLog;
-      
+        private object lockobj;
 
         private static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
         private static readonly DependencyProperty MachineNameProperty = DependencyProperty.Register(nameof(MachineName), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("Machine", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
@@ -53,36 +53,43 @@ namespace YuanliCore.Logger
             get => (string)GetValue(TitleProperty);
             set => SetValue(TitleProperty, value);
         }
-       
+
 
         private static void AddMessageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-           
+
             var dp = d as LoggerUC;
             dp.AddMessage();
 
-          
+
         }
 
 
         private void AddMessage()
         {
-            if (Message == null || Message=="") return;
+            if (Message == null || Message == "") return;
             string systemPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            DateTime dateTime = DateTime.Now;
 
-            string str = $"{dateTime.ToString("G")}:{  dateTime.Millisecond}   {Message} \r\n";
-            string path = $"{systemPath}\\AutoFocusMachine";
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+            lock (lockobj)
+            {
+                DateTime dateTime = DateTime.Now;
+
+                string str = $"{dateTime.ToString("G")}:{  dateTime.Millisecond}   {Message} \r\n";
+                string path = $"{systemPath}\\AutoFocusMachine";
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
 
 
-            File.AppendAllText($"{path}\\Log.txt", str);
-            //  File.AppendAllText(path, $"{dateTime.ToString("G")}{message}");
-            MainLog += str;
+                File.AppendAllText($"{path}\\Log.txt", str);
+                //  File.AppendAllText(path, $"{dateTime.ToString("G")}{message}");
+                MainLog += str;
 
-            TextBoxLog.ScrollToEnd();
- 
+                TextBoxLog.ScrollToEnd();
+
+
+            }
+
+
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
