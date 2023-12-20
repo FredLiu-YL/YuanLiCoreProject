@@ -25,7 +25,7 @@ namespace YuanliCore.Logger
     public partial class LoggerUC : UserControl, INotifyPropertyChanged
     {
         private string mainLog;
-        private object lockobj;
+        private object lockobj =new object();
 
         private static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
         private static readonly DependencyProperty MachineNameProperty = DependencyProperty.Register(nameof(MachineName), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("Machine", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
