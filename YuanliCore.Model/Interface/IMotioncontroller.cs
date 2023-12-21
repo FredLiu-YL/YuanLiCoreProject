@@ -38,6 +38,8 @@ namespace YuanliCore.Interface
 
         double GetPositionCommand(int id);
 
+        AxisSensor GetSensorCommand(int id);
+
         void GetLimitCommand(int id, out double limitN, out double limitP);
         void SetLimitCommand(int id, double minPos , double maxPos);
         VelocityParams GetSpeedCommand(int id);

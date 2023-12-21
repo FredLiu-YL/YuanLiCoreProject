@@ -31,7 +31,8 @@ namespace YuanliCore.Motion
                 axesPos.Add(0);
                 return new Axis(this, info.AxisID)
                 {
-                    AxisName = $"Axis{i}"
+                    AxisName = info.AxisName
+                   
                 };
 
             }).ToArray();
@@ -141,6 +142,19 @@ namespace YuanliCore.Motion
         {
             //不實做
 
+        }
+
+        public AxisSensor GetSensorCommand(int id)
+        {
+
+            if (simulatePosition[id] == 0)
+                return AxisSensor.ORG;
+            if (simulatePosition[id] <= simulateLimitN[id])
+                return AxisSensor.NEL;
+            if (simulatePosition[id] >= simulateLimitP[id])
+                return AxisSensor.PEL;
+
+            return AxisSensor.NONE;
         }
     }
 

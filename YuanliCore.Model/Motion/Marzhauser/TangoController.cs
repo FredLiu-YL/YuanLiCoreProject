@@ -436,7 +436,10 @@ namespace YuanliCore.Motion.Marzhauser
 
         }
 
-
+        public AxisSensor GetSensorCommand(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

@@ -12,30 +12,36 @@ namespace YuanliCore.Motion
 {
     public class AxisConfig : INotifyPropertyChanged
     {
+
+        private double limitNEL = 0, limitPEL= 1000000;
+        private double initialPos;
+        private VelocityParams moveVel = new VelocityParams(50000);
+        private VelocityParams homeVel = new VelocityParams(50000);
         /// <summary>
         /// 取得或設定 軟體負極限
         /// </summary>
-        public double LimitNEL { get; set; } = 0;
+        public double LimitNEL { get => limitNEL; set => SetValue(ref limitNEL, value); } 
 
         /// <summary>
         /// 取得或設定 軟體正極限
         /// </summary>
-        public double LimitPEL { get; set; } = 1000000;
+        public double LimitPEL { get => limitPEL; set => SetValue(ref limitPEL, value); } 
+
 
         /// <summary>
         /// 取得或設定 運動速度
         /// </summary>
-        public VelocityParams MoveVel { get; set; } = new VelocityParams(50000);
+        public VelocityParams MoveVel { get => moveVel; set => SetValue(ref moveVel, value); } 
 
         /// <summary>
         /// 取得或設定 回原點速度
         /// </summary>
-        public VelocityParams HomeVel { get; set; } = new VelocityParams(50000);
+        public VelocityParams HomeVel { get => homeVel; set => SetValue(ref homeVel, value); } 
 
         /// <summary>
         /// 取得或設定 初始化後位置
         /// </summary>
-        public double InitialPos { get; set; } = 0;
+        public double InitialPos { get => initialPos; set => SetValue(ref initialPos, value); }
 
         /// <summary>
         /// 取得或設定 原點模式

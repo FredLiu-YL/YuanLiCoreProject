@@ -21,10 +21,10 @@ namespace YuanliCore.Motion
             this.AxisID = axisNum;
         }
 
-        
+
         public bool IsOpen { get; }
         public bool IsRunning { get; }
-        
+
         /// <summary>
         /// 運動軸編號
         /// </summary>
@@ -55,12 +55,16 @@ namespace YuanliCore.Motion
         /// 運動軸速度
         /// </summary>
         public VelocityParams AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
-       // public MotionVelocity AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
+        // public MotionVelocity AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
 
+        /// <summary>
+        /// Axis 燈號狀態
+        /// </summary>
+        public AxisSensor AxisState { get => ReadSensor(); }
 
         public HomeModes HomeMode { get; set; }
-       
-        
+
+
         public void Open()
         {
 
@@ -71,7 +75,7 @@ namespace YuanliCore.Motion
 
 
         }
-      
+
         public async Task HomeAsync()
         {
             if (isBusy) return;
@@ -93,10 +97,10 @@ namespace YuanliCore.Motion
                 int i = 0;
                 isBusy = true;
                 await Task.Run(async () =>
-                { 
+                {
                     double postion = Position + distance;
                     controller.MoveCommand(AxisID, distance);
-                   
+
                     while (Math.Abs(Position - postion) > 0.005 && !isStop)
                     {
                         i++;
@@ -196,8 +200,8 @@ namespace YuanliCore.Motion
         }
         private VelocityParams GetVelocity()
         {
-             return controller.GetSpeedCommand(AxisID);
-        
+            return controller.GetSpeedCommand(AxisID);
+
         }
         private void SetVelocity(VelocityParams axisVelocity)
         {
@@ -210,7 +214,10 @@ namespace YuanliCore.Motion
 
 
         }
-
+        private AxisSensor ReadSensor()
+        {
+          return   controller.GetSensorCommand(AxisID);
+        }
     }
 
 
@@ -227,7 +234,13 @@ namespace YuanliCore.Motion
         Forward = 1
     }
 
-
+    public enum AxisSensor
+    {
+        ORG = 0,
+        PEL = 1,
+        NEL = 2,
+        NONE = 3,
+    }
     public enum HomeModes
     {
         ORG = 0,

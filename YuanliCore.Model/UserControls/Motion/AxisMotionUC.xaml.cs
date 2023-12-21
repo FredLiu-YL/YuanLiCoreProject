@@ -32,6 +32,10 @@ namespace YuanliCore.Motion
         private System.Windows.Threading.DispatcherTimer dispatcherTimerFeedback;
         private string axisName;
         private double position;
+        private double accMoveVelTime = 0.1, decMoveVelTime = 0.1, accHomVelTime = 0.1, decHomeVelTime = 0.1;
+        private Brush pELBackground = Brushes.White, nELBackground = Brushes.White, oRGBackground = Brushes.White;
+
+ 
 
 
         public AxisMotionUC()
@@ -121,20 +125,7 @@ namespace YuanliCore.Motion
             get => axisName; set => SetValue(ref axisName, value);
         }
 
-        /// <summary>
-        /// 取得或設定 負極限
-        /// </summary>
-        public double LimitNEL { get; set; } = 0;
 
-        /// <summary>
-        /// 取得或設定 正極限
-        /// </summary>
-        public double LimitPEL { get; set; } = 200;
-
-        /// <summary>
-        /// 取得或設定 移動速度
-        /// </summary>
-        public double MoveVel { get; set; } = 2000;
 
         /// <summary>
         /// 取得或設定 原點速度
@@ -144,22 +135,22 @@ namespace YuanliCore.Motion
         /// <summary>
         /// 取得或設定 移動加速度時間
         /// </summary>
-        public double AccMoveVelTime { get; set; } = 0.1;
+        public double AccMoveVelTime { get => accMoveVelTime; set => SetValue(ref accMoveVelTime, value); }
 
         /// <summary>
         /// 取得或設定 移動減速度時間
         /// </summary>
-        public double DecMoveVelTime { get; set; } = 0.1;
+        public double DecMoveVelTime { get => decMoveVelTime; set => SetValue(ref decMoveVelTime, value); }
 
         /// <summary>
         /// 取得或設定 原點加速度時間
         /// </summary>
-        public double AccHomeVelTime { get; set; } = 0.1;
+        public double AccHomeVelTime { get => accHomVelTime; set => SetValue(ref accHomVelTime, value); }
 
         /// <summary>
         /// 取得或設定 原點減速度時間
         /// </summary>
-        public double DecHomeVelTime { get; set; } = 0.1;
+        public double DecHomeVelTime { get => decHomeVelTime; set => SetValue(ref decHomeVelTime, value); }
 
         /// <summary>
         /// 取得或設定 位移量
@@ -179,18 +170,18 @@ namespace YuanliCore.Motion
         /// <summary>
         /// 取得或設定 軸在正極限上顏色
         /// </summary>
-        public Brush PELBackground { get; set; } = Brushes.White;
+        public Brush PELBackground { get => pELBackground; set => SetValue(ref pELBackground, value); }  
 
         /// <summary>
         /// 取得或設定 軸在負極限上顏色
         /// </summary>
-        public Brush NELBackground { get; set; } = Brushes.White;
+        public Brush NELBackground { get => nELBackground; set => SetValue(ref nELBackground, value); }  
 
         /// <summary>
         /// 取得或設定 軸在原點上顏色
         /// </summary>
-        public Brush ORGBackground { get; set; } = Brushes.White;
-
+        public Brush ORGBackground { get => oRGBackground; set => SetValue(ref oRGBackground, value); }
+        
         /// <summary>
         /// 取得或設定 Home 模式
         /// </summary>
@@ -359,17 +350,7 @@ namespace YuanliCore.Motion
             }
         });
 
-        private VelocityParams ConvertHomeVelocity()
-        {
-            var homeVel = new VelocityParams(1000, HomeVel, AccHomeVelTime, DecHomeVelTime);
-            return homeVel;
-        }
 
-        private VelocityParams ConvertMoveVelocity()
-        {
-            var moveVel = new VelocityParams(0, MoveVel, AccMoveVelTime, DecMoveVelTime);
-            return moveVel;
-        }
 
         private double ConvertDistance()
         {
@@ -455,19 +436,21 @@ namespace YuanliCore.Motion
                 }
                 AxisName = Axis.AxisName;
                 Position = Axis.Position;
-                /*
-                                if (Axis.Sensor.HasFlag(Sensors.NEL))
-                                    NELBackground = Brushes.Red;
-                                else
-                                    NELBackground = Brushes.White;
-                                if (Axis.Sensor.HasFlag(Sensors.PEL))
-                                    PELBackground = Brushes.Red;
-                                else
-                                    PELBackground = Brushes.White;
-                                if (Axis.Sensor.HasFlag(Sensors.ORG))
-                                    ORGBackground = Brushes.DarkGreen;
-                                else
-                                    ORGBackground = Brushes.White;*/
+
+                if (Axis.AxisState == AxisSensor.NEL)
+                    NELBackground = Brushes.Red;
+                else
+                    NELBackground = Brushes.White;
+
+                if (Axis.AxisState == AxisSensor.PEL)
+                    PELBackground = Brushes.Red;
+                else
+                    PELBackground = Brushes.White;
+
+                if (Axis.AxisState == AxisSensor.ORG)
+                    ORGBackground = Brushes.DarkGreen;
+                else
+                    ORGBackground = Brushes.White;
                 await Task.Delay(50);
             }
         }
@@ -482,19 +465,20 @@ namespace YuanliCore.Motion
             }
             AxisName = Axis.AxisName;
             Position = Axis.Position;
-            /*
-            if (Axis.Sensor.HasFlag(Sensors.NEL))
+            if (Axis.AxisState == AxisSensor.NEL)
                 NELBackground = Brushes.Red;
             else
                 NELBackground = Brushes.White;
-            if (Axis.Sensor.HasFlag(Sensors.PEL))
+
+            if (Axis.AxisState == AxisSensor.PEL)
                 PELBackground = Brushes.Red;
             else
                 PELBackground = Brushes.White;
-            if (Axis.Sensor.HasFlag(Sensors.ORG))
+
+            if (Axis.AxisState == AxisSensor.ORG)
                 ORGBackground = Brushes.DarkGreen;
             else
-                ORGBackground = Brushes.White;*/
+                ORGBackground = Brushes.White;
         }
 
 
