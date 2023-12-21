@@ -6,26 +6,32 @@ using System.Threading.Tasks;
 
 namespace YuanliCore.Motion
 {
+    //暫不使用
     public struct MotionVelocity
     {
     
-        public MotionVelocity(double fainalVelocity, double accVelocity, double decVelocity)
+        public MotionVelocity(double initialVel, double fainalVelocity, double accVelocityTime, double decVelocityTime)
         {
+            InitialVelocity =  initialVel;
             FainalVelocity = fainalVelocity;
-            AccVelocity = accVelocity;
-            DecVelocity = decVelocity;
+            AccVelocityTime = accVelocityTime;
+            DecVelocityTime = decVelocityTime;
         }
+        /// <summary>
+        /// 運動軸初速度
+        /// </summary>
+        public double InitialVelocity { get; set; }
         /// <summary>
         /// 運動軸最高速度
         /// </summary>
         public double FainalVelocity { get; set; }
         /// <summary>
-        /// 運動軸加速度
+        /// 運動軸加速度 到最高速的時間
         /// </summary>
-        public double AccVelocity { get; set; }
+        public double AccVelocityTime { get; set; }
         /// <summary>
-        /// 運動軸減速度
+        /// 運動軸減速度 到0的時間
         /// </summary>
-        public double DecVelocity { get; set; }
+        public double DecVelocityTime { get; set; }
     }
 }

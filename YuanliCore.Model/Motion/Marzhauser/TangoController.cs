@@ -33,7 +33,7 @@ namespace YuanliCore.Motion.Marzhauser
 
         public IEnumerable<DigitalOutput> OutputSignals => throw new NotImplementedException();
 
-        public IEnumerable<Axis> Axes => GetDefaultAxes();
+        public  Axis[] Axes => GetDefaultAxes();
 
 
 
@@ -316,7 +316,7 @@ namespace YuanliCore.Motion.Marzhauser
         }
 
 
-        private IEnumerable<Axis> GetDefaultAxes()
+        private Axis[] GetDefaultAxes()
         {
             List<Axis> axesList = new List<Axis>();
 
@@ -324,7 +324,7 @@ namespace YuanliCore.Motion.Marzhauser
             {
                 axesList.Add(new Axis(this, i));
             }
-            return axesList;
+            return axesList.ToArray();
         }
 
         /// <summary>
@@ -336,7 +336,7 @@ namespace YuanliCore.Motion.Marzhauser
 
         }
 
-        public MotionVelocity GetSpeedCommand(int id)
+        public VelocityParams GetSpeedCommand(int id)
         {
             TangoLib.LS_GetVel(out double motionVelX, out double motionVelY, out double motionVelZ, out double motionVelA);
             TangoLib.LS_GetAccel(out double motionAccVelX, out double motionAccVelY, out double motionAccVelZ, out double motionAccVelA);
@@ -345,24 +345,24 @@ namespace YuanliCore.Motion.Marzhauser
             switch (id)
             {
                 case 1:
-                    MotionVelocity velocityX = new MotionVelocity(motionVelX, motionAccVelX, motionDecVelX);
+                    VelocityParams velocityX = new VelocityParams(0,motionVelX, motionAccVelX, motionDecVelX);
                     return velocityX;
                  
 
                 case 2:
-                    MotionVelocity velocityY = new MotionVelocity(motionVelY, motionAccVelY, motionDecVelY);
+                    VelocityParams velocityY = new VelocityParams(0,motionVelY, motionAccVelY, motionDecVelY);
                     return velocityY;
                  
 
 
                 case 3:
-                    MotionVelocity velocityZ = new MotionVelocity(motionVelZ, motionAccVelZ, motionDecVelZ);
+                    VelocityParams velocityZ = new VelocityParams(0,motionVelZ, motionAccVelZ, motionDecVelZ);
                     return velocityZ;
                  
 
 
                 case 4:
-                    MotionVelocity velocityA = new MotionVelocity(motionVelA, motionAccVelA, motionDecVelA);
+                    VelocityParams velocityA = new VelocityParams(0,motionVelA, motionAccVelA, motionDecVelA);
                     return velocityA;
                    
 
@@ -372,28 +372,31 @@ namespace YuanliCore.Motion.Marzhauser
             }
         }
 
-        public void SetSpeedCommand(int id, MotionVelocity motionVelocity)
+        public void SetSpeedCommand(int id, VelocityParams motionVelocity)
         {
             TangoLib.LS_GetVel(out double motionVelX, out double motionVelY, out double motionVelZ, out double motionVelA);
             TangoLib.LS_GetAccel(out double motionAccVelX, out double motionAccVelY, out double motionAccVelZ, out double motionAccVelA);
             TangoLib.LS_GetStopAccel(out double motionDecVelX, out double motionDecVelY, out double motionDecVelZ, out double motionDecVelA);
 
+            double acc = motionVelocity.FinalVel / motionVelocity.AccelerationTime;
+            double dec = motionVelocity.FinalVel / motionVelocity.DecelerationTime;
+
             switch (id)
             {
                 case 1:
 
-
-                    TangoLib.LS_SetVel(motionVelocity.FainalVelocity, motionVelY,  motionVelZ,  motionVelA);
-                    TangoLib.LS_SetAccel(motionVelocity.AccVelocity,  motionAccVelY,  motionAccVelZ,  motionAccVelA);
-                    TangoLib.LS_SetStopAccel(motionVelocity.DecVelocity,  motionDecVelY,  motionDecVelZ,  motionDecVelA);
+                 
+                    TangoLib.LS_SetVel(motionVelocity.FinalVel, motionVelY,  motionVelZ,  motionVelA);
+                    TangoLib.LS_SetAccel(acc,  motionAccVelY,  motionAccVelZ,  motionAccVelA);
+                    TangoLib.LS_SetStopAccel(dec,  motionDecVelY,  motionDecVelZ,  motionDecVelA);
 
                     break;
 
                 case 2:
 
-                    TangoLib.LS_SetVel(motionVelX, motionVelocity.FainalVelocity, motionVelZ, motionVelA);
-                    TangoLib.LS_SetAccel(motionAccVelX, motionVelocity.AccVelocity, motionAccVelZ, motionAccVelA);
-                    TangoLib.LS_SetStopAccel(motionDecVelX, motionVelocity.DecVelocity, motionDecVelZ, motionDecVelA);
+                    TangoLib.LS_SetVel(motionVelX, motionVelocity.FinalVel, motionVelZ, motionVelA);
+                    TangoLib.LS_SetAccel(motionAccVelX, acc, motionAccVelZ, motionAccVelA);
+                    TangoLib.LS_SetStopAccel(motionDecVelX, dec, motionDecVelZ, motionDecVelA);
                     break;
 
 
@@ -425,10 +428,10 @@ namespace YuanliCore.Motion.Marzhauser
             TangoLib.LS_GetStopAccel(out double motionDecVelX, out double motionDecVelY, out double motionDecVelZ, out double motionDecVelA);
 
             return new AxisInfo[] {
-                    new AxisInfo(){AxisName="AxisX" , AxisID=1,Velocity= new MotionVelocity( motionVelX,motionAccVelX , motionDecVelX)},
-                    new AxisInfo(){AxisName="AxisY" , AxisID=2, Velocity=new MotionVelocity( motionVelY,motionAccVelY , motionDecVelY)},
-                    new AxisInfo(){AxisName="AxisZ" , AxisID=3, Velocity=new MotionVelocity( motionVelZ,motionAccVelZ , motionDecVelZ)},
-                    new AxisInfo(){AxisName="AxisA" , AxisID=4, Velocity=new MotionVelocity( motionVelA,motionAccVelA , motionDecVelA)},
+                    new AxisInfo(){AxisName="AxisX" , AxisID=1,Velocity= new VelocityParams(0, motionVelX,motionAccVelX , motionDecVelX)},
+                    new AxisInfo(){AxisName="AxisY" , AxisID=2, Velocity=new VelocityParams(0, motionVelY,motionAccVelY , motionDecVelY)},
+                    new AxisInfo(){AxisName="AxisZ" , AxisID=3, Velocity=new VelocityParams(0, motionVelZ,motionAccVelZ , motionDecVelZ)},
+                    new AxisInfo(){AxisName="AxisA" , AxisID=4, Velocity=new VelocityParams(0, motionVelA,motionAccVelA , motionDecVelA)},
             };
 
         }

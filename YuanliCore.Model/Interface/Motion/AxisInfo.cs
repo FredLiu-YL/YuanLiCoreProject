@@ -20,7 +20,7 @@ namespace YuanliCore.Interface.Motion
         /// <summary>
         /// 運動軸速度
         /// </summary>
-        public MotionVelocity Velocity { get; set; }
+        public VelocityParams Velocity { get; set; }
   
        
         /// <summary>

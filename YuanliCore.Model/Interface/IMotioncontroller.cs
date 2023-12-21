@@ -16,7 +16,7 @@ namespace YuanliCore.Interface
         bool IsOpen { get; }
 
 
-        IEnumerable<Axis> Axes { get; }
+        Axis[] Axes { get; }
         IEnumerable<DigitalInput> IutputSignals { get; }
         IEnumerable<DigitalOutput> OutputSignals { get; }
 
@@ -40,8 +40,8 @@ namespace YuanliCore.Interface
 
         void GetLimitCommand(int id, out double limitN, out double limitP);
         void SetLimitCommand(int id, double minPos , double maxPos);
-        MotionVelocity GetSpeedCommand(int id);
-        void SetSpeedCommand(int id, MotionVelocity motionVelocity);
+        VelocityParams GetSpeedCommand(int id);
+        void SetSpeedCommand(int id, VelocityParams motionVelocity);
         void SetAxisDirectionCommand(int id ,AxisDirection direction);
         AxisDirection GetAxisDirectionCommand(int id);
     }

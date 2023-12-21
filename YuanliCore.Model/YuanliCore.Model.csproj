@@ -184,7 +184,7 @@
     <Compile Include="UserControls\Motion\AxisMoveControl.xaml.cs">
       <DependentUpon>AxisMoveControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Motion\UserControlAxisConfig.cs" />
+    <Compile Include="UserControls\Motion\AxisConfig.cs" />
     <Compile Include="UserControls\SignalUC.xaml.cs">
       <DependentUpon>SignalUC.xaml</DependentUpon>
     </Compile>

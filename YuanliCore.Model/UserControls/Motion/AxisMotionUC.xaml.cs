@@ -30,6 +30,9 @@ namespace YuanliCore.Motion
         private bool isGetStatus = false;
         private VelocityParams moveVelParams = new VelocityParams(5000);
         private System.Windows.Threading.DispatcherTimer dispatcherTimerFeedback;
+        private string axisName;
+        private double position;
+
 
         public AxisMotionUC()
         {
@@ -85,7 +88,7 @@ namespace YuanliCore.Motion
         }
 
         public static readonly DependencyProperty AxisProperty = DependencyProperty.Register("Axis", typeof(Axis), typeof(AxisMotionUC), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-        public static readonly DependencyProperty AxisSetConfigProperty = DependencyProperty.Register("AxisSetConfig", typeof(UserControlAxisConfig), typeof(AxisMotionUC), new FrameworkPropertyMetadata(new UserControlAxisConfig(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty AxisSetConfigProperty = DependencyProperty.Register("AxisSetConfig", typeof(AxisConfig), typeof(AxisMotionUC), new FrameworkPropertyMetadata(new AxisConfig(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
         public static readonly DependencyProperty HomeAsycProperty = DependencyProperty.Register("HomeAsyc", typeof(Action<Axis>), typeof(AxisMotionUC), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public Action<Axis> HomeAsyc
@@ -104,16 +107,19 @@ namespace YuanliCore.Motion
             set => SetValue(AxisProperty, value);
         }
 
-        public UserControlAxisConfig AxisSetConfig
+        public AxisConfig AxisSetConfig
         {
-            get => (UserControlAxisConfig)GetValue(AxisSetConfigProperty);
+            get => (AxisConfig)GetValue(AxisSetConfigProperty);
             set => SetValue(AxisSetConfigProperty, value);
         }
 
         /// <summary>
         /// 取得或設定 軸名稱
         /// </summary>
-        public string AxisName { get; set; } = "";
+        public string AxisName
+        {
+            get => axisName; set => SetValue(ref axisName, value);
+        }
 
         /// <summary>
         /// 取得或設定 負極限
@@ -168,7 +174,7 @@ namespace YuanliCore.Motion
         /// <summary>
         /// 當前位置
         /// </summary>
-        public double Position { get; set; } = 0;
+        public double Position { get => position; set => SetValue(ref position, value); }
 
         /// <summary>
         /// 取得或設定 軸在正極限上顏色
@@ -210,10 +216,16 @@ namespace YuanliCore.Motion
             //設定軸參數
             Axis.PositionNEL = AxisSetConfig.LimitNEL;
             Axis.PositionPEL = AxisSetConfig.LimitPEL;
-            if(AxisSetConfig.MoveVel != null)
+            /* if(AxisSetConfig.MoveVel != null)
+                 AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.FinalVel, AccMoveVelTime, DecMoveVelTime);
+             if(AxisSetConfig.HomeVel != null)
+                 AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.FinalVel, AccHomeVelTime, DecHomeVelTime);*/
+
+            if (AxisSetConfig.MoveVel != null)
                 AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.FinalVel, AccMoveVelTime, DecMoveVelTime);
-            if(AxisSetConfig.HomeVel != null)
+            if (AxisSetConfig.HomeVel != null)
                 AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.FinalVel, AccHomeVelTime, DecHomeVelTime);
+
             switch (HomeModeString)
             {
                 case "原點":
@@ -237,10 +249,10 @@ namespace YuanliCore.Motion
                     AxisSetConfig.Direction = MotionDirections.Backward;
                     break;
             }
-           // Axis.MotionVelParams = AxisSetConfig.MoveVel;
+            // Axis.MotionVelParams = AxisSetConfig.MoveVel;
             Axis.AxisVelocity = AxisSetConfig.MoveVel;
 
-          
+
 
         });
 
@@ -404,9 +416,9 @@ namespace YuanliCore.Motion
                     HomeModeString = "原點";
                     break;
                 case HomeModes.EL:
-                    if(motionDirections == MotionDirections.Backward)
+                    if (motionDirections == MotionDirections.Backward)
                         HomeModeString = "負極限";
-                    else if(motionDirections == MotionDirections.Forward) 
+                    else if (motionDirections == MotionDirections.Forward)
                         HomeModeString = "正極限";
                     break;
                 case HomeModes.Index:
@@ -443,19 +455,19 @@ namespace YuanliCore.Motion
                 }
                 AxisName = Axis.AxisName;
                 Position = Axis.Position;
-/*
-                if (Axis.Sensor.HasFlag(Sensors.NEL))
-                    NELBackground = Brushes.Red;
-                else
-                    NELBackground = Brushes.White;
-                if (Axis.Sensor.HasFlag(Sensors.PEL))
-                    PELBackground = Brushes.Red;
-                else
-                    PELBackground = Brushes.White;
-                if (Axis.Sensor.HasFlag(Sensors.ORG))
-                    ORGBackground = Brushes.DarkGreen;
-                else
-                    ORGBackground = Brushes.White;*/
+                /*
+                                if (Axis.Sensor.HasFlag(Sensors.NEL))
+                                    NELBackground = Brushes.Red;
+                                else
+                                    NELBackground = Brushes.White;
+                                if (Axis.Sensor.HasFlag(Sensors.PEL))
+                                    PELBackground = Brushes.Red;
+                                else
+                                    PELBackground = Brushes.White;
+                                if (Axis.Sensor.HasFlag(Sensors.ORG))
+                                    ORGBackground = Brushes.DarkGreen;
+                                else
+                                    ORGBackground = Brushes.White;*/
                 await Task.Delay(50);
             }
         }

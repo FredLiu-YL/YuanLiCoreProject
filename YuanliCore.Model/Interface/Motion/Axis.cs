@@ -32,7 +32,7 @@ namespace YuanliCore.Motion
         /// <summary>
         /// 運動軸名稱
         /// </summary>
-        public string AxisName { get; }
+        public string AxisName { get; set; }
         /// <summary>
         /// 當前位置
         /// </summary>
@@ -55,8 +55,8 @@ namespace YuanliCore.Motion
         /// 運動軸速度
         /// </summary>
         public VelocityParams AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
+       // public MotionVelocity AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
 
-  
 
         public HomeModes HomeMode { get; set; }
        
@@ -196,12 +196,12 @@ namespace YuanliCore.Motion
         }
         private VelocityParams GetVelocity()
         {
-            // return controller.GetSpeedCommand(AxisID);
-            throw new NotImplementedException();
+             return controller.GetSpeedCommand(AxisID);
+        
         }
         private void SetVelocity(VelocityParams axisVelocity)
         {
-            throw new NotImplementedException();
+            controller.SetSpeedCommand(AxisID, axisVelocity);
             /*double velocity = axisVelocity.FainalVelocity;
             double accVelocity = axisVelocity.AccVelocity;
             double decVelocity = axisVelocity.DecVelocity;

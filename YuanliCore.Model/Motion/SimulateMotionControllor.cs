@@ -11,70 +11,94 @@ namespace YuanliCore.Motion
     public class SimulateMotionControllor : IMotionController
     {
         private double[] simulatePosition; //暫存虛擬座標 模擬驅動器內的位置
-        private IEnumerable<Axis> axes;
-        public SimulateMotionControllor(IEnumerable< AxisInfo> axisInfos, IEnumerable<string> doNames, IEnumerable<string> diNames)
+        private VelocityParams[] simulateVelocity; //模擬驅動器內的各軸的速度參數
+        private double[] simulateLimitN; //模擬驅動器內的各軸的軟體極限
+        private double[] simulateLimitP; //模擬驅動器內的各軸的軟體極限
+
+
+        private Axis[] axes;
+        public SimulateMotionControllor(IEnumerable<AxisInfo> axisInfos, IEnumerable<string> doNames, IEnumerable<string> diNames)
         {
             List<double> axesPos = new List<double>();
+            List<VelocityParams> axesVel = new List<VelocityParams>();
+            List<double> axeslimitN = new List<double>();
+            List<double> axeslimitP = new List<double>();
 
-            axes = axisInfos.Select(info => {
+
+            axes = axisInfos.Select((info,i) =>
+            {
 
                 axesPos.Add(0);
-                return new Axis(this, info.AxisID);
-                
-                }).ToArray();
-            simulatePosition = axesPos.ToArray();
+                return new Axis(this, info.AxisID)
+                {
+                    AxisName = $"Axis{i}"
+                };
 
-            OutputSignals =  doNames.Select(n=>new DigitalOutput(n));
+            }).ToArray();
+
+            //有多少軸就創建多少顆驅動器參數
+            for (int i = 0; i < axes.Length; i++)
+            {
+                axesVel.Add(new VelocityParams());
+                axeslimitN.Add(0);
+                axeslimitP.Add(200000);
+            }
+
+
+            simulatePosition = axesPos.ToArray();
+            simulateVelocity = axesVel.ToArray();
+            simulateLimitP = axeslimitP.ToArray();
+            simulateLimitN = axeslimitN.ToArray();
+
+            OutputSignals = doNames.Select(n => new DigitalOutput(n));
 
             IutputSignals = diNames.Select(n => new DigitalInput(n));
         }
 
         public bool IsOpen => throw new NotImplementedException();
 
-        public IEnumerable<Axis> Axes => axes;
+        public Axis[] Axes => axes;
 
         public IEnumerable<DigitalInput> IutputSignals { get; set; }
 
         public IEnumerable<DigitalOutput> OutputSignals { get; set; }
 
-        public AxisDirection GetAxisDirectionCommand(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void GetLimitCommand(int id, out double limitN, out double limitP)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public double GetPositionCommand(int id)
         {
             return simulatePosition[id];
         }
 
-        public MotionVelocity GetSpeedCommand(int id)
+        public VelocityParams GetSpeedCommand(int id)
         {
-            return new MotionVelocity();
-        }
+            return simulateVelocity[id];
 
+        }
+        public void SetSpeedCommand(int id, VelocityParams motionVelocity)
+        {
+
+            simulateVelocity[id] = motionVelocity;
+        }
         public void HomeCommand(int id)
         {
-            simulatePosition[id]=0;
+            simulatePosition[id] = 0;
         }
 
         public void InitializeCommand()
         {
-            
+
         }
 
         public void MoveCommand(int id, double distance)
         {
-            simulatePosition[id]+= distance;
+            simulatePosition[id] += distance;
         }
 
         public void MoveToCommand(int id, double position)
         {
-            simulatePosition[id]  = position;
+            simulatePosition[id] = position;
         }
 
         public Axis[] SetAxesParam(IEnumerable<AxisInfo> axisInfos)
@@ -82,21 +106,30 @@ namespace YuanliCore.Motion
             throw new NotImplementedException();
         }
 
-       
+        public AxisDirection GetAxisDirectionCommand(int id)
+        {
+            return AxisDirection.Forward;
+        }
+
 
         public void SetAxisDirectionCommand(int id, AxisDirection direction)
         {
-            throw new NotImplementedException();
+
         }
 
         public DigitalInput[] SetInputs(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }
-
+        public void GetLimitCommand(int id, out double limitN, out double limitP)
+        {
+            limitN = simulateLimitN[id];
+            limitP = simulateLimitP[id];
+        }
         public void SetLimitCommand(int id, double minPos, double maxPos)
         {
-            throw new NotImplementedException();
+            simulateLimitN[id] = minPos;
+            simulateLimitP[id] = maxPos;
         }
 
         public DigitalOutput[] SetOutputs(IEnumerable<string> names)
@@ -104,19 +137,10 @@ namespace YuanliCore.Motion
             throw new NotImplementedException();
         }
 
-        public void SetSpeedCommand(int id, double velocity, double accVelocity, double decVelocity)
-        {
-             
-        }
-
-        public void SetSpeedCommand(int id, MotionVelocity motionVelocity)
-        {
-            
-        }
-
         public void StopCommand(int id)
         {
-            throw new NotImplementedException();
+            //不實做
+
         }
     }
 

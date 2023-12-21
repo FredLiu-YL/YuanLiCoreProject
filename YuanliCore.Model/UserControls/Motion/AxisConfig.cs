@@ -10,7 +10,7 @@ using YuanliCore.Interface;
 
 namespace YuanliCore.Motion
 {
-    public class UserControlAxisConfig : INotifyPropertyChanged
+    public class AxisConfig : INotifyPropertyChanged
     {
         /// <summary>
         /// 取得或設定 軟體負極限
