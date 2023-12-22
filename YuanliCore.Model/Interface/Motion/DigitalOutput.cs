@@ -20,5 +20,17 @@ namespace YuanliCore.Interface
         public string Name { get; set; }
 
 
+        public void On()
+        { 
+        
+        
+        }
+        public void Off()
+        {
+
+
+        }
+
+
     }
 }
