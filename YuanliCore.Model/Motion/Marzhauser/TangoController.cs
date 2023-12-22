@@ -29,7 +29,7 @@ namespace YuanliCore.Motion.Marzhauser
 
 
 
-        public IEnumerable<DigitalInput> IutputSignals => throw new NotImplementedException();
+        public DigitalInput[] IutputSignals => throw new NotImplementedException();
 
         public IEnumerable<DigitalOutput> OutputSignals => throw new NotImplementedException();
 

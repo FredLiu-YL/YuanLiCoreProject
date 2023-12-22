@@ -10,11 +10,12 @@ namespace YuanliCore.Interface
 {
     public class DigitalInput : INotifyPropertyChanged
     {
+        private IMotionController motionController;
         private bool isSignal;
-        public DigitalInput(string name)
+        public DigitalInput(string name )
         {
             Name = name;
-
+            
 
         }
         public string Name { get; set; }

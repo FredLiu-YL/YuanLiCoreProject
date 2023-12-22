@@ -17,7 +17,7 @@ namespace YuanliCore.Interface
 
 
         Axis[] Axes { get; }
-        IEnumerable<DigitalInput> IutputSignals { get; }
+        DigitalInput[] IutputSignals { get; }
         IEnumerable<DigitalOutput> OutputSignals { get; }
 
 

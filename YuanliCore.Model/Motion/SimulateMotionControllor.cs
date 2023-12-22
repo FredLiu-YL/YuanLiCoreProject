@@ -25,14 +25,14 @@ namespace YuanliCore.Motion
             List<double> axeslimitP = new List<double>();
 
 
-            axes = axisInfos.Select((info,i) =>
+            axes = axisInfos.Select((info, i) =>
             {
 
                 axesPos.Add(0);
                 return new Axis(this, info.AxisID)
                 {
                     AxisName = info.AxisName
-                   
+
                 };
 
             }).ToArray();
@@ -51,16 +51,17 @@ namespace YuanliCore.Motion
             simulateLimitP = axeslimitP.ToArray();
             simulateLimitN = axeslimitN.ToArray();
 
-            OutputSignals = doNames.Select(n => new DigitalOutput(n));
+            OutputSignals = doNames.Select((n,i) => new DigitalOutput(i,this));
+            IutputSignals = diNames.Select(n => new DigitalInput(n)).ToArray();
 
-            IutputSignals = diNames.Select(n => new DigitalInput(n));
+            Task.Run(ReflashInput);
         }
 
         public bool IsOpen => throw new NotImplementedException();
 
         public Axis[] Axes => axes;
 
-        public IEnumerable<DigitalInput> IutputSignals { get; set; }
+        public DigitalInput[] IutputSignals { get; private set; }
 
         public IEnumerable<DigitalOutput> OutputSignals { get; set; }
 
@@ -155,6 +156,35 @@ namespace YuanliCore.Motion
                 return AxisSensor.PEL;
 
             return AxisSensor.NONE;
+        }
+
+        private async Task ReflashInput()
+        {
+            var inputCount = IutputSignals.Length;
+
+            foreach (var item in IutputSignals)
+            {
+                item.IsSignal = false;
+            }
+
+            while (true)
+            {
+                for (int i = 0; i < inputCount; i++)
+                {
+                    if (i == 0)
+                        IutputSignals[inputCount - 1].IsSignal = false;
+                    else
+                        IutputSignals[i - 1].IsSignal = false;
+
+                    IutputSignals[i].IsSignal = true;
+
+                    await Task.Delay(500);
+                }
+
+
+
+            }
+
         }
     }
 
