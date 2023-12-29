@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace YuanliCore.Model
+namespace YuanliCore.Model.Common
 {
     public class RelayCommand : ICommand
     {

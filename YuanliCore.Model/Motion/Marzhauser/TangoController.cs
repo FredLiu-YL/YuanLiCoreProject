@@ -377,7 +377,7 @@ namespace YuanliCore.Motion.Marzhauser
             TangoLib.LS_GetVel(out double motionVelX, out double motionVelY, out double motionVelZ, out double motionVelA);
             TangoLib.LS_GetAccel(out double motionAccVelX, out double motionAccVelY, out double motionAccVelZ, out double motionAccVelA);
             TangoLib.LS_GetStopAccel(out double motionDecVelX, out double motionDecVelY, out double motionDecVelZ, out double motionDecVelA);
-
+    
             double acc = motionVelocity.FinalVel / motionVelocity.AccelerationTime;
             double dec = motionVelocity.FinalVel / motionVelocity.DecelerationTime;
 
