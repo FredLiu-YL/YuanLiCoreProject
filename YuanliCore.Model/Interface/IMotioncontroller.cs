@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YuanliCore.Interface.Motion;
 using YuanliCore.Motion;
 
 namespace YuanliCore.Interface
@@ -25,7 +24,7 @@ namespace YuanliCore.Interface
         void InitializeCommand();
 
 
-        Axis[] SetAxesParam(IEnumerable<AxisInfo> axisInfos);
+        Axis[] SetAxesParam(IEnumerable<AxisConfig> axisConfig);
         DigitalOutput[] SetOutputs(IEnumerable<string> names);
         DigitalInput[] SetInputs(IEnumerable<string> names);
 

@@ -21,7 +21,6 @@ namespace YuanliCore.Motion
             this.AxisID = axisNum;
         }
 
-
         public bool IsOpen { get; }
         public bool IsRunning { get; }
 
@@ -37,6 +36,16 @@ namespace YuanliCore.Motion
         /// 當前位置
         /// </summary>
         public double Position { get => GetPositon(); }
+
+        /// <summary>
+        /// 比例(轉換成um、度)
+        /// </summary>
+        public double Ratio { get; set; }
+
+        /// <summary>
+        /// 到位整定容許量(um)
+        /// </summary>
+        public double Tolerance { get; set; } = 3;
 
         /// <summary>
         /// 軟體負極限
@@ -120,9 +129,7 @@ namespace YuanliCore.Motion
             {
                 isBusy = false;
                 isStop = false;
-
             }
-
         }
 
         public async Task MoveToAsync(double postion)
@@ -216,14 +223,13 @@ namespace YuanliCore.Motion
         }
         private AxisSensor ReadSensor()
         {
-          return   controller.GetSensorCommand(AxisID);
+            return controller.GetSensorCommand(AxisID);
         }
     }
 
 
     public enum AxisDirection
     {
-
         Forward,
         Backward
     }
@@ -240,6 +246,11 @@ namespace YuanliCore.Motion
         PEL = 1,
         NEL = 2,
         NONE = 3,
+    }
+    public enum HomeDirection
+    {
+        Forward,
+        Backward
     }
     public enum HomeModes
     {

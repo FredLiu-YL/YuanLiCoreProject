@@ -17,6 +17,17 @@ namespace YuanliCore.Motion
         private double initialPos;
         private VelocityParams moveVel = new VelocityParams(50000);
         private VelocityParams homeVel = new VelocityParams(50000);
+
+
+        /// <summary>
+        /// 運動軸在卡的號碼
+        /// </summary>
+        public int AxisID { get; set; }
+        /// <summary>
+        /// 運動軸名稱
+        /// </summary>
+        public string AxisName { get; set; }
+
         /// <summary>
         /// 取得或設定 軟體負極限
         /// </summary>
@@ -56,7 +67,7 @@ namespace YuanliCore.Motion
         /// <summary>
         /// 取得或設定 軸解析度
         /// </summary>
-        public double Unifactor { get; set; } = 1;
+        public double Ratio { get; set; } = 1;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
