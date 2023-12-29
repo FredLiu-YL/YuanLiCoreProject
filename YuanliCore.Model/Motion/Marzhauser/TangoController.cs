@@ -6,13 +6,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using YuanliCore.Interface;
-using YuanliCore.Interface.Motion;
 
 namespace YuanliCore.Motion.Marzhauser
 {
     public class TangoController : IMotionController
     {
-  
+
         private string comPort;
         private int baudRate = 57600;
 
@@ -33,7 +32,7 @@ namespace YuanliCore.Motion.Marzhauser
 
         public IEnumerable<DigitalOutput> OutputSignals => throw new NotImplementedException();
 
-        public  Axis[] Axes => GetDefaultAxes();
+        public Axis[] Axes => GetDefaultAxes();
 
 
 
@@ -121,9 +120,9 @@ namespace YuanliCore.Motion.Marzhauser
             }*/
 
 
-        
+
             var r1 = TangoLib.LS_MoveAbsSingleAxis(id, position, 0);
-          
+
         }
 
 
@@ -143,25 +142,25 @@ namespace YuanliCore.Motion.Marzhauser
                 {
                     case 1:
                         return posX;
-                       
+
 
                     case 2:
                         return posY;
-                    
+
 
 
                     case 3:
                         return posZ;
-                
+
 
 
                     case 4:
                         return posA;
-                    
+
 
                     default:
                         throw new Exception("Id Error");
-                       
+
                 }
             }
             catch (Exception ex)
@@ -172,7 +171,7 @@ namespace YuanliCore.Motion.Marzhauser
 
         }
 
-        public Axis[] SetAxesParam(IEnumerable<AxisInfo> axisInfos)
+        public Axis[] SetAxesParam(IEnumerable<AxisConfig> axisInfos)
         {
             throw new NotImplementedException();
         }
@@ -221,29 +220,29 @@ namespace YuanliCore.Motion.Marzhauser
         {
             Int32 loc_err = TangoLib.LSX_GetAxisDirection(1, out int plXD, out int plYD, out int plZD, out int plAD);
 
-         /*   switch (id)
-            {
-                case 1:
-                    return (AxisDirection)plXD;
-                    break;
+            /*   switch (id)
+               {
+                   case 1:
+                       return (AxisDirection)plXD;
+                       break;
 
-                case 2:
-                    return (AxisDirection)plYD;
-                    break;
-
-
-                case 3:
-                    return (AxisDirection)plZD;
-                    break;
+                   case 2:
+                       return (AxisDirection)plYD;
+                       break;
 
 
-                case 4:
-                    return (AxisDirection)plAD;
-                    break;
+                   case 3:
+                       return (AxisDirection)plZD;
+                       break;
 
-                default:
-                    break;
-            }*/
+
+                   case 4:
+                       return (AxisDirection)plAD;
+                       break;
+
+                   default:
+                       break;
+               }*/
 
 
             return AxisDirection.Forward;
@@ -277,14 +276,14 @@ namespace YuanliCore.Motion.Marzhauser
                     loc_err = TangoLib.LSX_SetAxisDirection(1, plXD, (int)direction, plZD, plAD);
                     break;
 
-              case 3:        
+                case 3:
                     loc_err = TangoLib.LSX_SetAxisDirection(1, plXD, plYD, (int)direction, plAD);
-              
+
                     break;
 
-                 case 4:       
+                case 4:
                     loc_err = TangoLib.LSX_SetAxisDirection(1, plXD, plYD, plZD, (int)direction);
-            
+
                     break;
 
                 default:
@@ -345,30 +344,30 @@ namespace YuanliCore.Motion.Marzhauser
             switch (id)
             {
                 case 1:
-                    VelocityParams velocityX = new VelocityParams(0,motionVelX, motionAccVelX, motionDecVelX);
+                    VelocityParams velocityX = new VelocityParams(0, motionVelX, motionAccVelX, motionDecVelX);
                     return velocityX;
-                 
+
 
                 case 2:
-                    VelocityParams velocityY = new VelocityParams(0,motionVelY, motionAccVelY, motionDecVelY);
+                    VelocityParams velocityY = new VelocityParams(0, motionVelY, motionAccVelY, motionDecVelY);
                     return velocityY;
-                 
+
 
 
                 case 3:
-                    VelocityParams velocityZ = new VelocityParams(0,motionVelZ, motionAccVelZ, motionDecVelZ);
+                    VelocityParams velocityZ = new VelocityParams(0, motionVelZ, motionAccVelZ, motionDecVelZ);
                     return velocityZ;
-                 
+
 
 
                 case 4:
-                    VelocityParams velocityA = new VelocityParams(0,motionVelA, motionAccVelA, motionDecVelA);
+                    VelocityParams velocityA = new VelocityParams(0, motionVelA, motionAccVelA, motionDecVelA);
                     return velocityA;
-                   
+
 
                 default:
                     throw new NotImplementedException("Axis  does not exist");
-               
+
             }
         }
 
@@ -385,10 +384,10 @@ namespace YuanliCore.Motion.Marzhauser
             {
                 case 1:
 
-                 
-                    TangoLib.LS_SetVel(motionVelocity.FinalVel, motionVelY,  motionVelZ,  motionVelA);
-                    TangoLib.LS_SetAccel(acc,  motionAccVelY,  motionAccVelZ,  motionAccVelA);
-                    TangoLib.LS_SetStopAccel(dec,  motionDecVelY,  motionDecVelZ,  motionDecVelA);
+
+                    TangoLib.LS_SetVel(motionVelocity.FinalVel, motionVelY, motionVelZ, motionVelA);
+                    TangoLib.LS_SetAccel(acc, motionAccVelY, motionAccVelZ, motionAccVelA);
+                    TangoLib.LS_SetStopAccel(dec, motionDecVelY, motionDecVelZ, motionDecVelA);
 
                     break;
 
@@ -416,22 +415,22 @@ namespace YuanliCore.Motion.Marzhauser
 
                 default:
                     throw new NotImplementedException("Axis  does not exist");
-                    
+
             }
         }
 
-        private AxisInfo[] GetAxisVel()
+        private AxisConfig[] GetAxisVel()
         {
 
             TangoLib.LS_GetVel(out double motionVelX, out double motionVelY, out double motionVelZ, out double motionVelA);
             TangoLib.LS_GetAccel(out double motionAccVelX, out double motionAccVelY, out double motionAccVelZ, out double motionAccVelA);
             TangoLib.LS_GetStopAccel(out double motionDecVelX, out double motionDecVelY, out double motionDecVelZ, out double motionDecVelA);
 
-            return new AxisInfo[] {
-                    new AxisInfo(){AxisName="AxisX" , AxisID=1,Velocity= new VelocityParams(0, motionVelX,motionAccVelX , motionDecVelX)},
-                    new AxisInfo(){AxisName="AxisY" , AxisID=2, Velocity=new VelocityParams(0, motionVelY,motionAccVelY , motionDecVelY)},
-                    new AxisInfo(){AxisName="AxisZ" , AxisID=3, Velocity=new VelocityParams(0, motionVelZ,motionAccVelZ , motionDecVelZ)},
-                    new AxisInfo(){AxisName="AxisA" , AxisID=4, Velocity=new VelocityParams(0, motionVelA,motionAccVelA , motionDecVelA)},
+            return new AxisConfig[] {
+                    new AxisConfig(){AxisName="AxisX" , AxisID=1,MoveVel= new VelocityParams(0, motionVelX,motionAccVelX , motionDecVelX)},
+                    new AxisConfig(){AxisName="AxisY" , AxisID=2, MoveVel=new VelocityParams(0, motionVelY,motionAccVelY , motionDecVelY)},
+                    new AxisConfig(){AxisName="AxisZ" , AxisID=3, MoveVel=new VelocityParams(0, motionVelZ,motionAccVelZ , motionDecVelZ)},
+                    new AxisConfig(){AxisName="AxisA" , AxisID=4, MoveVel=new VelocityParams(0, motionVelA,motionAccVelA , motionDecVelA)},
             };
 
         }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YuanliCore.Interface;
-using YuanliCore.Interface.Motion;
 
 namespace YuanliCore.Motion
 {
@@ -17,7 +16,7 @@ namespace YuanliCore.Motion
 
 
         private Axis[] axes;
-        public SimulateMotionControllor(IEnumerable<AxisInfo> axisInfos, IEnumerable<string> doNames, IEnumerable<string> diNames)
+        public SimulateMotionControllor(IEnumerable<AxisConfig> axisInfos, IEnumerable<string> doNames, IEnumerable<string> diNames)
         {
             List<double> axesPos = new List<double>();
             List<VelocityParams> axesVel = new List<VelocityParams>();
@@ -103,7 +102,7 @@ namespace YuanliCore.Motion
             simulatePosition[id] = position;
         }
 
-        public Axis[] SetAxesParam(IEnumerable<AxisInfo> axisInfos)
+        public Axis[] SetAxesParam(IEnumerable<AxisConfig> axisConfig)
         {
             throw new NotImplementedException();
         }

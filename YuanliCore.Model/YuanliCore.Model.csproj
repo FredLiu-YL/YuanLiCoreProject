@@ -157,7 +157,6 @@
     <Compile Include="Interface\IMotioncontroller.cs" />
     <Compile Include="Interface\ITransform.cs" />
     <Compile Include="Interface\Motion\Axis.cs" />
-    <Compile Include="Interface\Motion\AxisInfo.cs" />
     <Compile Include="Interface\Motion\VelocityParam.cs" />
     <Compile Include="Interface\Motion\MotionVelocity.cs" />
     <Compile Include="Interface\Motion\DigitalInput.cs" />
