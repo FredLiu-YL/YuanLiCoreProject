@@ -377,15 +377,15 @@ namespace YuanliCore.Motion.Marzhauser
             TangoLib.LS_GetAccel(out double motionAccVelX, out double motionAccVelY, out double motionAccVelZ, out double motionAccVelA);
             TangoLib.LS_GetStopAccel(out double motionDecVelX, out double motionDecVelY, out double motionDecVelZ, out double motionDecVelA);
     
-            double acc = motionVelocity.FinalVel / motionVelocity.AccelerationTime;
-            double dec = motionVelocity.FinalVel / motionVelocity.DecelerationTime;
+            double acc = motionVelocity.MaxVel / motionVelocity.AccelerationTime;
+            double dec = motionVelocity.MaxVel / motionVelocity.DecelerationTime;
 
             switch (id)
             {
                 case 1:
 
 
-                    TangoLib.LS_SetVel(motionVelocity.FinalVel, motionVelY, motionVelZ, motionVelA);
+                    TangoLib.LS_SetVel(motionVelocity.MaxVel, motionVelY, motionVelZ, motionVelA);
                     TangoLib.LS_SetAccel(acc, motionAccVelY, motionAccVelZ, motionAccVelA);
                     TangoLib.LS_SetStopAccel(dec, motionDecVelY, motionDecVelZ, motionDecVelA);
 
@@ -393,7 +393,7 @@ namespace YuanliCore.Motion.Marzhauser
 
                 case 2:
 
-                    TangoLib.LS_SetVel(motionVelX, motionVelocity.FinalVel, motionVelZ, motionVelA);
+                    TangoLib.LS_SetVel(motionVelX, motionVelocity.MaxVel, motionVelZ, motionVelA);
                     TangoLib.LS_SetAccel(motionAccVelX, acc, motionAccVelZ, motionAccVelA);
                     TangoLib.LS_SetStopAccel(motionDecVelX, dec, motionDecVelZ, motionDecVelA);
                     break;

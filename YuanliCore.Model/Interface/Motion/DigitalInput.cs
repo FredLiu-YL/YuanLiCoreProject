@@ -12,16 +12,16 @@ namespace YuanliCore.Interface
     {
         private IMotionController motionController;
         private bool isSignal;
-        public DigitalInput(string name )
+        public DigitalInput(string name)
         {
             Name = name;
-            
+
 
         }
         public string Name { get; set; }
         public bool IsSignal { get => isSignal; set => SetValue(ref isSignal, value); }
 
-     
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = null)

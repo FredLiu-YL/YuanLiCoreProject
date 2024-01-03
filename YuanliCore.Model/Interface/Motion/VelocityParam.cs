@@ -23,7 +23,7 @@ namespace YuanliCore.Motion
         public VelocityParams(double start, double max, double accTime = 0.2, double decTime = 0.2)
         {
             InitialVel = start;
-            FinalVel = max;
+            MaxVel = max;
             AccelerationTime = accTime;
             DecelerationTime = decTime;
         }
@@ -34,7 +34,7 @@ namespace YuanliCore.Motion
         public static VelocityParams operator /(VelocityParams vel, double factor)
             => new VelocityParams(
              vel.InitialVel / factor,
-             vel.FinalVel / factor,
+             vel.MaxVel / factor,
              vel.AccelerationTime,
              vel.DecelerationTime)
             {
@@ -51,7 +51,7 @@ namespace YuanliCore.Motion
                 vel1.InitialVel == vel2.InitialVel &&
                 vel1.AccelerationTime == vel2.AccelerationTime &&
                 vel1.DecelerationTime == vel2.DecelerationTime &&
-                vel1.FinalVel == vel2.FinalVel;
+                vel1.MaxVel == vel2.MaxVel;
         }
 
         public static bool operator !=(VelocityParams vel1, VelocityParams vel2)
@@ -63,7 +63,7 @@ namespace YuanliCore.Motion
                 vel1.InitialVel != vel2.InitialVel ||
                 vel1.AccelerationTime != vel2.AccelerationTime ||
                 vel1.DecelerationTime != vel2.DecelerationTime ||
-                vel1.FinalVel != vel2.FinalVel;
+                vel1.MaxVel != vel2.MaxVel;
         }
 
         /// <summary>
@@ -77,9 +77,9 @@ namespace YuanliCore.Motion
         public double InitialVel { get; set; } = 0;
 
         /// <summary>
-        /// 取得或設定最終速度。
+        /// 取得或設定最大速度。
         /// </summary>
-        public double FinalVel { get; set; } = 10000;
+        public double MaxVel { get; set; } = 10000;
 
         /// <summary>
         /// 取得或設定由初速加速至最高速的加速時間。
@@ -109,12 +109,12 @@ namespace YuanliCore.Motion
         T = 1,
     }
 
-   /* public static partial class goonØ
-    {
-        public static double GetAcceleration(this VelocityParams vel)
-            => (vel.FinalVel - vel.InitialVel) / vel.AccelerationTime;
+    /* public static partial class goonØ
+     {
+         public static double GetAcceleration(this VelocityParams vel)
+             => (vel.FinalVel - vel.InitialVel) / vel.AccelerationTime;
 
-        public static double GetDeceleration(this VelocityParams vel)
-            => (vel.FinalVel - vel.InitialVel) / vel.DecelerationTime;
-    }*/
+         public static double GetDeceleration(this VelocityParams vel)
+             => (vel.FinalVel - vel.InitialVel) / vel.DecelerationTime;
+     }*/
 }

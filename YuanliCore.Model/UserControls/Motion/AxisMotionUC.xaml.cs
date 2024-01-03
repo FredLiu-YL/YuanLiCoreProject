@@ -35,7 +35,7 @@ namespace YuanliCore.Motion
         private double accMoveVelTime = 0.1, decMoveVelTime = 0.1, accHomVelTime = 0.1, decHomeVelTime = 0.1;
         private Brush pELBackground = Brushes.White, nELBackground = Brushes.White, oRGBackground = Brushes.White;
 
- 
+
 
 
         public AxisMotionUC()
@@ -170,18 +170,18 @@ namespace YuanliCore.Motion
         /// <summary>
         /// 取得或設定 軸在正極限上顏色
         /// </summary>
-        public Brush PELBackground { get => pELBackground; set => SetValue(ref pELBackground, value); }  
+        public Brush PELBackground { get => pELBackground; set => SetValue(ref pELBackground, value); }
 
         /// <summary>
         /// 取得或設定 軸在負極限上顏色
         /// </summary>
-        public Brush NELBackground { get => nELBackground; set => SetValue(ref nELBackground, value); }  
+        public Brush NELBackground { get => nELBackground; set => SetValue(ref nELBackground, value); }
 
         /// <summary>
         /// 取得或設定 軸在原點上顏色
         /// </summary>
         public Brush ORGBackground { get => oRGBackground; set => SetValue(ref oRGBackground, value); }
-        
+
         /// <summary>
         /// 取得或設定 Home 模式
         /// </summary>
@@ -213,9 +213,9 @@ namespace YuanliCore.Motion
                  AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.FinalVel, AccHomeVelTime, DecHomeVelTime);*/
 
             if (AxisSetConfig.MoveVel != null)
-                AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.FinalVel, AccMoveVelTime, DecMoveVelTime);
+                AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.MaxVel, AccMoveVelTime, DecMoveVelTime);
             if (AxisSetConfig.HomeVel != null)
-                AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.FinalVel, AccHomeVelTime, DecHomeVelTime);
+                AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.MaxVel, AccHomeVelTime, DecHomeVelTime);
 
             switch (HomeModeString)
             {
@@ -506,7 +506,7 @@ namespace YuanliCore.Motion
         {
             var valpar = (VelocityParams)value;
             if (valpar != null)
-                return valpar.FinalVel;
+                return valpar.MaxVel;
             return null;
 
 

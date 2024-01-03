@@ -40,7 +40,7 @@ namespace YuanliCore.Motion
         /// <summary>
         /// 比例(轉換成um、度)
         /// </summary>
-        public double Ratio { get; set; }
+        public double Ratio { get; set; } = 1;
 
         /// <summary>
         /// 到位整定容許量(um)
@@ -64,14 +64,18 @@ namespace YuanliCore.Motion
         /// 運動軸速度
         /// </summary>
         public VelocityParams AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
-        // public MotionVelocity AxisVelocity { get => GetVelocity(); set => SetVelocity(value); }
 
         /// <summary>
         /// Axis 燈號狀態
         /// </summary>
         public AxisSensor AxisState { get => ReadSensor(); }
 
+        public HomeDirection HomeDirection { get; set; }
         public HomeModes HomeMode { get; set; }
+        /// <summary>
+        /// 運動軸速度
+        /// </summary>
+        public VelocityParams HomeVelocity { get; set; }
 
 
         public void Open()
@@ -110,7 +114,7 @@ namespace YuanliCore.Motion
                     double postion = Position + distance;
                     controller.MoveCommand(AxisID, distance);
 
-                    while (Math.Abs(Position - postion) > 0.005 && !isStop)
+                    while (Math.Abs(Position - postion) * Ratio > Tolerance && !isStop)
                     {
                         i++;
                         await Task.Delay(50);
@@ -145,7 +149,7 @@ namespace YuanliCore.Motion
 
                     controller.MoveToCommand(AxisID, postion);
                     double nowPosition = Position;
-                    while (Math.Abs(nowPosition - postion) > 0.005 && !isStop)
+                    while (Math.Abs(nowPosition - postion) * Ratio > Tolerance && !isStop)
                     {
                         i++;
                         await Task.Delay(50);
