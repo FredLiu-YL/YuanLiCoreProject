@@ -172,12 +172,12 @@
             </Button>
             <ComboBox  Grid.Column="7" Grid.Row="1" SelectedIndex="0"  Text="{Binding MoveDistance}" VerticalAlignment="Center" IsEditable="True" IsReadOnly="False" Margin="5">
                 <Label Content="連續運動"/>
-                <Label Content="0.001"/>
-                <Label Content="0.01"/>
-                <Label Content="0.1"/>
                 <Label Content="1"/>
                 <Label Content="10"/>
-                <Label Content="50"/>
+                <Label Content="100"/>
+                <Label Content="1000"/>
+                <Label Content="10000"/>
+                <Label Content="50000"/>
             </ComboBox>
             <Button Grid.Column="8"  Grid.Row="1" Style="{StaticResource MaterialDesignFlatButton}" FontSize="25" Margin="1,0">
                 <i:Interaction.Triggers>

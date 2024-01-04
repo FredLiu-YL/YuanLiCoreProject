@@ -69,9 +69,8 @@ namespace YuanliCore.Motion
         /// Axis 燈號狀態
         /// </summary>
         public AxisSensor AxisState { get => ReadSensor(); }
-
-        public HomeDirection HomeDirection { get; set; }
         public HomeModes HomeMode { get; set; }
+        public HomeDirection HomeDirection { get; set; }
         /// <summary>
         /// 運動軸速度
         /// </summary>
@@ -80,13 +79,11 @@ namespace YuanliCore.Motion
 
         public void Open()
         {
-
-
+            //IMotionController那邊要新增實作，軸卡開啟
         }
         public void Close()
         {
-
-
+            //IMotionController那邊要新增實作，軸卡關閉
         }
 
         public async Task HomeAsync()
@@ -175,7 +172,11 @@ namespace YuanliCore.Motion
         }
 
 
-
+        private bool GetServo()
+        {
+            //IMotionController那邊可能要新增實作，得到軸卡是否開啟
+            return true;
+        }
         private double GetPositon()
         {
             return controller.GetPositionCommand(AxisID);
@@ -216,6 +217,7 @@ namespace YuanliCore.Motion
         }
         private void SetVelocity(VelocityParams axisVelocity)
         {
+            
             controller.SetSpeedCommand(AxisID, axisVelocity);
             /*double velocity = axisVelocity.FainalVelocity;
             double accVelocity = axisVelocity.AccVelocity;
@@ -260,7 +262,7 @@ namespace YuanliCore.Motion
     {
         ORG = 0,
         EL = 1,
-        Index = 2,
+        ORGAndIndex = 2,
         Block = 3,
         CurPos = 4,
         ELAndIndex = 5

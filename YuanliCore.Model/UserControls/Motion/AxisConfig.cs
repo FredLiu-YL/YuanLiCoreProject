@@ -58,7 +58,10 @@ namespace YuanliCore.Motion
         /// 取得或設定 原點模式
         /// </summary>
         public HomeModes HomeMode { get; set; } = HomeModes.ORG;
-
+        /// <summary>
+        /// 取得或設定 原點方向
+        /// </summary>
+        public HomeDirection HomeDirection { get; set; } = HomeDirection.Backward;
         /// <summary>
         /// 取得或設定 方向
         /// </summary>

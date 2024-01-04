@@ -29,7 +29,17 @@ namespace YuanliCore.Interface
         /// 軸卡初始化
         /// </summary>
         void InitializeCommand();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
         DigitalInput[] SetInputs(IEnumerable<string> names);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="names"></param>
+        /// <returns></returns>
         DigitalOutput[] SetOutputs(IEnumerable<string> names);
         /// <summary>
         /// 設定軸卡參數

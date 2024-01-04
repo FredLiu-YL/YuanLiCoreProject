@@ -222,21 +222,25 @@ namespace YuanliCore.Motion
                 case "原點":
                     Axis.HomeMode = HomeModes.ORG;
                     AxisSetConfig.HomeMode = HomeModes.ORG;
+                    AxisSetConfig.HomeDirection = HomeDirection.Backward;
                     AxisSetConfig.Direction = MotionDirections.Backward;
                     break;
                 case "正極限":
                     Axis.HomeMode = HomeModes.EL;
                     AxisSetConfig.HomeMode = HomeModes.EL;
+                    AxisSetConfig.HomeDirection = HomeDirection.Forward;
                     AxisSetConfig.Direction = MotionDirections.Forward;
                     break;
                 case "負極限":
                     Axis.HomeMode = HomeModes.EL;
                     AxisSetConfig.HomeMode = HomeModes.EL;
+                    AxisSetConfig.HomeDirection = HomeDirection.Backward;
                     AxisSetConfig.Direction = MotionDirections.Backward;
                     break;
                 case "CurPos":
                     Axis.HomeMode = HomeModes.CurPos;
                     AxisSetConfig.HomeMode = HomeModes.CurPos;
+                    AxisSetConfig.HomeDirection = HomeDirection.Backward;
                     AxisSetConfig.Direction = MotionDirections.Backward;
                     break;
             }
@@ -286,12 +290,34 @@ namespace YuanliCore.Motion
 
         public ICommand AxisHomeAsycCommand => new RelayCommand(async () =>
         {
-            HomeAsyc?.Invoke(Axis);
+            try
+            {
+                HomeAsyc?.Invoke(Axis);
+                //await Axis.HomeAsync();
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    //     MessageBox.Show(ex.Message);
+                });
+            }
+
         });
 
         public ICommand AxisStopAsycCommand => new RelayCommand(() =>
         {
-            Axis.Stop();
+            try
+            {
+                Axis.Stop();
+            }
+            catch (Exception ex)
+            {
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    //     MessageBox.Show(ex.Message);
+                });
+            }
         });
 
         public ICommand AxisMoveMouseDownCommand => new RelayCommand<string>(async param =>
@@ -402,7 +428,7 @@ namespace YuanliCore.Motion
                     else if (motionDirections == MotionDirections.Forward)
                         HomeModeString = "正極限";
                     break;
-                case HomeModes.Index:
+                case HomeModes.ORGAndIndex:
                     break;
                 case HomeModes.Block:
                     break;
