@@ -21,7 +21,7 @@ namespace YuanliCore.Motion
             this.AxisID = axisNum;
         }
 
-        public bool IsOpen { get; }
+        public bool IsOpen { get; set; }
         public bool IsRunning { get; }
 
         /// <summary>

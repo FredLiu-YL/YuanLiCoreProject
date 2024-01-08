@@ -18,11 +18,11 @@ namespace YuanliCore.Interface
         /// </summary>
         Axis[] Axes { get; }
         /// <summary>
-        /// 
+        /// Input點位狀態
         /// </summary>
-        DigitalInput[] IutputSignals { get; }
+        DigitalInput[] InputSignals { get; }
         /// <summary>
-        /// 
+        /// Output點位狀態
         /// </summary>
         IEnumerable<DigitalOutput> OutputSignals { get; }
         /// <summary>
@@ -34,19 +34,31 @@ namespace YuanliCore.Interface
         /// </summary>
         /// <param name="names"></param>
         /// <returns></returns>
-        DigitalInput[] SetInputs(IEnumerable<string> names);
+        DigitalInput[] SetInputNames(IEnumerable<string> names);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="names"></param>
         /// <returns></returns>
-        DigitalOutput[] SetOutputs(IEnumerable<string> names);
+        DigitalOutput[] SetOutputNames(IEnumerable<string> names);
+        /// <summary>
+        /// Output點位設定
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="isOn"></param>
+        void SetOutputCommand(int id, bool isOn);
         /// <summary>
         /// 設定軸卡參數
         /// </summary>
         /// <param name="axisConfig"></param>
         /// <returns></returns>
         Axis[] SetAxesParam(IEnumerable<AxisConfig> axisConfig);
+        /// <summary>
+        /// 設定軸開啟/關閉
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="isOn"></param>
+        void SetServoCommand(int id, bool isOn);
         /// <summary>
         /// 軸移動相對位置
         /// </summary>

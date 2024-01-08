@@ -28,7 +28,7 @@ namespace YuanliCore.Motion.Marzhauser
 
 
 
-        public DigitalInput[] IutputSignals => throw new NotImplementedException();
+        public DigitalInput[] InputSignals => throw new NotImplementedException();
 
         public IEnumerable<DigitalOutput> OutputSignals => throw new NotImplementedException();
 
@@ -176,12 +176,12 @@ namespace YuanliCore.Motion.Marzhauser
             throw new NotImplementedException();
         }
 
-        public DigitalOutput[] SetOutputs(IEnumerable<string> names)
+        public DigitalOutput[] SetOutputNames(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }
 
-        public DigitalInput[] SetInputs(IEnumerable<string> names)
+        public DigitalInput[] SetInputNames(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }
@@ -436,6 +436,16 @@ namespace YuanliCore.Motion.Marzhauser
         }
 
         public AxisSensor GetSensorCommand(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetOutputCommand(int id, bool isOn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetServoCommand(int id, bool isOn)
         {
             throw new NotImplementedException();
         }

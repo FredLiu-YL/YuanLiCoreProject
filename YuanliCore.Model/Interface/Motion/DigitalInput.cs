@@ -15,8 +15,6 @@ namespace YuanliCore.Interface
         public DigitalInput(string name)
         {
             Name = name;
-
-
         }
         public string Name { get; set; }
         public bool IsSignal { get => isSignal; set => SetValue(ref isSignal, value); }

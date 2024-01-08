@@ -51,7 +51,7 @@ namespace YuanliCore.Motion
             simulateLimitN = axeslimitN.ToArray();
 
             OutputSignals = doNames.Select((n,i) => new DigitalOutput(i,this));
-            IutputSignals = diNames.Select(n => new DigitalInput(n)).ToArray();
+            InputSignals = diNames.Select(n => new DigitalInput(n)).ToArray();
 
             Task.Run(ReflashInput);
         }
@@ -60,7 +60,7 @@ namespace YuanliCore.Motion
 
         public Axis[] Axes => axes;
 
-        public DigitalInput[] IutputSignals { get; private set; }
+        public DigitalInput[] InputSignals { get; private set; }
 
         public IEnumerable<DigitalOutput> OutputSignals { get; set; }
 
@@ -118,7 +118,7 @@ namespace YuanliCore.Motion
 
         }
 
-        public DigitalInput[] SetInputs(IEnumerable<string> names)
+        public DigitalInput[] SetInputNames(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }
@@ -133,7 +133,7 @@ namespace YuanliCore.Motion
             simulateLimitP[id] = maxPos;
         }
 
-        public DigitalOutput[] SetOutputs(IEnumerable<string> names)
+        public DigitalOutput[] SetOutputNames(IEnumerable<string> names)
         {
             throw new NotImplementedException();
         }
@@ -159,9 +159,9 @@ namespace YuanliCore.Motion
 
         private async Task ReflashInput()
         {
-            var inputCount = IutputSignals.Length;
+            var inputCount = InputSignals.Length;
 
-            foreach (var item in IutputSignals)
+            foreach (var item in InputSignals)
             {
                 item.IsSignal = false;
             }
@@ -171,11 +171,11 @@ namespace YuanliCore.Motion
                 for (int i = 0; i < inputCount; i++)
                 {
                     if (i == 0)
-                        IutputSignals[inputCount - 1].IsSignal = false;
+                        InputSignals[inputCount - 1].IsSignal = false;
                     else
-                        IutputSignals[i - 1].IsSignal = false;
+                        InputSignals[i - 1].IsSignal = false;
 
-                    IutputSignals[i].IsSignal = true;
+                    InputSignals[i].IsSignal = true;
 
                     await Task.Delay(500);
                 }
@@ -184,6 +184,16 @@ namespace YuanliCore.Motion
 
             }
 
+        }
+
+        public void SetOutputCommand(int id, bool isOn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetServoCommand(int id, bool isOn)
+        {
+            throw new NotImplementedException();
         }
     }
 
