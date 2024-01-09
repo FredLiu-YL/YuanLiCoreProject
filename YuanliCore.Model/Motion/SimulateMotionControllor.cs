@@ -159,36 +159,42 @@ namespace YuanliCore.Motion
 
         private async Task ReflashInput()
         {
-            var inputCount = InputSignals.Length;
-
-            foreach (var item in InputSignals)
+            try
             {
-                item.IsSignal = false;
-            }
+                var inputCount = InputSignals.Length;
 
-            while (true)
-            {
-                for (int i = 0; i < inputCount; i++)
+                foreach (var item in InputSignals)
                 {
-                    if (i == 0)
-                        InputSignals[inputCount - 1].IsSignal = false;
-                    else
-                        InputSignals[i - 1].IsSignal = false;
-
-                    InputSignals[i].IsSignal = true;
-
-                    await Task.Delay(500);
+                    item.IsSignal = false;
                 }
 
+                while (true)
+                {
+                    for (int i = 0; i < inputCount; i++)
+                    {
+                        if (i == 0)
+                            InputSignals[inputCount - 1].IsSignal = false;
+                        else
+                            InputSignals[i - 1].IsSignal = false;
+
+                        InputSignals[i].IsSignal = true;
+
+                        await Task.Delay(500);
+                    }
 
 
+
+                }
             }
-
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void SetOutputCommand(int id, bool isOn)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void SetServoCommand(int id, bool isOn)
