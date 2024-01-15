@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reactive.Subjects;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -12,21 +14,27 @@ namespace YuanliCore.CameraLib
 {
     public class SimulateCamera : ICamera
     {
-    
+
         private Frame<byte[]> tempFrames;
         private Subject<Frame<byte[]>> frames = new Subject<Frame<byte[]>>();
         private bool freshImage;
         public SimulateCamera(string path)
         {
-            BitmapImage bi = new BitmapImage();
-            // BitmapImage.UriSource must be in a BeginInit/EndInit block.
-            bi.BeginInit();
-            bi.UriSource = new Uri(path, UriKind.RelativeOrAbsolute);
-            bi.EndInit();
-            // Set the image source.
-            var bmp = bi.FormatConvertTo(PixelFormats.Bgr24);
-          //  tempFrames = bi.ToByteFrame();
-            tempFrames = bmp.ToByteFrame();
+            if (File.Exists(path))
+            {
+
+                BitmapImage bi = new BitmapImage();
+                // BitmapImage.UriSource must be in a BeginInit/EndInit block.
+                bi.BeginInit();
+                bi.UriSource = new Uri(path, UriKind.RelativeOrAbsolute);
+                bi.EndInit();
+                // Set the image source.
+                var bmp = bi.FormatConvertTo(PixelFormats.Bgr24);
+
+
+                tempFrames = bmp.ToByteFrame();
+            }
+
 
 
         }
@@ -45,16 +53,18 @@ namespace YuanliCore.CameraLib
 
         public IDisposable Grab()
         {
+            if(tempFrames==null) return null;
+
             freshImage = true;
             Task.Run(ShowImage);
             return null;
         }
 
-        public   BitmapSource GrabAsync()
+        public BitmapSource GrabAsync()
         {
-            return   tempFrames.ToBitmapSource();
-               
-            
+            return tempFrames.ToBitmapSource();
+
+
         }
 
         public void Open()

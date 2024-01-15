@@ -27,16 +27,16 @@ namespace YuanliCore.UserControls
     {
         private string filenameExtension = ".json";
         private string fileName;
-        private string folderPath;
-
+     //   private string folderPath;
+        private bool isInput;
         public string MachineName { get; private set; }
-        public string DirectoryName { get; private set; }
-        public bool IsInput { get; private set; }
+        public string RecipeDirectory { get; private set; }
+       // public bool IsInput { get; private set; }
         public ObservableCollection<RecipeInfo> DataCollection { get; private set; } = new ObservableCollection<RecipeInfo>();
         public int SelectedIndex { get; set; } = -1;
         public string FilePathName { get; private set; }
         public string FileName { get => fileName; set => SetValue(ref fileName, value); }
-
+        public bool IsInput { get => isInput; set => SetValue(ref isInput, value); }
         /// <summary>
         /// FileInfoWindow 
         /// (整體路徑為 文件/machineName/directoryName(預設Recipe)/ )
@@ -45,13 +45,13 @@ namespace YuanliCore.UserControls
         /// <param name="machineName">機台名稱</param>
         /// <param name="directoryName">讀取路徑資料夾</param>
         /// <param name="filenameExtension">副檔名 預設 .JSON</param>
-        public FileInfoWindow(bool isInputTextBox, string machineName, string directoryName, string filenameExtension = ".json")
+        public FileInfoWindow(bool isInputTextBox, string machineName, string directoryPath, string filenameExtension = ".json")
         {
             InitializeComponent();
 
             IsInput = isInputTextBox;
             MachineName = machineName;
-            DirectoryName = directoryName;
+            RecipeDirectory = directoryPath;
             this.filenameExtension = filenameExtension;
         }
 
@@ -62,18 +62,21 @@ namespace YuanliCore.UserControls
 
         private void RespiceFileControl_Loaded(object sender, RoutedEventArgs e)
         {
-            string temp = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            folderPath = System.IO.Path.Combine(temp, MachineName, DirectoryName);
-            if (!Directory.Exists(folderPath))
+          //  string temp = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+          //  folderPath = System.IO.Path.Combine(temp, MachineName, RecipeDirectory);
+            
+            if (!Directory.Exists(RecipeDirectory))
             {
-                Directory.CreateDirectory(folderPath);
+                Directory.CreateDirectory(RecipeDirectory);
             }
 
             DataCollection.Clear();
-            var fileNameList = Directory.GetFileSystemEntries(folderPath, $"*{filenameExtension}").ToList();
+        //    var fileNameList = Directory.GetFileSystemEntries(RecipeDirectory, $"*{filenameExtension}").ToList(); //找尋資料夾內的 .JSON檔案
+            var fileNameList = Directory.GetDirectories(RecipeDirectory).ToList(); //找尋資料夾內的 所有資料夾
+           
             fileNameList.ForEach(file =>
             {
-                var path = System.IO.Path.Combine(folderPath, file);
+                var path = System.IO.Path.Combine(RecipeDirectory, file);
                 string name = System.IO.Path.GetFileNameWithoutExtension(path);
                 RecipeInfo info = new RecipeInfo();
                 info.Name = name;
@@ -95,8 +98,8 @@ namespace YuanliCore.UserControls
             MessageBoxResult msg = MessageBox.Show("是否刪除檔案?", "再次確認", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             if (msg == MessageBoxResult.Cancel) return;
 
-            var path = System.IO.Path.Combine(folderPath, $"{DataCollection[index].Name}{filenameExtension}");
-            var dirPath = System.IO.Path.Combine(folderPath, $"{DataCollection[index].Name}");
+            var path = System.IO.Path.Combine(RecipeDirectory, $"{DataCollection[index].Name}{filenameExtension}");
+            var dirPath = System.IO.Path.Combine(RecipeDirectory, $"{DataCollection[index].Name}");
 
             if (Directory.Exists(dirPath))
                 Directory.Delete(dirPath, true);
@@ -141,7 +144,7 @@ namespace YuanliCore.UserControls
                     if (msg == MessageBoxResult.Cancel) return;
                 }
 
-                FilePathName = System.IO.Path.Combine(folderPath, $"{FileName}{filenameExtension}");
+                FilePathName = System.IO.Path.Combine(RecipeDirectory, $"{FileName}{filenameExtension}");
             }
             else
             {
@@ -150,7 +153,7 @@ namespace YuanliCore.UserControls
                 //HOperatorSet.ClearAllShapeModels();
                 //HOperatorSet.ClearAllNccModels();
 
-                FilePathName = System.IO.Path.Combine(folderPath, $"{DataCollection[SelectedIndex].Name}{filenameExtension}");
+                FilePathName = System.IO.Path.Combine(RecipeDirectory, $"{DataCollection[SelectedIndex].Name}{filenameExtension}");
             }
 
             this.DialogResult = true;

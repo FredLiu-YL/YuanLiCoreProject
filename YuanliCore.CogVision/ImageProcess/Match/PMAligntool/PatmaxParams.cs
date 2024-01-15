@@ -100,5 +100,11 @@ namespace YuanliCore.ImageProcess.Match
             Pattern = tool.Pattern;
             tool.Dispose();
         }
+        //可能用不到
+        public void Dispose()
+        {
+            RunParams.Dispose();
+            Pattern.Dispose();
+        }
     }
 }
