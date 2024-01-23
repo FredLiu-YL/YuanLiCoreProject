@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
               x:Name="BXFM"
-             d:DesignHeight="250" d:DesignWidth="800">
+             d:DesignHeight="240" d:DesignWidth="600">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -29,8 +29,6 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -68,7 +66,7 @@
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Lens" Style="{StaticResource MaterialDesignGroupBox}">
-                <ListBox  Margin="-5" x:Name="RadioLensChoiceChip"  Style="{StaticResource MaterialDesignChoiceChipListBox}">
+                <ListBox  Margin="-7" x:Name="RadioLensChoiceChip"  Style="{StaticResource MaterialDesignChoiceChipListBox}">
                     <ListBoxItem Margin="-5,0,0,0" Content="1.25X" />
                     <ListBoxItem Margin="-5,0,0,0" Content="5X" IsSelected="True" />
                     <ListBoxItem Margin="-5,0,0,0" Content="10X" />
@@ -77,28 +75,33 @@
                 </ListBox>
             </GroupBox>
 
-            <GroupBox Grid.Column="4 " Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+            <GroupBox Grid.Column="3 " Grid.Row="2"   materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Shutter" Style="{StaticResource MaterialDesignGroupBox}">
-                <ListBox  Margin="-10" x:Name="RadioShutterChoiceChip"  Style="{StaticResource MaterialDesignChoiceChipListBox}">
-                    <ListBoxItem Margin="0,0,-10,0"  Content="Auto"  Width="70" IsSelected="True" />
-                    <ListBoxItem Margin="-1,0,-10,0"  Content="1/5"  Width="70"/>
-                    <ListBoxItem Margin="-1,0,-10,0"  Content="1/15" Width="70"/>
-                    <ListBoxItem Margin="-1,0,-10,0"  Content="1/30" Width="70" IsEnabled="True" />
-                    <ListBoxItem Margin="-1,0,-10,0"  Content="1/60" Width="70" IsEnabled="True" />
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/100" Width="70" />
-                    <ListBoxItem Margin="-1,0,-10,0"  Content="1/200" Width="70"  />
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/500" Width="70" />
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/1000" Width="70"  FontSize="10" IsSelected="False" />
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/2000"  Width="70" FontSize="10" />
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/4000" Width="70" FontSize="10" IsSelected="False" />
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/8000" Width="70" FontSize="10" />
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/10000" Width="70" FontSize="10"/>
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/12000" Width="70" FontSize="10" />
-                    <ListBoxItem Margin="-1,0,-10,0"   Content="1/15000" Width="70" FontSize="10"/>
+                <materialDesign:PopupBox Grid.Column="1" StaysOpen="True" HorizontalAlignment="Left">
+                    <Grid Width="200" Margin="8">
+                        <ListBox  Margin="-10" x:Name="RadioShutterChoiceChip"  Style="{StaticResource MaterialDesignChoiceChipListBox}">
+                            <ListBoxItem Margin="0,0,-10,0"  Content="Auto"  Width="70" IsSelected="True" />
+                            <ListBoxItem Margin="-1,0,-10,0"  Content="1/5"  Width="70"/>
+                            <ListBoxItem Margin="-1,0,-10,0"  Content="1/15" Width="70"/>
+                            <ListBoxItem Margin="-1,0,-10,0"  Content="1/30" Width="70" IsEnabled="True" />
+                            <ListBoxItem Margin="-1,0,-10,0"  Content="1/60" Width="70" IsEnabled="True" />
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/100" Width="70" />
+                            <ListBoxItem Margin="-1,0,-10,0"  Content="1/200" Width="70"  />
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/500" Width="70" />
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/1000" Width="70"  FontSize="10" IsSelected="False" />
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/2000"  Width="70" FontSize="10" />
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/4000" Width="70" FontSize="10" IsSelected="False" />
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/8000" Width="70" FontSize="10" />
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/10000" Width="70" FontSize="10"/>
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/12000" Width="70" FontSize="10" />
+                            <ListBoxItem Margin="-1,0,-10,0"   Content="1/15000" Width="70" FontSize="10"/>
 
-                </ListBox>
+                        </ListBox>
+                    </Grid>
+                </materialDesign:PopupBox>
+             
 
             </GroupBox>
 
@@ -128,22 +131,35 @@
 
             </GroupBox>
 
-            <GroupBox Grid.Column="0 " Grid.Row="2" Grid.ColumnSpan="4" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+            <GroupBox Grid.Column="0 " Grid.Row="2" Grid.ColumnSpan="3" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Focus" Style="{StaticResource MaterialDesignGroupBox}">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,-10">
-                    <TextBlock Text="42347" FontSize="20" Width="60" />
-                    <TextBox Margin="10,0,0,0" Text="0000" FontSize="20" />
-                    <Button  Style="{StaticResource MaterialDesignPaperButton}" >
-                        <materialDesign:PackIcon Width="26" Height="26"  Kind="ArrowLeftBox" />
+                <Grid Margin="-7" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="0.85*" />
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition Width="0.6*" />
+                        <ColumnDefinition  Width="1.8*" />
+                        <ColumnDefinition Width="0.7*" />
+                        <ColumnDefinition/>
+                     
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="42347" FontSize="20"  />
+                    <TextBox Grid.Column="1"  Text="0000" FontSize="20" />
+                    <Button  Grid.Column="2"  Style="{StaticResource MaterialDesignPaperButton}" >
+                        <materialDesign:PackIcon Margin="-5,0,0,0"  Width="26" Height="26"  Kind="ArrowLeftBox" />
                     </Button>
-                    <Slider Maximum="50" Minimum="0" Width="180" Value="35" />
-                    <Button  Style="{StaticResource MaterialDesignPaperButton}" >
-                        <materialDesign:PackIcon Width="26" Height="26"  Kind="ArrowRightBox" />
+                    <Slider Grid.Column="3"  Maximum="50" Minimum="0"  Value="35" />
+                    <Button Grid.Column="4"   Style="{StaticResource MaterialDesignPaperButton}" >
+                        <materialDesign:PackIcon Margin="-5,0,0,0" Width="26" Height="26"  Kind="ArrowRightBox" />
                     </Button>
-                    <CheckBox Content="AutoFocus" />
-                </StackPanel>
+                    <CheckBox Content="AutoFocus" Grid.Column="5"  />
+                </Grid>
+              
+                   
+          
 
             </GroupBox>
 
