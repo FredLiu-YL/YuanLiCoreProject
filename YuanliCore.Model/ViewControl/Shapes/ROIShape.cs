@@ -327,7 +327,13 @@ namespace YuanliCore.Views.CanvasShapes
             DoCursorOverride(mousePoint);
         }
 
-        public virtual bool ShapeContains(Point point) => throw new NotImplementedException();
+        public virtual bool ShapeContains(Point point)
+        {
+
+            Rect rect = new Rect(LeftTop, RightBottom);
+            return rect.Contains(point);
+        }
+
 
         public virtual Point[] GetEdgePoints(Size ImageSize) => throw new NotFiniteNumberException();
 
