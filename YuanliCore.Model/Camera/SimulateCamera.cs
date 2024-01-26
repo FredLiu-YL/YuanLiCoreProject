@@ -46,6 +46,10 @@ namespace YuanliCore.CameraLib
 
         public PixelFormat PixelFormat { get => tempFrames.Format; set => throw new NotImplementedException(); }
 
+        public double Gain => throw new NotImplementedException();
+
+        public double ExposureTime => throw new NotImplementedException();
+
         public void Close()
         {
 
