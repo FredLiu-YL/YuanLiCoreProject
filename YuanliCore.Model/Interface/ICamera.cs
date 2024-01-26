@@ -16,8 +16,8 @@ namespace YuanliCore.Interface
     {
         int Width { get; }
         int Height { get; }
-        double Gain { get; }
-        double ExposureTime { get; }
+        double Gain { get; set; }
+        double ExposureTime { get; set; }
         IObservable<Frame<byte[]>> Frames { get; }
         System.Windows.Media.PixelFormat PixelFormat { get; set; }
 
