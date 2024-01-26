@@ -200,6 +200,7 @@
     <Compile Include="ViewControl\Shapes\ROIRotatedRect.cs" />
     <Compile Include="ViewControl\Shapes\ROIShape.cs" />
     <Compile Include="ViewControl\Shapes\ViewerCanvas.cs" />
+    <Compile Include="ViewControl\Shapes\WaferMappingViewerCanvas.cs" />
     <Compile Include="ViewControl\ViewConvert.cs" />
     <Compile Include="ViewControl\VirtualCanvas.xaml.cs">
       <DependentUpon>VirtualCanvas.xaml</DependentUpon>
