@@ -137,10 +137,10 @@ namespace System.Drawing
             byte[] data = null;
             using (MemoryStream ms = new MemoryStream())
             {
-                using (Bitmap Bitmap = new Bitmap(Image))
+                using (Bitmap bitmap = new Bitmap(Image))
                 {
                  
-                    Bitmap.Save(ms, Image.RawFormat);
+                    bitmap.Save(ms, Image.RawFormat);
                     ms.Position = 0;
                     data = new byte[ms.Length];
                     ms.Read(data, 0, Convert.ToInt32(ms.Length));
