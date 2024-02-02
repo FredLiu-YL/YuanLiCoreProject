@@ -57,7 +57,7 @@ namespace YuanliCore.Views.CanvasShapes
         public static readonly DependencyProperty ThetaProperty = DependencyProperty.Register("Theta", typeof(double), typeof(WaferMappingViewerCanvas),
                                                                                        new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        public static readonly DependencyProperty IsMovedEnableProperty = DependencyProperty.Register(nameof(IsMoveEnable), typeof(bool), typeof(ViewerCanvas),
+        public static readonly DependencyProperty IsMovedEnableProperty = DependencyProperty.Register(nameof(IsMoveEnable), typeof(bool), typeof(WaferMappingViewerCanvas),
                                                                                   new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public WaferMappingViewerCanvas()
@@ -197,12 +197,23 @@ namespace YuanliCore.Views.CanvasShapes
 
             //移動畫面
             if (e.LeftButton == MouseButtonState.Pressed
-              && !(e.OriginalSource is Thumb) && !(e.OriginalSource is Shape)) // Don't block the scrollbars.
+              && !(e.OriginalSource is Thumb)) // Don't block the scrollbars.//&& !(e.OriginalSource is Shape)
             {
-                //CaptureMouse();
-                //GetScreenCenter();
-                //Offset -= position - LastMousePosition;
-                //e.Handled = true;
+                if (!(e.OriginalSource is Shape))
+                {
+                    //如果是Shape都不能移動
+                }
+                if (!(((e.OriginalSource is Shape) ^ (e.OriginalSource is ROICircle)) && (e.OriginalSource is Shape)))
+                {
+                    //如果是Shape，除了ROICircle，其他Shape都不能移動
+                }
+                if (IsMoveEnable == true)
+                {
+                    CaptureMouse();
+                    GetScreenCenter();
+                    Offset -= position - LastMousePosition;
+                    e.Handled = true;
+                }
             }
             else ReleaseMouseCapture();
 
