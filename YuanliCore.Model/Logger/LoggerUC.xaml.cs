@@ -25,7 +25,7 @@ namespace YuanliCore.Logger
     public partial class LoggerUC : UserControl, INotifyPropertyChanged
     {
         private string mainLog;
-        private object lockobj =new object();
+        private object lockobj = new object();
 
         private static readonly DependencyProperty MessageProperty = DependencyProperty.Register(nameof(Message), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(AddMessageChanged)));
         private static readonly DependencyProperty MachineNameProperty = DependencyProperty.Register(nameof(MachineName), typeof(string), typeof(LoggerUC), new FrameworkPropertyMetadata("Machine", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
@@ -73,19 +73,29 @@ namespace YuanliCore.Logger
             lock (lockobj)
             {
                 DateTime dateTime = DateTime.Now;
-
                 string str = $"{dateTime.ToString("G")}:{  dateTime.Millisecond}   {Message} \r\n";
-                string path = $"{systemPath}\\AutoFocusMachine";
+                string path = $"{systemPath}\\MachineLog";
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
 
 
-                File.AppendAllText($"{path}\\Log.txt", str);
+                File.AppendAllText($"{path}\\Log{dateTime.ToString("yyyy-MM-dd")}.txt", str);
                 //  File.AppendAllText(path, $"{dateTime.ToString("G")}{message}");
+
                 MainLog += str;
 
                 TextBoxLog.ScrollToEnd();
+                if (MainLog.Length > 2000000)//怕檔案太大有問題  限制字數
+                {
+                    //找出資料夾內所有文件
+                    var files = Directory.EnumerateFiles(path);
+                    //依照當天日期判斷備份了多少數量 ，以利後續檔名加入號碼
+                    var file = files.Where(f => f.Contains(dateTime.ToString("yyyy-MM-dd")));
+                    int count = file.Count();
+                    File.Move($"{path}\\Log{dateTime.ToString("yyyy-MM-dd")}.txt", $"{path}\\Log{dateTime.ToString("yyyy-MM-dd")}-{count}.txt");
 
+                    MainLog = "";
+                }
 
             }
 
