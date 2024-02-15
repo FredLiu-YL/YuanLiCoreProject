@@ -505,7 +505,7 @@ namespace YuanliCore.CameraLib.IDS
                
                 return new Frame<byte[]>(buffer, width, height, PixelFormat, Resolution);
             }
-            catch (Exception ex)
+            catch (Exception )
             {
               // Logger.Default.Error(ex, "");
                 return null;

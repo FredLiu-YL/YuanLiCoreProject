@@ -475,7 +475,7 @@ namespace YuanliCore
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
 

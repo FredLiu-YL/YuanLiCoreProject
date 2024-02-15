@@ -121,6 +121,7 @@ namespace YuanliCore.Account
         });
 
         public event PropertyChangedEventHandler PropertyChanged;
+   
     }
 
     [ValueConversion(typeof(Enum), typeof(bool))]

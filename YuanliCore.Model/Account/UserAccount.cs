@@ -165,7 +165,7 @@ namespace YuanliCore.Account
                     return account;
                 }
             }
-            catch (FileNotFoundException exception)
+            catch (FileNotFoundException )
             {
                 var account = new UserAccount();
                 account.Accounts.Add(new Account() { Name = "Administrator", Right = RightsModel.Administrator, Password = "0000" });
@@ -174,7 +174,7 @@ namespace YuanliCore.Account
                 return UserAccount.Load();
             }
 
-            catch (JsonReaderException ex)
+            catch (JsonReaderException )
             {
                 throw;
             }

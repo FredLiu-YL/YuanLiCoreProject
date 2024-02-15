@@ -71,7 +71,7 @@ namespace YuanliCore.Motion.Marzhauser
                 #endregion
 
 
-                Int32 ShowProt = 0;
+
 
                 Int32 loc_err = TangoLib.LS_ConnectSimple(1, comPort, baudRate, 0);
                 if (loc_err == 0)
