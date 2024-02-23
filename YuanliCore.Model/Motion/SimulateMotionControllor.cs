@@ -201,6 +201,11 @@ namespace YuanliCore.Motion
         {
             throw new NotImplementedException();
         }
+
+        public void ResetAlarmCommand()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

@@ -131,5 +131,7 @@ namespace YuanliCore.Interface
         /// <param name="id"></param>
         /// <returns></returns>
         AxisDirection GetAxisDirectionCommand(int id);
+
+        void ResetAlarmCommand();
     }
 }

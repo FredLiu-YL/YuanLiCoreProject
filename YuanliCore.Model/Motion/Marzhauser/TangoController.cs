@@ -14,17 +14,17 @@ namespace YuanliCore.Motion.Marzhauser
 
         private string comPort;
         private int baudRate = 57600;
-
+  
 
         public TangoController(string comPort)
         {
 
             this.comPort = comPort;
-
+            
         }
 
 
-        public bool IsOpen { get; set; }
+        public bool IsOpen { get; private set; }
 
 
 
@@ -70,7 +70,7 @@ namespace YuanliCore.Motion.Marzhauser
                 //  SetEncoderPosition();
                 #endregion
 
-
+               
 
 
                 Int32 loc_err = TangoLib.LS_ConnectSimple(1, comPort, baudRate, 0);
@@ -446,6 +446,11 @@ namespace YuanliCore.Motion.Marzhauser
         }
 
         public void SetServoCommand(int id, bool isOn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResetAlarmCommand()
         {
             throw new NotImplementedException();
         }

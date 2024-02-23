@@ -33,7 +33,7 @@ namespace YuanliCore.Motion
         /// </summary>
         public string AxisName { get; set; }
         /// <summary>
-        /// 當前位置
+        /// 當前位置 um
         /// </summary>
         public double Position { get => GetPositon(); }
 
@@ -170,7 +170,11 @@ namespace YuanliCore.Motion
 
 
         }
+        public void ResetAlarm()
+        {
+            controller.ResetAlarmCommand();
 
+        }
 
         private bool GetServo()
         {
@@ -227,10 +231,13 @@ namespace YuanliCore.Motion
 
 
         }
+
         private AxisSensor ReadSensor()
         {
             return controller.GetSensorCommand(AxisID);
         }
+
+
     }
 
 
