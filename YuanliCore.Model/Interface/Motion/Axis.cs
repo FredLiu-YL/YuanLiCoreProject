@@ -111,7 +111,8 @@ namespace YuanliCore.Motion
                     double postion = Position + distance;
                     controller.MoveCommand(AxisID, distance);
 
-                    while (Math.Abs(Position - postion) * Ratio > Tolerance && !isStop)
+                    while (Math.Abs(Position - postion) * Ratio > Tolerance && !isStop
+                    && Position > PositionNEL && Position< PositionPEL)
                     {
                         i++;
                         await Task.Delay(50);
@@ -136,7 +137,11 @@ namespace YuanliCore.Motion
         public async Task MoveToAsync(double postion)
         {
 
-            if (isBusy) throw new Exception($"ID{ AxisID}  {AxisName}  is Busy");
+            if (isBusy) throw new Exception($"ID:{ AxisID} [{AxisName}]  is Busy");
+
+            if (Position > PositionPEL) throw new Exception($"ID:{ AxisID} [{AxisName}]  is Beyond the limits PositionPEL:{PositionPEL} POS:{Position}");
+            if (Position < PositionNEL) throw new Exception($"ID:{ AxisID} [{AxisName}]  is Beyond the limits PositionNEL:{PositionPEL} POS:{Position}");
+
             try
             {
                 isBusy = true;

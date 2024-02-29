@@ -34,7 +34,7 @@ namespace YuanliCore.Motion
         private double position;
         private double accMoveVelTime = 0.1, decMoveVelTime = 0.1, accHomVelTime = 0.1, decHomeVelTime = 0.1;
         private Brush pELBackground = Brushes.White, nELBackground = Brushes.White, oRGBackground = Brushes.White;
-
+        private double moveFinalVelocity, moveAccTime, moveDecTime, homeFinalVelocity, homeAccTime, homeDecTime;
 
 
 
@@ -92,7 +92,7 @@ namespace YuanliCore.Motion
         }
 
         public static readonly DependencyProperty AxisProperty = DependencyProperty.Register("Axis", typeof(Axis), typeof(AxisMotionUC), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-        public static readonly DependencyProperty AxisSetConfigProperty = DependencyProperty.Register("AxisSetConfig", typeof(AxisConfig), typeof(AxisMotionUC), new FrameworkPropertyMetadata(new AxisConfig(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty AxisSetConfigProperty = DependencyProperty.Register("AxisSetConfig", typeof(AxisConfig), typeof(AxisMotionUC), new FrameworkPropertyMetadata(new AxisConfig(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnConfigChanged)));
         public static readonly DependencyProperty HomeAsycProperty = DependencyProperty.Register("HomeAsyc", typeof(Action<Axis>), typeof(AxisMotionUC), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public Action<Axis> HomeAsyc
@@ -182,6 +182,14 @@ namespace YuanliCore.Motion
         /// </summary>
         public Brush ORGBackground { get => oRGBackground; set => SetValue(ref oRGBackground, value); }
 
+
+        public double MoveFinalVelocity { get => moveFinalVelocity; set => SetValue(ref moveFinalVelocity, value); }
+        public double MoveAccTime { get => moveAccTime; set => SetValue(ref moveAccTime, value); }
+        public double MoveDecTime { get => moveDecTime; set => SetValue(ref moveDecTime, value); }
+        public double HomeFinalVelocity { get => homeFinalVelocity; set => SetValue(ref homeFinalVelocity, value); }
+        public double HomeAccTime { get => homeAccTime; set => SetValue(ref homeAccTime, value); }
+        public double HomeDecTime { get => homeDecTime; set => SetValue(ref homeDecTime, value); }
+
         /// <summary>
         /// 取得或設定 Home 模式
         /// </summary>
@@ -211,12 +219,16 @@ namespace YuanliCore.Motion
                  AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.FinalVel, AccMoveVelTime, DecMoveVelTime);
              if(AxisSetConfig.HomeVel != null)
                  AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.FinalVel, AccHomeVelTime, DecHomeVelTime);*/
+           
+            AxisSetConfig.MoveVel = new VelocityParams(0, MoveFinalVelocity, MoveAccTime, MoveDecTime);
+            AxisSetConfig.HomeVel = new VelocityParams(0, HomeFinalVelocity, HomeAccTime, HomeDecTime);
 
-            if (AxisSetConfig.MoveVel != null)
+
+           /* if (AxisSetConfig.MoveVel != null)
                 AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.MaxVel, AccMoveVelTime, DecMoveVelTime);
             if (AxisSetConfig.HomeVel != null)
                 AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.MaxVel, AccHomeVelTime, DecHomeVelTime);
-
+           */
             switch (HomeModeString)
             {
                 case "原點":
@@ -245,7 +257,10 @@ namespace YuanliCore.Motion
                     break;
             }
             // Axis.MotionVelParams = AxisSetConfig.MoveVel;
+
+       
             Axis.AxisVelocity = AxisSetConfig.MoveVel;
+            Axis.HomeVelocity = AxisSetConfig.HomeVel;
 
 
 
@@ -441,6 +456,30 @@ namespace YuanliCore.Motion
                     break;
             }
         }
+
+        private static void OnConfigChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var dp = d as AxisMotionUC;
+            dp.SetVelocity();
+        }
+        private void SetVelocity()
+        {
+            if(AxisSetConfig!=null)
+            {
+                MoveFinalVelocity = AxisSetConfig.MoveVel.MaxVel;
+                MoveAccTime = AxisSetConfig.MoveVel.AccelerationTime;
+                MoveDecTime = AxisSetConfig.MoveVel.DecelerationTime;
+
+                HomeFinalVelocity = AxisSetConfig.HomeVel.MaxVel;
+                HomeAccTime = AxisSetConfig.HomeVel.AccelerationTime;
+                HomeDecTime = AxisSetConfig.HomeVel.DecelerationTime;
+
+            }
+
+
+        }
+
+
         //沒在用
         private async void StartAxisStatus()
         {

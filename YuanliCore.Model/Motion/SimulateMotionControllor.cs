@@ -94,6 +94,11 @@ namespace YuanliCore.Motion
 
         public void MoveCommand(int id, double distance)
         {
+            if (simulatePosition[id] + distance >= simulateLimitP[id])
+                simulatePosition[id] = simulateLimitP[id];
+            else if (simulatePosition[id] + distance <= simulateLimitN[id])
+                simulatePosition[id] = simulateLimitN[id];
+            else
             simulatePosition[id] += distance;
         }
 
