@@ -34,48 +34,65 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
-            <GroupBox Grid.Column="0 " Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+            <GroupBox Grid.Column="0 " Grid.Row="0" Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
-                                     Header="Aperture" Style="{StaticResource MaterialDesignGroupBox}">
-                <StackPanel Orientation ="Horizontal" Margin="-5,-7,-5,-7">
-                    <TextBlock Text="12345" Width="80" FontSize="26"  VerticalAlignment="Center" />
-                    <Button  Margin="1"  Height="30" Width="30" ToolTip="1" Foreground="Black"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" Background="{x:Null}" >
-                        <materialDesign:PackIcon Width="28"  Height="28"  Kind="CircleSlice7" />
-                    </Button>
-                    <Button  Margin="1" Height="30" Width="30" ToolTip="2"  Foreground="Black" Background="{x:Null}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
-                        <materialDesign:PackIcon  Width="28"  Height="28"  Kind="CircleSlice6" />
-                    </Button>
-                    <Button  Margin="1"  Height="30" Width="30" ToolTip="3" Foreground="Black"   Background="{x:Null}"   Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
-                        <materialDesign:PackIcon Width="28"  Height="28"  Kind="CircleSlice5" />
-                    </Button>
-                    <Button  Margin="1" Height="30" Width="30" ToolTip="4"  Foreground="Black"  Background="{x:Null}"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
-                        <materialDesign:PackIcon  Width="28"  Height="28"  Kind="CircleSlice3" />
-                    </Button>
-                    <Button  Margin="1" Height="30" Width="30" ToolTip="5"  Foreground="Black"  Background="{x:Null}"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
-                        <materialDesign:PackIcon  Width="28"  Height="28"  Kind="CircleSlice2" />
-                    </Button>
-                    <Button  Margin="1" Height="30" Width="30" ToolTip="6"  Foreground="Black"  Background="{x:Null}"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
-                        <materialDesign:PackIcon  Width="28"  Height="28"  Kind="CircleOutline" />
-                    </Button>
-                </StackPanel>
+                                     Header="Lens" Style="{StaticResource MaterialDesignGroupBox}">
+                <ListBox Margin="-7" x:Name="RadioLensChoiceChip" Style="{StaticResource MaterialDesignChoiceChipListBox}">
+                    <ListBoxItem Margin="-5,0,0,0" Content="1.25X" IsSelected="{Binding IsLens1}"/>
+                    <ListBoxItem Margin="-5,0,0,0" Content="5X" IsSelected="{Binding IsLens2}" />
+                    <ListBoxItem Margin="-5,0,0,0" Content="10X" IsSelected="{Binding IsLens3}" />
+                    <ListBoxItem Margin="-5,0,0,0" Content="50X" IsSelected="{Binding IsLens4}" />
+                    <ListBoxItem Margin="-5,0,0,0" Content="100X" IsSelected="{Binding IsLens5}"/>
+                </ListBox>
             </GroupBox>
 
             <GroupBox Grid.Column="2 " Grid.Row="0" Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
-                                     Header="Lens" Style="{StaticResource MaterialDesignGroupBox}">
-                <ListBox  Margin="-7" x:Name="RadioLensChoiceChip"  Style="{StaticResource MaterialDesignChoiceChipListBox}">
-                    <ListBoxItem Margin="-5,0,0,0" Content="1.25X" />
-                    <ListBoxItem Margin="-5,0,0,0" Content="5X" IsSelected="True" />
-                    <ListBoxItem Margin="-5,0,0,0" Content="10X" />
-                    <ListBoxItem Margin="-5,0,0,0" Content="50X" IsEnabled="False" />
-                    <ListBoxItem Margin="-5,0,0,0" Content="100X" IsEnabled="False" />
-                </ListBox>
+                                     Header="Intensity" Style="{StaticResource MaterialDesignGroupBox}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock  FontSize="20" Width="50" Text ="{Binding BXFMUIShow.LightValue}"/>
+                    <Slider Maximum="120" Minimum="0" Width="180" Value="{Binding IntensitySliderValue}"  />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Column="0 " Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+                                    materialDesign:ColorZoneAssist.Foreground="White"
+                                    materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
+                                     Header="Focus" Style="{StaticResource MaterialDesignGroupBox}">
+                <Grid Margin="-7" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions >
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2"  Grid.Column="0" Text="{Binding BXFMUIShow.FocusZ}" FontSize="12"  />
+
+                    <Button  Grid.Column="1" Grid.Row="0" Width="15" Style="{StaticResource MaterialDesignPaperButton}" Command="{Binding FocusZMove}" CommandParameter="Up" IsEnabled="{Binding IsFocusZMove}">
+                        <materialDesign:PackIcon Margin="-22,0,0,0"  Width="26" Height="26"  Kind="ArrowUpBox" />
+                    </Button>
+
+                    <Button  Grid.Column="1" Grid.Row="1" Width="15" Style="{StaticResource MaterialDesignPaperButton}" Command="{Binding FocusZMove}" CommandParameter="Down" IsEnabled="{Binding IsFocusZMove}">
+                        <materialDesign:PackIcon Margin="-22,0,0,0" Width="26" Height="26"  Kind="ArrowDownBox" />
+                    </Button>
+
+                    <StackPanel Orientation="Vertical" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" >
+                        <TextBox Width="35" Text="{Binding DistanceZ}" HorizontalAlignment="Right" />
+                        <Label Content="(um)" FontSize="12" Grid.Column="2" HorizontalAlignment="Right" />
+                    </StackPanel>
+                    <CheckBox Content="AutoFocus" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan ="2" IsChecked="{Binding IsAF}" />
+                </Grid>
             </GroupBox>
 
-            <GroupBox Grid.Column="3 " Grid.Row="2"   materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+
+
+            <GroupBox Grid.Column="1" Grid.Row="1"   materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Shutter" Style="{StaticResource MaterialDesignGroupBox}">
@@ -101,67 +118,58 @@
                         </ListBox>
                     </Grid>
                 </materialDesign:PopupBox>
-             
+
 
             </GroupBox>
-
-            <GroupBox Grid.Column="0 " Grid.Row="1" Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+            <GroupBox Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
-                                     Header="Intensity" Style="{StaticResource MaterialDesignGroupBox}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="4234" FontSize="20" Width="50" />
-                    <Slider Maximum="50" Minimum="0" Width="180" Value="35"   />
+                                     Header="Aperture" Style="{StaticResource MaterialDesignGroupBox}">
+                <StackPanel Orientation ="Horizontal" Margin="-5,-7,-5,-7">
+                    <TextBlock Text="{Binding BXFMUIShow.ApertureValue}" Width="80" FontSize="26"  VerticalAlignment="Center" />
+                    <Button  Margin="1"  Height="30" Width="30" ToolTip="1"  Command="{Binding ApertureChange}"  CommandParameter="1"  Foreground="Black"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" Background="{x:Null}" >
+                        <materialDesign:PackIcon Width="28"  Height="28"  Kind="CircleSlice7" />
+                    </Button>
+                    <Button  Margin="1" Height="30" Width="30" ToolTip="2"  Command="{Binding ApertureChange}"  CommandParameter="2"  Foreground="Black" Background="{x:Null}" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
+                        <materialDesign:PackIcon  Width="28"  Height="28"  Kind="CircleSlice6" />
+                    </Button>
+                    <Button  Margin="1"  Height="30" Width="30" ToolTip="3"  Command="{Binding ApertureChange}"  CommandParameter="3"  Foreground="Black"   Background="{x:Null}"   Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
+                        <materialDesign:PackIcon Width="28"  Height="28"  Kind="CircleSlice5" />
+                    </Button>
+                    <Button  Margin="1" Height="30" Width="30" ToolTip="4"  Command="{Binding ApertureChange}" CommandParameter="4"  Foreground="Black"  Background="{x:Null}"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
+                        <materialDesign:PackIcon  Width="28"  Height="28"  Kind="CircleSlice3" />
+                    </Button>
+                    <Button  Margin="1" Height="30" Width="30" ToolTip="5"  Command="{Binding ApertureChange}" CommandParameter="5"  Foreground="Black"  Background="{x:Null}"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
+                        <materialDesign:PackIcon  Width="28"  Height="28"  Kind="CircleSlice2" />
+                    </Button>
+                    <Button  Margin="1" Height="30" Width="30" ToolTip="6"  Command="{Binding ApertureChange}" CommandParameter="6"  Foreground="Black"  Background="{x:Null}"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" >
+                        <materialDesign:PackIcon  Width="28"  Height="28"  Kind="CircleOutline" />
+                    </Button>
                 </StackPanel>
-
             </GroupBox>
 
-            <GroupBox Grid.Column="2 " Grid.Row="1" Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+
+            <GroupBox Grid.Column="1 " Grid.Row="3" Grid.ColumnSpan="1" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Observation" Style="{StaticResource MaterialDesignGroupBox}">
                 <StackPanel Margin="-5" Orientation="Horizontal">
                     <ListBox  Margin="-5" x:Name="RadioObservationChoiceChip"  Style="{StaticResource MaterialDesignChoiceChipListBox}">
-                        <ListBoxItem Margin="0,0,-5,0" Content="DF" />
-                        <ListBoxItem Margin="0,0,-5,0" Content="BF" IsSelected="True" />
-                        <ListBoxItem Margin="0,0,-5,0" Content="DIC" IsEnabled="False" />
+                        <ListBoxItem Margin="0,0,-5,0" Content="DF" IsSelected="{Binding IsObservation1}"/>
+                        <ListBoxItem Margin="0,0,-5,0" Content="BF" IsSelected="{Binding IsObservation2}" />
+                        <ListBoxItem Margin="0,0,-5,0" Content="DIC" IsSelected="{Binding IsObservation3}" />
                     </ListBox>
-                    <Slider Margin="10,0,0,0" Width="100" />
+
                 </StackPanel>
 
-            </GroupBox>
-
-            <GroupBox Grid.Column="0 " Grid.Row="2" Grid.ColumnSpan="3" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+            </GroupBox >
+            <GroupBox Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
-                                     Header="Focus" Style="{StaticResource MaterialDesignGroupBox}">
-                <Grid Margin="-7" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition  Width="0.85*" />
-                        <ColumnDefinition Width="0.7*" />
-                        <ColumnDefinition Width="0.6*" />
-                        <ColumnDefinition  Width="1.8*" />
-                        <ColumnDefinition Width="0.7*" />
-                        <ColumnDefinition/>
-                     
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Column="0" Text="42347" FontSize="20"  />
-                    <TextBox Grid.Column="1"  Text="0000" FontSize="20" />
-                    <Button  Grid.Column="2"  Style="{StaticResource MaterialDesignPaperButton}" >
-                        <materialDesign:PackIcon Margin="-5,0,0,0"  Width="26" Height="26"  Kind="ArrowLeftBox" />
-                    </Button>
-                    <Slider Grid.Column="3"  Maximum="50" Minimum="0"  Value="35" />
-                    <Button Grid.Column="4"   Style="{StaticResource MaterialDesignPaperButton}" >
-                        <materialDesign:PackIcon Margin="-5,0,0,0" Width="26" Height="26"  Kind="ArrowRightBox" />
-                    </Button>
-                    <CheckBox Content="AutoFocus" Grid.Column="5"  />
-                </Grid>
-              
-                   
-          
-
+                                     Header="DIC" Style="{StaticResource MaterialDesignGroupBox}">
+                <Slider Margin="10,0,0,0" Width="180" />
             </GroupBox>
+
 
         </Grid>
 
