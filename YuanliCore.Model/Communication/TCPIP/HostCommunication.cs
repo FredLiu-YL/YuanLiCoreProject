@@ -140,7 +140,7 @@ namespace YuanliCore.Communication
     {
         private TcpClient tcpClient;
         private bool isReceiver;
-        private string message;
+        //private string message;
         private NetworkStream stream;
         private byte[] buffer = new byte[1024];
         private Task receiverTask = Task.CompletedTask;

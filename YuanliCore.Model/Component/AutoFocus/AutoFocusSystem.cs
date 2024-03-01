@@ -17,7 +17,7 @@ namespace YuanliCore
         private Task task = Task.CompletedTask;
         private bool isRefresh = false;
         private Subject<bool> afStates = new Subject<bool>();
-        private int tempPattern, tempPositionZ, tempFSP, tempNSP;
+        private int tempFSP, tempNSP;
 
         public AutoFocusSystem(string comPort, int baudrate =19200)
         {
@@ -69,7 +69,7 @@ namespace YuanliCore
         /// </summary>
         public int AGC { get; }
 
-        public event Action<bool> JustFocus;
+     //   public event Action<bool> JustFocus;
 
         public void Open()
         {

@@ -28,8 +28,8 @@ namespace YuanliCore.ImageProcess
         private CogGraphicLabel cogGraphicLabel = new CogGraphicLabel();
 
         private static readonly DependencyProperty RecordProperty = DependencyProperty.Register(nameof(Record), typeof(ICogRecord), typeof(CogDisplayer), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnImageChanged)));
-        private static readonly DependencyProperty WidthProperty = DependencyProperty.Register(nameof(Width), typeof(int), typeof(CogDisplayer), new FrameworkPropertyMetadata(800, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnImageSizeChanged)));
-        private static readonly DependencyProperty HeightProperty = DependencyProperty.Register(nameof(Height), typeof(int), typeof(CogDisplayer), new FrameworkPropertyMetadata(600, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnImageSizeChanged)));
+        private static readonly DependencyProperty ImageWidthProperty = DependencyProperty.Register(nameof(ImageWidth), typeof(int), typeof(CogDisplayer), new FrameworkPropertyMetadata(800, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnImageSizeChanged)));
+        private static readonly DependencyProperty ImageHeightProperty = DependencyProperty.Register(nameof(ImageHeight), typeof(int), typeof(CogDisplayer), new FrameworkPropertyMetadata(600, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnImageSizeChanged)));
         private static readonly DependencyProperty TextLsitProperty = DependencyProperty.Register(nameof(TextLsit), typeof(List<DisplayLable>), typeof(CogDisplayer), new FrameworkPropertyMetadata(new List<DisplayLable>(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnTextChanged)));
       
         public CogDisplayer()
@@ -37,7 +37,7 @@ namespace YuanliCore.ImageProcess
             InitializeComponent();
 
             cogDisplay = new CogRecordDisplay();
-            cogDisplay.Size = new System.Drawing.Size(Width, Height);
+            cogDisplay.Size = new System.Drawing.Size(ImageWidth, ImageHeight);
 
 
             ((System.ComponentModel.ISupportInitialize)(cogDisplay)).BeginInit();
@@ -66,15 +66,15 @@ namespace YuanliCore.ImageProcess
             set => SetValue(RecordProperty, value);
         }
 
-        public int Width
+        public int ImageWidth
         {
-            get => (int)GetValue(WidthProperty);
-            set => SetValue(WidthProperty, value);
+            get => (int)GetValue(ImageWidthProperty);
+            set => SetValue(ImageWidthProperty, value);
         }
-        public int Height
+        public int ImageHeight
         {
-            get => (int)GetValue(HeightProperty);
-            set => SetValue(HeightProperty, value);
+            get => (int)GetValue(ImageHeightProperty);
+            set => SetValue(ImageHeightProperty, value);
         }
         public List<DisplayLable> TextLsit
         {
@@ -112,7 +112,7 @@ namespace YuanliCore.ImageProcess
         }
         private void SetSize()
         {
-            cogDisplay.Size = new System.Drawing.Size(Width, Height);
+            cogDisplay.Size = new System.Drawing.Size(ImageWidth, ImageHeight);
         }
 
         private void SetTextLsit()
