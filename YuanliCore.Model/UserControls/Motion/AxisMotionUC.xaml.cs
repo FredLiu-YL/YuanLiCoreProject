@@ -219,16 +219,16 @@ namespace YuanliCore.Motion
                  AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.FinalVel, AccMoveVelTime, DecMoveVelTime);
              if(AxisSetConfig.HomeVel != null)
                  AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.FinalVel, AccHomeVelTime, DecHomeVelTime);*/
-           
+
             AxisSetConfig.MoveVel = new VelocityParams(0, MoveFinalVelocity, MoveAccTime, MoveDecTime);
             AxisSetConfig.HomeVel = new VelocityParams(0, HomeFinalVelocity, HomeAccTime, HomeDecTime);
 
 
-           /* if (AxisSetConfig.MoveVel != null)
-                AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.MaxVel, AccMoveVelTime, DecMoveVelTime);
-            if (AxisSetConfig.HomeVel != null)
-                AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.MaxVel, AccHomeVelTime, DecHomeVelTime);
-           */
+            /* if (AxisSetConfig.MoveVel != null)
+                 AxisSetConfig.MoveVel = new VelocityParams(0, AxisSetConfig.MoveVel.MaxVel, AccMoveVelTime, DecMoveVelTime);
+             if (AxisSetConfig.HomeVel != null)
+                 AxisSetConfig.HomeVel = new VelocityParams(0, AxisSetConfig.HomeVel.MaxVel, AccHomeVelTime, DecHomeVelTime);
+            */
             switch (HomeModeString)
             {
                 case "原點":
@@ -255,10 +255,30 @@ namespace YuanliCore.Motion
                     AxisSetConfig.HomeDirection = HomeDirection.Backward;
                     AxisSetConfig.Direction = MotionDirections.Backward;
                     break;
+                case "原點+Index":
+                    Axis.HomeMode = HomeModes.ORGAndIndex;
+                    AxisSetConfig.HomeMode = HomeModes.ORGAndIndex;
+                    AxisSetConfig.HomeDirection = HomeDirection.Backward;
+                    AxisSetConfig.Direction = MotionDirections.Backward;
+                    break;
+                case "原點+正極限":
+                    Axis.HomeMode = HomeModes.ELAndIndex;
+                    AxisSetConfig.HomeMode = HomeModes.ELAndIndex;
+                    AxisSetConfig.HomeDirection = HomeDirection.Forward;
+                    AxisSetConfig.Direction = MotionDirections.Forward;
+                    break;
+                case "原點+負極限":
+                    Axis.HomeMode = HomeModes.ELAndIndex;
+                    AxisSetConfig.HomeMode = HomeModes.ELAndIndex;
+                    AxisSetConfig.HomeDirection = HomeDirection.Backward;
+                    AxisSetConfig.Direction = MotionDirections.Backward;
+                    break;
+                default:
+                    break;
             }
             // Axis.MotionVelParams = AxisSetConfig.MoveVel;
 
-       
+
             Axis.AxisVelocity = AxisSetConfig.MoveVel;
             Axis.HomeVelocity = AxisSetConfig.HomeVel;
 
@@ -307,8 +327,8 @@ namespace YuanliCore.Motion
         {
             try
             {
-                HomeAsyc?.Invoke(Axis);
-                //await Axis.HomeAsync();
+                //HomeAsyc?.Invoke(Axis);
+                await Axis.HomeAsync();
             }
             catch (Exception ex)
             {
@@ -417,14 +437,25 @@ namespace YuanliCore.Motion
 
             switch (modeString)
             {
+                case "負極限+Index":
+                    break;
+
                 case "負極限":
-
                     break;
+
                 case "原點":
-
                     break;
-                case "正極限":
 
+                case "原點+Index":
+                    break;
+
+                case "CurPos":
+                    break;
+
+                case "正極限":
+                    break;
+
+                case "正極限+Index":
                     break;
             }
             return mode;
@@ -444,6 +475,7 @@ namespace YuanliCore.Motion
                         HomeModeString = "正極限";
                     break;
                 case HomeModes.ORGAndIndex:
+                    HomeModeString = "原點+Index";
                     break;
                 case HomeModes.Block:
                     break;
@@ -451,6 +483,10 @@ namespace YuanliCore.Motion
                     HomeModeString = "CurPos";
                     break;
                 case HomeModes.ELAndIndex:
+                    if (motionDirections == MotionDirections.Backward)
+                        HomeModeString = "負極限+Index";
+                    else if (motionDirections == MotionDirections.Forward)
+                        HomeModeString = "正極限+Index";
                     break;
                 default:
                     break;
@@ -464,7 +500,7 @@ namespace YuanliCore.Motion
         }
         private void SetVelocity()
         {
-            if(AxisSetConfig!=null)
+            if (AxisSetConfig != null)
             {
                 MoveFinalVelocity = AxisSetConfig.MoveVel.MaxVel;
                 MoveAccTime = AxisSetConfig.MoveVel.AccelerationTime;
