@@ -164,6 +164,7 @@
     <Compile Include="Interface\ICamera.cs" />
     <Compile Include="Interface\IMotioncontroller.cs" />
     <Compile Include="Interface\ITransform.cs" />
+    <Compile Include="Machine.Base\MachineStates.cs" />
     <Compile Include="Interface\Motion\Axis.cs" />
     <Compile Include="Interface\Motion\VelocityParam.cs" />
     <Compile Include="Interface\Motion\MotionVelocity.cs" />
