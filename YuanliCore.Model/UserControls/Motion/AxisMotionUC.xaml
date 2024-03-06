@@ -138,10 +138,13 @@
                         <ComboBox Grid.Row="3" SelectedIndex="0" Text="{Binding HomeModeString}" VerticalAlignment="Center" 
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.Hint="HomeMode"
                               Margin="8">
+                            <Label Content="負極限+Index"/>
                             <Label Content="負極限"/>
                             <Label Content="原點"/>
-                            <Label Content="正極限"/>
+                            <Label Content="原點+Index"/>
                             <Label Content="CurPos"/>
+                            <Label Content="正極限"/>
+                            <Label Content="正極限+Index"/>
                         </ComboBox>
                     </Grid>
                 </materialDesign:PopupBox>
