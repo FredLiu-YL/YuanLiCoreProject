@@ -465,14 +465,18 @@ namespace YuanliCore.Motion
         {
             switch (homeModes)
             {
-                case HomeModes.ORG:
-                    HomeModeString = "原點";
-                    break;
                 case HomeModes.EL:
                     if (motionDirections == MotionDirections.Backward)
+                    {
                         HomeModeString = "負極限";
+                    }
                     else if (motionDirections == MotionDirections.Forward)
+                    {
                         HomeModeString = "正極限";
+                    }
+                    break;
+                case HomeModes.ORG:
+                    HomeModeString = "原點";
                     break;
                 case HomeModes.ORGAndIndex:
                     HomeModeString = "原點+Index";
@@ -484,9 +488,13 @@ namespace YuanliCore.Motion
                     break;
                 case HomeModes.ELAndIndex:
                     if (motionDirections == MotionDirections.Backward)
+                    {
                         HomeModeString = "負極限+Index";
+                    }
                     else if (motionDirections == MotionDirections.Forward)
+                    {
                         HomeModeString = "正極限+Index";
+                    }
                     break;
                 default:
                     break;
