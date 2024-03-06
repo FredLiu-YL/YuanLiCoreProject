@@ -65,16 +65,19 @@ namespace YuanliCore.Model.Interface
         /// </summary>
         /// <returns></returns>
         Task Home();
+
         /// <summary>
         /// 更換鏡頭 idx=1~5、6(有5、6孔)
         /// </summary>
         /// <param name="idx"></param>
         Task ChangeLens(int idx);
+
         /// <summary>
         /// 更換鏡片組BF DF Other
         /// </summary>
         /// <param name="idx"></param>
         Task ChangeCube(int idx);
+
         /// <summary>
         /// 更換光圈 ApertureValue=0~3113
         /// </summary>
@@ -139,5 +142,53 @@ namespace YuanliCore.Model.Interface
         Task AberrationMoveToCommand(double position);
     }
 
+    public interface IMicroscope2
+    {
 
+        /// <summary>
+        /// 光強度
+        /// </summary>
+        int LightValue { get; set; }
+        /// <summary>
+        /// 光圈
+        /// </summary>
+        int ApertureValue { get; set; }
+
+        /// <summary>
+        /// Z軸位置
+        /// </summary>
+        double Position { get; }
+
+        double PositionPEL { get; set; }
+        double PositionNEL { get; set; }
+
+        /// <summary>
+        /// 對焦位置
+        /// </summary>
+        double AberationPosition { get; set; }
+        /// <summary>
+        /// 對焦範圍正極限
+        /// </summary>
+        double AutoFocusPEL { get; set; }
+
+        /// <summary>
+        /// 對焦範圍負極限
+        /// </summary>
+        double AutoFocusNEL { get; set; }
+        /// <summary>
+        /// 鼻輪號碼
+        /// </summary>
+        int LensNumber { get; set; }
+
+        void Initial();
+        void Open();
+        void Close();
+        void Home();
+
+        void MoveFocusPosition();
+
+        void Dispose();
+
+
+    }
 }
