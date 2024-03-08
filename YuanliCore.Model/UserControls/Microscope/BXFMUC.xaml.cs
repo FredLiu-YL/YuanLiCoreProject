@@ -69,7 +69,7 @@ namespace YuanliCore.Model.Microscope
                         {
                             if (Microscope != null)
                             {
-                                FocusZ = Convert.ToInt32(await Microscope.GetZPosition());
+                                FocusZ = Microscope.Position;
 
                             }
                             await Task.Delay(300);
@@ -105,8 +105,7 @@ namespace YuanliCore.Model.Microscope
             set
             {
                 //Microscope.ChangeLight(value).Wait();
-
-                Microscope.LightValue = value;
+                Microscope.ChangeLightAsync(value).Wait();
                 SetValue(ref intensitySliderValue, value);
                 IntensityValue = value;
             }
@@ -132,7 +131,7 @@ namespace YuanliCore.Model.Microscope
             get => focusZ;
             set
             {
-                Microscope.ZMoveToCommand(value).Wait();
+                Microscope.MoveToAsync(value).Wait();
                 SetValue(ref focusZ, value);
             }
         }
@@ -154,11 +153,11 @@ namespace YuanliCore.Model.Microscope
             {
                 if (value == true)
                 {
-                    Microscope.AF_Off().Wait();
+                    Microscope.AFOff();
                 }
                 else
                 {
-                    Microscope.AF_Trace().Wait();
+                    Microscope.AFTrace();
                 }
                 SetValue(ref isAF, value);
             }
@@ -175,7 +174,7 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeLens(1).Wait();
+                        Microscope.ChangeLensAsync(1).Wait();
                     }
                     catch (Exception)
                     {
@@ -196,7 +195,7 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeLens(2).Wait();
+                        Microscope.ChangeLensAsync(2).Wait();
                     }
                     catch (Exception)
                     {
@@ -217,7 +216,7 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeLens(3).Wait();
+                        Microscope.ChangeLensAsync(3).Wait();
                     }
                     catch (Exception)
                     {
@@ -238,7 +237,7 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeLens(4).Wait();
+                        Microscope.ChangeLensAsync(4).Wait();
                     }
                     catch (Exception)
                     {
@@ -259,7 +258,7 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeLens(5).Wait();
+                        Microscope.ChangeLensAsync(5).Wait();
                     }
                     catch (Exception)
                     {
@@ -281,9 +280,9 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeCube(2).Wait();
-                        Microscope.ChangeFilter(1, 1).Wait();
-                        Microscope.ChangeFilter(2, 1).Wait();
+                        Microscope.ChangeCubeAsync(2).Wait();
+                        Microscope.ChangeFilterAsync(1, 1).Wait();
+                        Microscope.ChangeFilterAsync(2, 1).Wait();
                     }
                     catch (Exception)
                     {
@@ -304,9 +303,9 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeCube(1).Wait();
-                        Microscope.ChangeFilter(1, 1).Wait();
-                        Microscope.ChangeFilter(2, 1).Wait();
+                        Microscope.ChangeCubeAsync(1).Wait();
+                        Microscope.ChangeFilterAsync(1, 1).Wait();
+                        Microscope.ChangeFilterAsync(2, 1).Wait();
                     }
                     catch (Exception)
                     {
@@ -326,8 +325,8 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeFilter(1, 2).Wait();
-                        Microscope.ChangeFilter(2, 2).Wait();
+                        Microscope.ChangeFilterAsync(1, 2).Wait();
+                        Microscope.ChangeFilterAsync(2, 2).Wait();
                     }
                     catch (Exception)
                     {
@@ -347,27 +346,22 @@ namespace YuanliCore.Model.Microscope
                 switch (key)
                 {
                     case "1":
-                        Microscope.ApertureValue = 100;
-                        break;
-                    case "2":
-                        await Microscope.ChangeAperture(700);
-                        Microscope.ApertureValue = 700;
-                        break;
-                    case "3":
-                        await Microscope.ChangeAperture(1300);
-                        Microscope.ApertureValue = 1300;
-                        break;
-                    case "4":
-                        await Microscope.ChangeAperture(1900);
-                        Microscope.ApertureValue = 1900;
-                        break;
-                    case "5":
-                        await Microscope.ChangeAperture(2500);
-                        Microscope.ApertureValue = 2500;
-                        break;
-                    case "6":
-                        await Microscope.ChangeAperture(3113);
-                        Microscope.ApertureValue = 3113;
+                        await Microscope.ChangeApertureAsync(100);
+                        break;           
+                    case "2":            
+                        await Microscope.ChangeApertureAsync(700);
+                        break;          
+                    case "3":           
+                        await Microscope.ChangeApertureAsync(1300);
+                        break;          
+                    case "4":           
+                        await Microscope.ChangeApertureAsync(1900);
+                        break;          
+                    case "5":           
+                        await Microscope.ChangeApertureAsync(2500);
+                        break;         
+                    case "6":          
+                        await Microscope.ChangeApertureAsync(3113);
                         break;
                     default:
                         break;
@@ -399,10 +393,10 @@ namespace YuanliCore.Model.Microscope
                 switch (key)
                 {
                     case "Up":
-                        await Microscope.ZMoveCommand(-DistanceZ);
+                        await Microscope.MoveAsync(-DistanceZ);
                         break;
                     case "Down":
-                        await Microscope.ZMoveCommand(DistanceZ);
+                        await Microscope.MoveAsync(DistanceZ);
                         break;
                     default:
                         break;
