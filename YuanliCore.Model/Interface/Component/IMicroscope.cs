@@ -41,6 +41,10 @@ namespace YuanliCore.Model.Interface
         /// </summary>
         int AFPEL { get; set; }
         /// <summary>
+        /// TimeOut重送次數
+        /// </summary>
+        int TimeOutRetryCount { get; set; }
+        /// <summary>
         /// 初始化
         /// </summary>
         void Initial();
@@ -57,7 +61,7 @@ namespace YuanliCore.Model.Interface
         Task ChangeLensAsync(int idx);
 
         /// <summary>
-        /// 更換鏡片組BF DF Other
+        /// 更換鏡片組BF DF Other,idx=1~2、6、8(有2、6、8種)
         /// </summary>
         /// <param name="idx"></param>
         Task ChangeCubeAsync(int idx);

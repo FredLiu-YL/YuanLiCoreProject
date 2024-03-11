@@ -280,7 +280,7 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeCubeAsync(2).Wait();
+                        Microscope.ChangeCubeAsync(1).Wait();
                         Microscope.ChangeFilterAsync(1, 1).Wait();
                         Microscope.ChangeFilterAsync(2, 1).Wait();
                     }
@@ -303,7 +303,7 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
-                        Microscope.ChangeCubeAsync(1).Wait();
+                        Microscope.ChangeCubeAsync(2).Wait();
                         Microscope.ChangeFilterAsync(1, 1).Wait();
                         Microscope.ChangeFilterAsync(2, 1).Wait();
                     }
@@ -325,6 +325,7 @@ namespace YuanliCore.Model.Microscope
                 {
                     try
                     {
+                        Microscope.ChangeCubeAsync(3).Wait();
                         Microscope.ChangeFilterAsync(1, 2).Wait();
                         Microscope.ChangeFilterAsync(2, 2).Wait();
                     }
