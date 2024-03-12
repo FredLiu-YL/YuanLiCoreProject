@@ -52,7 +52,7 @@
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Intensity" Style="{StaticResource MaterialDesignGroupBox}">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock  FontSize="20" Width="50" Text ="{Binding BXFMUIShow.LightValue}"/>
+                    <TextBlock  FontSize="20" Width="50" Text ="{Binding MicroscopeParam.LightValue}"/>
                     <Slider Maximum="120" Minimum="0" Width="180" Value="{Binding IntensitySliderValue}"  />
                 </StackPanel>
             </GroupBox>
@@ -72,7 +72,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2"  Grid.Column="0" Text="{Binding BXFMUIShow.FocusZ}" FontSize="12"  />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2"  Grid.Column="0" Text="{Binding MicroscopeParam.Position}" FontSize="12"  />
 
                     <Button  Grid.Column="1" Grid.Row="0" Width="15" Style="{StaticResource MaterialDesignPaperButton}" Command="{Binding FocusZMove}" CommandParameter="Up" IsEnabled="{Binding IsFocusZMove}">
                         <materialDesign:PackIcon Margin="-22,0,0,0"  Width="26" Height="26"  Kind="ArrowUpBox" />
@@ -126,7 +126,7 @@
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Aperture" Style="{StaticResource MaterialDesignGroupBox}">
                 <StackPanel Orientation ="Horizontal" Margin="-5,-7,-5,-7">
-                    <TextBlock Text="{Binding BXFMUIShow.ApertureValue}" Width="80" FontSize="26"  VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding MicroscopeParam.ApertureValue}" Width="80" FontSize="26"  VerticalAlignment="Center" />
                     <Button  Margin="1"  Height="30" Width="30" ToolTip="1"  Command="{Binding ApertureChange}"  CommandParameter="1"  Foreground="Black"  Style="{StaticResource MaterialDesignFloatingActionMiniButton}" BorderBrush="{x:Null}" Background="{x:Null}" >
                         <materialDesign:PackIcon Width="28"  Height="28"  Kind="CircleSlice7" />
                     </Button>

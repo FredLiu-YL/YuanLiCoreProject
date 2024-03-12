@@ -9,6 +9,26 @@ namespace YuanliCore.Model.Interface
     public interface IMicroscope
     {
         /// <summary>
+        /// 目前Lens在第幾孔
+        /// </summary>
+        int LensIndex { get; }
+        /// <summary>
+        /// 目前Cube在第幾孔
+        /// </summary>
+        int CubeIndex { get; }
+        /// <summary>
+        /// 目前Filter1在第幾孔
+        /// </summary>
+        int Filter1Index { get; }
+        /// <summary>
+        /// 目前Filter2在第幾孔
+        /// </summary>
+        int Filter2Index { get; }
+        /// <summary>
+        /// 目前Filter3在第幾孔
+        /// </summary>
+        int Filter3Index { get; }
+        /// <summary>
         /// 目前光強度
         /// </summary>
         int LightValue { get; }
@@ -31,7 +51,7 @@ namespace YuanliCore.Model.Interface
         /// <summary>
         /// 準焦位置
         /// </summary>
-        double AberationPosition { get; }
+        int AberationPosition { get; }
         /// <summary>
         /// 自動對焦負極限
         /// </summary>
@@ -65,20 +85,30 @@ namespace YuanliCore.Model.Interface
         /// </summary>
         /// <param name="idx"></param>
         Task ChangeCubeAsync(int idx);
-
+        /// <summary>
+        /// 更換第一道濾片，濾片可以切換1~6、7、8組(idx)
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <returns></returns>
+        Task ChangeFilter1Async(int idx);
+        /// <summary>
+        /// 更換第二道濾片，濾片可以切換1~6、7、8組(idx)
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <returns></returns>
+        Task ChangeFilter2Async(int idx);
+        /// <summary>
+        /// 更換第三道濾片，濾片可以切換1~6、7、8組(idx)
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <returns></returns>
+        Task ChangeFilter3Async(int idx);
         /// <summary>
         /// 更換光圈 ApertureValue=0~3113
         /// </summary>
         /// <param name="ApertureValue"></param>
         /// <returns></returns>
         Task ChangeApertureAsync(int ApertureValue);
-        /// <summary>
-        /// 更換濾片，可裝1~3道濾片(wheelIdx)，每一到濾片可以切換1~6、7、8組(idx)
-        /// </summary>
-        /// <param name="wheelIdx">1~3</param>
-        /// <param name="idx">1~6、7、8</param>
-        /// <returns></returns>
-        Task ChangeFilterAsync(int wheelIdx, int idx);
         /// <summary>
         /// 更換光亮度 LigntValue=0~120
         /// </summary>
@@ -103,7 +133,7 @@ namespace YuanliCore.Model.Interface
         /// </summary>
         void AFOff();
         /// <summary>
-        /// 設定對焦的參數 FirstZPos(Z初始對焦位置) SearchRange(搜尋對焦的範圍)
+        /// 設定對焦的參數 FirstZPos(Z初始對焦位置) SearchRange(搜尋對焦的範圍)，會自動關閉AF
         /// </summary>
         /// <param name="FirstZPos"></param>
         /// <param name="SearchRange"></param>

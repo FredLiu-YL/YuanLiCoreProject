@@ -29,60 +29,24 @@ namespace YuanliCore.Model.Microscope
 
         private static readonly DependencyProperty MicroscopeProperty = DependencyProperty.Register(nameof(Microscope), typeof(IMicroscope), typeof(BXFMUC),
                                                                                     new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-        public static readonly DependencyProperty BXFMUIShowProperty = DependencyProperty.Register(nameof(BXFMUIShow), typeof(BXFMUI), typeof(BXFMUC),
-                                                                                     new FrameworkPropertyMetadata(new BXFMUI(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty MicroscopeParamProperty = DependencyProperty.Register(nameof(MicroscopeParam), typeof(MicroscopeParam), typeof(BXFMUC),
+                                                                                     new FrameworkPropertyMetadata(new MicroscopeParam(), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public BXFMUC()
         {
             InitializeComponent();
-            //Loaded += UserControl_Loaded;
         }
         public IMicroscope Microscope
         {
             get => (IMicroscope)GetValue(MicroscopeProperty);
             set => SetValue(MicroscopeProperty, value);
         }
-        public BXFMUI BXFMUIShow
+        public MicroscopeParam MicroscopeParam
         {
-            get => (BXFMUI)GetValue(BXFMUIShowProperty);
-            set => SetValue(BXFMUIShowProperty, value);
+            get => (MicroscopeParam)GetValue(MicroscopeParamProperty);
+            set => SetValue(MicroscopeParamProperty, value);
         }
 
-        private bool isRefresh = false;
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            Task.Run(() =>
-            {
-                isRefresh = false;
-                RefreshStatus();
-            });
-        }
-        private async Task RefreshStatus()
-        {
-            try
-            {
-                await Task.Run(async () =>
-                {
-                    while (true)
-                    {
-                        if (isRefresh == true)
-                        {
-                            if (Microscope != null)
-                            {
-                                FocusZ = Microscope.Position;
-
-                            }
-                            await Task.Delay(300);
-                        }
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
 
 
         private int intensitySliderValue;
@@ -281,8 +245,8 @@ namespace YuanliCore.Model.Microscope
                     try
                     {
                         Microscope.ChangeCubeAsync(1).Wait();
-                        Microscope.ChangeFilterAsync(1, 1).Wait();
-                        Microscope.ChangeFilterAsync(2, 1).Wait();
+                        Microscope.ChangeFilter1Async(1).Wait();
+                        Microscope.ChangeFilter2Async(1).Wait();
                     }
                     catch (Exception)
                     {
@@ -304,8 +268,8 @@ namespace YuanliCore.Model.Microscope
                     try
                     {
                         Microscope.ChangeCubeAsync(2).Wait();
-                        Microscope.ChangeFilterAsync(1, 1).Wait();
-                        Microscope.ChangeFilterAsync(2, 1).Wait();
+                        Microscope.ChangeFilter1Async(1).Wait();
+                        Microscope.ChangeFilter2Async(1).Wait();
                     }
                     catch (Exception)
                     {
@@ -326,8 +290,8 @@ namespace YuanliCore.Model.Microscope
                     try
                     {
                         Microscope.ChangeCubeAsync(3).Wait();
-                        Microscope.ChangeFilterAsync(1, 2).Wait();
-                        Microscope.ChangeFilterAsync(2, 2).Wait();
+                        Microscope.ChangeFilter1Async(2).Wait();
+                        Microscope.ChangeFilter2Async(2).Wait();
                     }
                     catch (Exception)
                     {
@@ -348,20 +312,20 @@ namespace YuanliCore.Model.Microscope
                 {
                     case "1":
                         await Microscope.ChangeApertureAsync(100);
-                        break;           
-                    case "2":            
+                        break;
+                    case "2":
                         await Microscope.ChangeApertureAsync(700);
-                        break;          
-                    case "3":           
+                        break;
+                    case "3":
                         await Microscope.ChangeApertureAsync(1300);
-                        break;          
-                    case "4":           
+                        break;
+                    case "4":
                         await Microscope.ChangeApertureAsync(1900);
-                        break;          
-                    case "5":           
+                        break;
+                    case "5":
                         await Microscope.ChangeApertureAsync(2500);
-                        break;         
-                    case "6":          
+                        break;
+                    case "6":
                         await Microscope.ChangeApertureAsync(3113);
                         break;
                     default:
@@ -429,40 +393,5 @@ namespace YuanliCore.Model.Microscope
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
-    public class BXFMUI : INotifyPropertyChanged
-    {
-        private int focusZ;
-        public int FocusZ
-        {
-            get => focusZ;
-            set => SetValue(ref focusZ, value);
-        }
-        private int lightValue;
-        public int LightValue
-        {
-            get => lightValue;
-            set => SetValue(ref lightValue, value);
-        }
 
-        private int apertureValue;
-        public int ApertureValue
-        {
-            get => apertureValue;
-            set => SetValue(ref apertureValue, value);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return;
-            T oldValue = field;
-            field = value;
-            OnPropertyChanged(propertyName, oldValue, value);
-        }
-        protected virtual void OnPropertyChanged<T>(string name, T oldValue, T newValue)
-        {
-            // oldValue 和 newValue 目前沒有用到，代爾後需要再實作。
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-    }
 }

@@ -185,6 +185,7 @@
     <Compile Include="UserControls\Microscope\BXFMUC.xaml.cs">
       <DependentUpon>BXFMUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Microscope\MicroscopeParam.cs" />
     <Compile Include="UserControls\Motion\AxisMotionUC.xaml.cs">
       <DependentUpon>AxisMotionUC.xaml</DependentUpon>
     </Compile>
