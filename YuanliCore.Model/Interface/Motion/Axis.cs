@@ -139,8 +139,8 @@ namespace YuanliCore.Motion
 
             if (isBusy) throw new Exception($"ID:{ AxisID} [{AxisName}]  is Busy");
 
-            if (Position > PositionPEL) throw new Exception($"ID:{ AxisID} [{AxisName}]  is Beyond the limits PositionPEL:{PositionPEL} POS:{Position}");
-            if (Position < PositionNEL) throw new Exception($"ID:{ AxisID} [{AxisName}]  is Beyond the limits PositionNEL:{PositionPEL} POS:{Position}");
+            if (postion > PositionPEL) throw new Exception($"ID:{ AxisID} [{AxisName}]  is Beyond the limits PositionPEL:{PositionPEL} POS:{postion}");
+            if (postion < PositionNEL) throw new Exception($"ID:{ AxisID} [{AxisName}]  is Beyond the limits PositionNEL:{PositionNEL} POS:{postion}");
 
             try
             {
@@ -250,12 +250,6 @@ namespace YuanliCore.Motion
     {
         Forward,
         Backward
-    }
-
-    public enum MotionDirections
-    {
-        Backward = -1,
-        Forward = 1
     }
 
     public enum AxisSensor

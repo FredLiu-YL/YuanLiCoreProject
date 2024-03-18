@@ -59,7 +59,7 @@ namespace YuanliCore.Motion
                 if (Axis.IsOpen) OnBackground = Brushes.LightGreen;
                 else OffBackground = Brushes.LightGreen;
 
-                SetHomeMode(Axis.HomeMode, AxisSetConfig.Direction);
+                SetHomeMode(Axis.HomeMode, AxisSetConfig.HomeDirection);
             }
             catch (Exception ex)
             {
@@ -235,43 +235,43 @@ namespace YuanliCore.Motion
                     Axis.HomeMode = HomeModes.ORG;
                     AxisSetConfig.HomeMode = HomeModes.ORG;
                     AxisSetConfig.HomeDirection = HomeDirection.Backward;
-                    AxisSetConfig.Direction = MotionDirections.Backward;
+                    AxisSetConfig.Direction = AxisDirection.Backward;
                     break;
                 case "正極限":
                     Axis.HomeMode = HomeModes.EL;
                     AxisSetConfig.HomeMode = HomeModes.EL;
                     AxisSetConfig.HomeDirection = HomeDirection.Forward;
-                    AxisSetConfig.Direction = MotionDirections.Forward;
+                    AxisSetConfig.Direction = AxisDirection.Forward;
                     break;
                 case "負極限":
                     Axis.HomeMode = HomeModes.EL;
                     AxisSetConfig.HomeMode = HomeModes.EL;
                     AxisSetConfig.HomeDirection = HomeDirection.Backward;
-                    AxisSetConfig.Direction = MotionDirections.Backward;
+                    AxisSetConfig.Direction = AxisDirection.Backward;
                     break;
                 case "CurPos":
                     Axis.HomeMode = HomeModes.CurPos;
                     AxisSetConfig.HomeMode = HomeModes.CurPos;
                     AxisSetConfig.HomeDirection = HomeDirection.Backward;
-                    AxisSetConfig.Direction = MotionDirections.Backward;
+                    AxisSetConfig.Direction = AxisDirection.Backward;
                     break;
                 case "原點+Index":
                     Axis.HomeMode = HomeModes.ORGAndIndex;
                     AxisSetConfig.HomeMode = HomeModes.ORGAndIndex;
                     AxisSetConfig.HomeDirection = HomeDirection.Backward;
-                    AxisSetConfig.Direction = MotionDirections.Backward;
+                    AxisSetConfig.Direction = AxisDirection.Backward;
                     break;
                 case "原點+正極限":
                     Axis.HomeMode = HomeModes.ELAndIndex;
                     AxisSetConfig.HomeMode = HomeModes.ELAndIndex;
                     AxisSetConfig.HomeDirection = HomeDirection.Forward;
-                    AxisSetConfig.Direction = MotionDirections.Forward;
+                    AxisSetConfig.Direction = AxisDirection.Forward;
                     break;
                 case "原點+負極限":
                     Axis.HomeMode = HomeModes.ELAndIndex;
                     AxisSetConfig.HomeMode = HomeModes.ELAndIndex;
                     AxisSetConfig.HomeDirection = HomeDirection.Backward;
-                    AxisSetConfig.Direction = MotionDirections.Backward;
+                    AxisSetConfig.Direction = AxisDirection.Backward;
                     break;
                 default:
                     break;
@@ -461,16 +461,16 @@ namespace YuanliCore.Motion
             return mode;
         }
 
-        private void SetHomeMode(HomeModes homeModes, MotionDirections motionDirections = MotionDirections.Backward)
+        private void SetHomeMode(HomeModes homeModes, HomeDirection motionDirections = HomeDirection.Backward)
         {
             switch (homeModes)
             {
                 case HomeModes.EL:
-                    if (motionDirections == MotionDirections.Backward)
+                    if (motionDirections == HomeDirection.Backward)
                     {
                         HomeModeString = "負極限";
                     }
-                    else if (motionDirections == MotionDirections.Forward)
+                    else if (motionDirections == HomeDirection.Forward)
                     {
                         HomeModeString = "正極限";
                     }
@@ -487,11 +487,11 @@ namespace YuanliCore.Motion
                     HomeModeString = "CurPos";
                     break;
                 case HomeModes.ELAndIndex:
-                    if (motionDirections == MotionDirections.Backward)
+                    if (motionDirections == HomeDirection.Backward)
                     {
                         HomeModeString = "負極限+Index";
                     }
-                    else if (motionDirections == MotionDirections.Forward)
+                    else if (motionDirections == HomeDirection.Forward)
                     {
                         HomeModeString = "正極限+Index";
                     }

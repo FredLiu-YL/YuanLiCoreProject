@@ -454,6 +454,11 @@ namespace YuanliCore.Motion.Marzhauser
         {
             throw new NotImplementedException();
         }
+
+        public bool GetInputCommand(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

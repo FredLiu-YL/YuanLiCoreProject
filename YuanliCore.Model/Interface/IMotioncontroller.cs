@@ -48,6 +48,12 @@ namespace YuanliCore.Interface
         /// <param name="isOn"></param>
         void SetOutputCommand(int id, bool isOn);
         /// <summary>
+        /// 取得Input點位狀態
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool GetInputCommand(int id);
+        /// <summary>
         /// 設定軸卡參數
         /// </summary>
         /// <param name="axisConfig"></param>

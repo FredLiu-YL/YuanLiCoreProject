@@ -65,6 +65,10 @@ namespace YuanliCore.Model.Interface
         /// </summary>
         int TimeOutRetryCount { get; set; }
         /// <summary>
+        /// AF是否成功
+        /// </summary>
+        bool IsAFOk { get; }
+        /// <summary>
         /// 初始化
         /// </summary>
         void Initial();

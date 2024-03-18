@@ -50,10 +50,10 @@ namespace YuanliCore.Motion
             simulateLimitP = axeslimitP.ToArray();
             simulateLimitN = axeslimitN.ToArray();
 
-            OutputSignals = doNames.Select((n,i) => new DigitalOutput(i,this));
-            InputSignals = diNames.Select(n => new DigitalInput(n)).ToArray();
+            OutputSignals = doNames.Select((n, i) => new DigitalOutput(i, this));
+            InputSignals = diNames.Select((n, i) => new DigitalInput(n, i, this)).ToArray();
 
-            Task.Run(ReflashInput);
+            //Task.Run(ReflashInput);
         }
 
         public bool IsOpen => throw new NotImplementedException();
@@ -99,7 +99,7 @@ namespace YuanliCore.Motion
             else if (simulatePosition[id] + distance <= simulateLimitN[id])
                 simulatePosition[id] = simulateLimitN[id];
             else
-            simulatePosition[id] += distance;
+                simulatePosition[id] += distance;
         }
 
         public void MoveToCommand(int id, double position)
@@ -164,37 +164,37 @@ namespace YuanliCore.Motion
 
         private async Task ReflashInput()
         {
-            try
-            {
-                var inputCount = InputSignals.Length;
+            //try
+            //{
+            //    var inputCount = InputSignals.Length;
 
-                foreach (var item in InputSignals)
-                {
-                    item.IsSignal = false;
-                }
+            //    foreach (var item in InputSignals)
+            //    {
+            //        item.IsSignal = false;
+            //    }
 
-                while (true)
-                {
-                    for (int i = 0; i < inputCount; i++)
-                    {
-                        if (i == 0)
-                            InputSignals[inputCount - 1].IsSignal = false;
-                        else
-                            InputSignals[i - 1].IsSignal = false;
+            //    while (true)
+            //    {
+            //        for (int i = 0; i < inputCount; i++)
+            //        {
+            //            if (i == 0)
+            //                InputSignals[inputCount - 1].IsSignal = false;
+            //            else
+            //                InputSignals[i - 1].IsSignal = false;
 
-                        InputSignals[i].IsSignal = true;
+            //            InputSignals[i].IsSignal = true;
 
-                        await Task.Delay(500);
-                    }
+            //            await Task.Delay(500);
+            //        }
 
 
 
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         }
 
         public void SetOutputCommand(int id, bool isOn)
@@ -210,6 +210,11 @@ namespace YuanliCore.Motion
         public void ResetAlarmCommand()
         {
             throw new NotImplementedException();
+        }
+
+        public bool GetInputCommand(int id)
+        {
+            return false;
         }
     }
 

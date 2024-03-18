@@ -11,14 +11,20 @@ namespace YuanliCore.Interface
     public class DigitalInput : INotifyPropertyChanged
     {
         private IMotionController motionController;
-        private bool isSignal;
-        public DigitalInput(string name)
+
+        private int id;
+        public DigitalInput(string name, int id, IMotionController motionController)
         {
             Name = name;
+            this.motionController = motionController;
+            this.id = id;
         }
         public string Name { get; set; }
-        public bool IsSignal { get => isSignal; set => SetValue(ref isSignal, value); }
-
+        public bool IsSignal { get => GetInput(); }
+        private bool GetInput()
+        {
+            return motionController.GetInputCommand(id);
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

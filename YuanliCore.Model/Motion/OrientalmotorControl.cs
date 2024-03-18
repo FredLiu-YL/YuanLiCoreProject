@@ -343,7 +343,10 @@ namespace YuanliCore.Motion
 
         }
 
-     
+        public bool GetInputCommand(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public enum OperationMode
