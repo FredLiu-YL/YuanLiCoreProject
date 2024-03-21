@@ -9,7 +9,7 @@ namespace YuanliCore.Interface
 {
     public  interface ITransform
     {
-
         Point TransPoint(Point point);
+        Point TransInvertPoint(Point point);
     }
 }

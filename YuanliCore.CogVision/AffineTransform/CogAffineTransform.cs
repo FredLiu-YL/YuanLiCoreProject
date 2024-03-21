@@ -13,6 +13,7 @@ namespace YuanliCore.AffineTransform
     public class CogAffineTransform : ITransform
     {
         private System.Windows.Media.Matrix matrix2D = System.Windows.Media.Matrix.Identity;
+        private System.Windows.Media.Matrix matrix2DInvert = System.Windows.Media.Matrix.Identity;
         private CogCalibNPointToNPointTool calibNPointTool;
 
         public CogAffineTransform()
@@ -23,13 +24,14 @@ namespace YuanliCore.AffineTransform
         public CogAffineTransform(IEnumerable<Point> source, IEnumerable<Point> target)
         {
 
-            try {
-                calibNPointTool = new CogCalibNPointToNPointTool();
-                calibNPointTool.Calibration.DOFsToCompute = CogNPointToNPointDOFConstants.ScalingRotationAndTranslation;
-
+            try
+            {
                 matrix2D = CreateMatriX(source.ToArray(), target.ToArray());
+                matrix2DInvert = CreateMatriX(source.ToArray(), target.ToArray());
+                matrix2DInvert.Invert();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
                 throw ex;
             }
@@ -38,7 +40,14 @@ namespace YuanliCore.AffineTransform
         }
         private System.Windows.Media.Matrix CreateMatriX(Point[] source, Point[] target)
         {
-            if (calibNPointTool == null) throw new Exception("Calibration is not create");
+            if (calibNPointTool != null)
+            {
+                calibNPointTool.Dispose();
+                //throw new Exception("Calibration is not create");
+            }
+            calibNPointTool = new CogCalibNPointToNPointTool();
+            calibNPointTool.Calibration.DOFsToCompute = CogNPointToNPointDOFConstants.ScalingRotationAndTranslation;
+
 
             System.Windows.Media.Matrix mat = System.Windows.Media.Matrix.Identity;
             if (source.Length != target.Length) throw new Exception("poins are incorrect");
@@ -75,6 +84,10 @@ namespace YuanliCore.AffineTransform
         public Point TransPoint(Point point)
         {
             return matrix2D.Transform(point);
+        }
+        public Point TransInvertPoint(Point point)
+        {
+            return matrix2DInvert.Transform(point);
         }
     }
 }
