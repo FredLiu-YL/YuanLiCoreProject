@@ -67,7 +67,11 @@ namespace YuanliCore.Model.Interface
         /// <summary>
         /// AF是否成功
         /// </summary>
-        bool IsAFOk { get; }
+        bool IsAutoFocusOk { get; }
+        /// <summary>
+        /// AutoFocus是否正在追蹤
+        /// </summary>
+        bool IsAutoFocusTrace { get; }
         /// <summary>
         /// 初始化
         /// </summary>
