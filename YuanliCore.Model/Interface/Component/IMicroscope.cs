@@ -39,7 +39,7 @@ namespace YuanliCore.Model.Interface
         /// <summary>
         /// 目前Z軸位置
         /// </summary>
-        int Position { get; }
+        double Position { get; }
         /// <summary>
         /// Z軟體負極限
         /// </summary>
@@ -51,7 +51,7 @@ namespace YuanliCore.Model.Interface
         /// <summary>
         /// 準焦位置
         /// </summary>
-        int AberationPosition { get; }
+        double AberationPosition { get; }
         /// <summary>
         /// 自動對焦負極限
         /// </summary>
