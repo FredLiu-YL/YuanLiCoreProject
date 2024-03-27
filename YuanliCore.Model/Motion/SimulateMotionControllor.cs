@@ -35,13 +35,17 @@ namespace YuanliCore.Motion
                 };
 
             }).ToArray();
-
+            var axisInfosArray = axisInfos.ToArray();
             //有多少軸就創建多少顆驅動器參數
             for (int i = 0; i < axes.Length; i++)
             {
-                axesVel.Add(new VelocityParams());
-                axeslimitN.Add(0);
-                axeslimitP.Add(200000);
+                axeslimitN.Add(axisInfosArray[i].LimitNEL);
+                axeslimitP.Add(axisInfosArray[i].LimitPEL);
+                axesVel.Add(axisInfosArray[i].MoveVel);
+                axes[i].Ratio = axisInfosArray[i].Ratio;
+                axes[i].HomeVelocity = axisInfosArray[i].HomeVel;
+                axes[i].HomeMode = axisInfosArray[i].HomeMode;
+                axes[i].HomeDirection = axisInfosArray[i].HomeDirection;
             }
 
 

@@ -39,7 +39,7 @@ namespace YuanliCore.Model.Interface
         /// <summary>
         /// 目前Z軸位置
         /// </summary>
-        int Position { get; }
+        double Position { get; }
         /// <summary>
         /// Z軟體負極限
         /// </summary>
@@ -51,7 +51,7 @@ namespace YuanliCore.Model.Interface
         /// <summary>
         /// 準焦位置
         /// </summary>
-        int AberationPosition { get; }
+        double AberationPosition { get; }
         /// <summary>
         /// 自動對焦負極限
         /// </summary>
@@ -67,7 +67,11 @@ namespace YuanliCore.Model.Interface
         /// <summary>
         /// AF是否成功
         /// </summary>
-        bool IsAFOk { get; }
+        bool IsAutoFocusOk { get; }
+        /// <summary>
+        /// AutoFocus是否正在追蹤
+        /// </summary>
+        bool IsAutoFocusTrace { get; }
         /// <summary>
         /// 初始化
         /// </summary>
