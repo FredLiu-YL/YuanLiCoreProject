@@ -59,19 +59,12 @@ namespace YuanliCore.Model.Microscope
         {
             get
             {
-                int returnValue = intensitySliderValue;
-                if (Microscope != null)
-                {
-                    returnValue = Microscope.LightValue;
-                }
                 return intensitySliderValue;
             }
             set
             {
-                //Microscope.ChangeLight(value).Wait();
                 Microscope.ChangeLightAsync(value).Wait();
                 SetValue(ref intensitySliderValue, value);
-                IntensityValue = value;
             }
         }
         public int DistanceZ

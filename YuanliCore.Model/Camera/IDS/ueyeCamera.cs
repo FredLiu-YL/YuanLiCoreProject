@@ -23,12 +23,12 @@ using YuanliCore.Interface;
 
 namespace YuanliCore.CameraLib.IDS
 {
-    public class UeyeCamera: ICamera
+    public class UeyeCamera : ICamera
     {
         private readonly uEye.Camera cam = new uEye.Camera();
         private readonly int bufferCount = 3;
         private byte[] buffer;
-        private IObservable<Frame<byte[]>> frames  ;
+        private IObservable<Frame<byte[]>> frames;
 
         private readonly Dictionary<ColorMode, System.Windows.Media.PixelFormat> formatMap = new Dictionary<ColorMode, System.Windows.Media.PixelFormat>
         {
@@ -91,7 +91,7 @@ namespace YuanliCore.CameraLib.IDS
         /// <summary>
         /// 當看到 PixelFormat為 Rgba64 ，等於相機是使用12bit(BGR12Unpacked)
         /// </summary>
-        public  System.Windows.Media.PixelFormat PixelFormat
+        public System.Windows.Media.PixelFormat PixelFormat
         {
             get
             {
@@ -111,9 +111,9 @@ namespace YuanliCore.CameraLib.IDS
             }
         }
 
-        public  int Width
+        public int Width
         {
-           
+
             get => GetWidth();
             //set
             //{
@@ -149,9 +149,9 @@ namespace YuanliCore.CameraLib.IDS
             //}
         }
 
-       
 
-        public  int Height
+
+        public int Height
         {
             get => GetHeight();
             //set
@@ -254,17 +254,17 @@ namespace YuanliCore.CameraLib.IDS
         }
 
 
-        public  ValueRange<double> ExposureTimeRange
+        public ValueRange<double> ExposureTimeRange
         {
             get
             {
-               
-                 cam.Timing.Exposure.GetRange(out Range<double> range);
+
+                cam.Timing.Exposure.GetRange(out Range<double> range);
                 return new ValueRange<double>(range.Maximum, range.Minimum, range.Increment);
             }
         }
 
-        public  ValueRange<double> FrameRateRange
+        public ValueRange<double> FrameRateRange
         {
             get
             {
@@ -273,9 +273,9 @@ namespace YuanliCore.CameraLib.IDS
             }
         }
 
-        public  ValueRange<double> GainRange => new ValueRange<double>(100, 0, 1);
+        public ValueRange<double> GainRange => new ValueRange<double>(100, 0, 1);
 
-        public  ValueRange<int> WidthRange
+        public ValueRange<int> WidthRange
         {
             get
             {
@@ -284,7 +284,7 @@ namespace YuanliCore.CameraLib.IDS
             }
         }
 
-        public  ValueRange<int> HeightRange
+        public ValueRange<int> HeightRange
         {
             get
             {
@@ -293,7 +293,7 @@ namespace YuanliCore.CameraLib.IDS
             }
         }
 
-        protected  int OffsetX
+        protected int OffsetX
         {
             get
             {
@@ -312,7 +312,7 @@ namespace YuanliCore.CameraLib.IDS
             }
         }
 
-        protected  int OffsetY
+        protected int OffsetY
         {
             get
             {
@@ -338,11 +338,11 @@ namespace YuanliCore.CameraLib.IDS
             Status result = Status.Success;
 
             result = cam.Init(ID);
-       
+
             if (result != Status.Success) throw new InvalidOperationException($"Failed to initilize camera. message = '{result}'.");
 
             cam.Exit(); // 初始化後再次關閉是為了防止前一次相機不正常關閉導致產生修改相機的屬性卻無法取得已修改的屬性值，如 Width 或 Height 等...
-           
+
             result = cam.Init(ID);
             if (result != Status.Success) throw new InvalidOperationException($"Failed to initilize camera. message = '{result}'.");
 
@@ -357,7 +357,7 @@ namespace YuanliCore.CameraLib.IDS
                 .Select(OnFrameReceived)
                 .Where(frame => frame != null)
                 .ObserveOn(TaskPoolScheduler.Default);
-                 
+
 
 
             // 載入儲存於相機內的設定。
@@ -407,16 +407,16 @@ namespace YuanliCore.CameraLib.IDS
 
         #region Acquisition Methods
 
-        protected  void AcquisitionStart()
+        protected void AcquisitionStart()
         {
-        
+
             // 開始取像前重新配置 Buffer，避免寬與高有被變動過。
             //AllocateMemoryAndBuffer();
             cam.Acquisition.Capture();
             IsGrabbing = true;
         }
 
-        protected  void AcquisitionStop()
+        protected void AcquisitionStop()
         {
             cam.Acquisition.Stop();
             IsGrabbing = false;
@@ -437,7 +437,7 @@ namespace YuanliCore.CameraLib.IDS
 
             try
             {
-          
+
                 AcquisitionStart();
                 return Disposable.Create(Stop);
             }
@@ -452,15 +452,15 @@ namespace YuanliCore.CameraLib.IDS
         {
             using (var grab = IsGrabbing ? Disposable.Empty : Grab())
             {
-                
+
                 // return   Frames.Take(1).Timeout(TimeSpan.FromSeconds(3));
-                  var f =  Frames.Take(1).Timeout(TimeSpan.FromSeconds(3)).FirstOrDefault();
-                  return  f.ToBitmapSource();
-      
-               
+                var f = Frames.Take(1).Timeout(TimeSpan.FromSeconds(3)).FirstOrDefault();
+                return f.ToBitmapSource();
+
+
             }
-                
-          
+
+
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -500,14 +500,14 @@ namespace YuanliCore.CameraLib.IDS
                 cam.Memory.ToIntPtr(out IntPtr source);
                 Marshal.Copy(source, buffer, 0, buffer.Length);
                 cam.Memory.Unlock(memId);
-            //    var bmp = buffer.ToBitmapSource(width, height, PixelFormat);
-                
-               
+                //    var bmp = buffer.ToBitmapSource(width, height, PixelFormat);
+
+
                 return new Frame<byte[]>(buffer, width, height, PixelFormat, Resolution);
             }
-            catch (Exception )
+            catch (Exception)
             {
-              // Logger.Default.Error(ex, "");
+                // Logger.Default.Error(ex, "");
                 return null;
             }
         }
@@ -667,8 +667,8 @@ namespace YuanliCore.CameraLib.IDS
         [Conditional("L201")]
         public static void ThrowIfNoAuthorization(this uEye.Camera cam)
         {
-           // cam.Information.GetCameraInfo(out CameraInfo camInfo);
-          // if (camInfo.ID != "StrokePae") throw new UnauthorizedAccessException("Unauthorized Access. Code:201");
+            // cam.Information.GetCameraInfo(out CameraInfo camInfo);
+            // if (camInfo.ID != "StrokePae") throw new UnauthorizedAccessException("Unauthorized Access. Code:201");
         }
     }
 
