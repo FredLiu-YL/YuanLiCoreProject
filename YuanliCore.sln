@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33529.622
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuanliApplication", "YuanliApplication\YuanliApplication.csproj", "{EC6CCF0A-3F6E-472E-85E7-69CDFE79B062}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuanliCore.Model", "YuanliCore.Model\YuanliCore.Model.csproj", "{14946968-1DA0-4F66-ABD0-10D45D580E00}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YuanliCore.CogVision", "YuanliCore.CogVision\YuanliCore.CogVision.csproj", "{7794CBB3-58F6-4E99-9AB2-C3A257A361A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{C50B7E53-00BC-4B2F-802C-878B73B9B81F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7794CBB3-58F6-4E99-9AB2-C3A257A361A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7794CBB3-58F6-4E99-9AB2-C3A257A361A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7794CBB3-58F6-4E99-9AB2-C3A257A361A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C50B7E53-00BC-4B2F-802C-878B73B9B81F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C50B7E53-00BC-4B2F-802C-878B73B9B81F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C50B7E53-00BC-4B2F-802C-878B73B9B81F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C50B7E53-00BC-4B2F-802C-878B73B9B81F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
