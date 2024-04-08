@@ -53,7 +53,7 @@
                                      Header="Intensity" Style="{StaticResource MaterialDesignGroupBox}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock  FontSize="20" Width="50" Text ="{Binding MicroscopeParam.LightValue}"/>
-                    <Slider Maximum="120" Minimum="0" Width="180" Value="{Binding IntensitySliderValue}"  />
+                    <Slider Maximum="120" Minimum="0" Width="180" Value="{Binding IntensitySliderValue}"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.Column="0 " Grid.Row="1" Grid.ColumnSpan="1" Grid.RowSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
