@@ -162,6 +162,7 @@
     <Compile Include="Component\AutoFocus\AutoFocusSystem.cs" />
     <Compile Include="Interface\AbstractRecipe.cs" />
     <Compile Include="Interface\Component\IMicroscope.cs" />
+    <Compile Include="Interface\Component\IReader.cs" />
     <Compile Include="Interface\ICamera.cs" />
     <Compile Include="Interface\IMotioncontroller.cs" />
     <Compile Include="Interface\ITransform.cs" />
