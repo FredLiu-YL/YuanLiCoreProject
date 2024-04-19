@@ -157,17 +157,17 @@
                     <ListBox  Margin="-5" x:Name="RadioObservationChoiceChip"  Style="{StaticResource MaterialDesignChoiceChipListBox}">
                         <ListBoxItem Margin="0,0,-5,0" Content="DF" IsSelected="{Binding IsObservation1}"/>
                         <ListBoxItem Margin="0,0,-5,0" Content="BF" IsSelected="{Binding IsObservation2}" />
-                        <ListBoxItem Margin="0,0,-5,0" Content="DIC" IsSelected="{Binding IsObservation3}" />
+                        <ListBoxItem Margin="0,0,-5,0" Content="DIC" IsSelected="{Binding IsObservation3}"   />
                     </ListBox>
 
                 </StackPanel>
 
             </GroupBox >
-            <GroupBox Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue"
+            <GroupBox  Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" materialDesign:ColorZoneAssist.Background="DeepSkyBlue" 
                                     materialDesign:ColorZoneAssist.Foreground="White"
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="DIC" Style="{StaticResource MaterialDesignGroupBox}">
-                <Slider Margin="10,0,0,0" Width="180" />
+                <Slider Margin="10,0,0,0" Width="180"  />
             </GroupBox>
 
 
