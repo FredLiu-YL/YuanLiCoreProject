@@ -233,13 +233,20 @@ namespace YuanliCore.Model.Microscope
             get => isObservation1;
             set
             {
-                if (value == true)
+                if (value)
                 {
                     try
                     {
-                        Microscope.ChangeCubeAsync(1).Wait();
-                        Microscope.ChangeFilter1Async(1).Wait();
-                        Microscope.ChangeFilter2Async(1).Wait();
+                        if (MicroscopeParam.IsHaveDIC)
+                        {
+                            Microscope.ChangeCubeAsync(1).Wait();
+                            Microscope.ChangeFilter1Async(1).Wait();
+                            Microscope.ChangeFilter2Async(1).Wait();
+                        }
+                        else
+                        {
+                            Microscope.ChangeCubeAsync(1).Wait();
+                        }
                     }
                     catch (Exception)
                     {
@@ -256,13 +263,20 @@ namespace YuanliCore.Model.Microscope
             get => isObservation2;
             set
             {
-                if (value == true)
+                if (value)
                 {
                     try
                     {
-                        Microscope.ChangeCubeAsync(2).Wait();
-                        Microscope.ChangeFilter1Async(1).Wait();
-                        Microscope.ChangeFilter2Async(1).Wait();
+                        if (MicroscopeParam.IsHaveDIC)
+                        {
+                            Microscope.ChangeCubeAsync(2).Wait();
+                            Microscope.ChangeFilter1Async(1).Wait();
+                            Microscope.ChangeFilter2Async(1).Wait();
+                        }
+                        else
+                        {
+                            Microscope.ChangeCubeAsync(2).Wait();
+                        }
                     }
                     catch (Exception)
                     {
@@ -278,13 +292,16 @@ namespace YuanliCore.Model.Microscope
             get => isObservation3;
             set
             {
-                if (value == true)
+                if (value)
                 {
                     try
                     {
-                        Microscope.ChangeCubeAsync(3).Wait();
-                        Microscope.ChangeFilter1Async(2).Wait();
-                        Microscope.ChangeFilter2Async(2).Wait();
+                        if (MicroscopeParam.IsHaveDIC)
+                        {
+                            Microscope.ChangeCubeAsync(3).Wait();
+                            Microscope.ChangeFilter1Async(2).Wait();
+                            Microscope.ChangeFilter2Async(2).Wait();
+                        }
                     }
                     catch (Exception)
                     {

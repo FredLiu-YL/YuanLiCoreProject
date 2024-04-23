@@ -24,7 +24,7 @@ namespace YuanliCore.Model
         private int aFNEL;
         private int aFPEL;
         private int timeOutRetryCount;
-
+        private bool isHaveDIC;
         /// <summary>
         /// 目前Lens在第幾孔
         /// </summary>
@@ -137,8 +137,14 @@ namespace YuanliCore.Model
             get => timeOutRetryCount;
             set => SetValue(ref timeOutRetryCount, value);
         }
-
-
+        /// <summary>
+        /// 有無DIC
+        /// </summary>
+        public bool IsHaveDIC
+        {
+            get => isHaveDIC;
+            set => SetValue(ref isHaveDIC, value);
+        }
 
 
 
