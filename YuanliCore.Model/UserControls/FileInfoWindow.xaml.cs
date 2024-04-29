@@ -53,6 +53,8 @@ namespace YuanliCore.UserControls
             MachineName = machineName;
             RecipeDirectory = directoryPath;
             this.filenameExtension = filenameExtension;
+
+ 
         }
 
         public FileInfoWindow(bool isInputTextBox, string machineName, DirectoryNames directoryName, string filenameExtension = ".json")
