@@ -108,13 +108,22 @@ namespace YuanliCore.Model.Microscope
             get => isAF;
             set
             {
-                if (value == true)
+                try
                 {
-                    Microscope.AFOff();
+                    if (value == true)
+                    {
+                        Microscope.AFOff();
+                        Microscope.AFTrace();
+                    }
+                    else
+                    {
+                        Microscope.AFOff();
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Microscope.AFTrace();
+                    MessageBox.Show(ex.Message);
+
                 }
                 SetValue(ref isAF, value);
             }
