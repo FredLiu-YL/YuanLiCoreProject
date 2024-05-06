@@ -110,13 +110,12 @@ namespace YuanliCore.Motion
                 {
                     double postion = Position + distance;
                     controller.MoveCommand(AxisID, distance);
-
                     while (Math.Abs(Position - postion) * Ratio > Tolerance && !isStop
                     && Position > PositionNEL && Position< PositionPEL)
                     {
                         i++;
                         await Task.Delay(50);
-                        if (i >= 200) throw new Exception($"ID{ AxisID}  {AxisName}  Time out");
+                        if (i >= 100) throw new Exception($"ID{ AxisID}  {AxisName}  Time out");
 
                     }
 
@@ -155,7 +154,7 @@ namespace YuanliCore.Motion
                     {
                         i++;
                         await Task.Delay(50);
-                        if (i >= 200) throw new Exception($"ID{ AxisID}  {AxisName}  Time out ,Target:{postion} now:{nowPosition}");
+                        if (i >= 100) throw new Exception($"ID{ AxisID}  {AxisName}  Time out ,Target:{postion} now:{nowPosition}");
                         nowPosition = Position;
                     }
 
