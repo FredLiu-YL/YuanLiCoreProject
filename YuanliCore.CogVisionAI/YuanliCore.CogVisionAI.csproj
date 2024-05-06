@@ -41,10 +41,6 @@
       <HintPath>C:\Program Files\Cognex\VisionPro\bin\Cognex.Vision.Startup.Net.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Cognex.Vision.ViDiELSegment.Net">
-      <HintPath>C:\Program Files\Cognex\VisionPro\bin\Cognex.Vision.ViDiELSegment.Net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Cognex.VisionPro, Version=81.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.dll</HintPath>
@@ -90,7 +86,7 @@
     </Reference>
     <Reference Include="Cognex.VisionPro.ViDiEL.Controls, Version=81.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files\Cognex\VisionPro\ReferencedAssemblies\Cognex.VisionPro.ViDiEL.Controls.dll</HintPath>
+      <HintPath>C:\Program Files\Cognex\VisionPro\bin\Cognex.VisionPro.ViDiEL.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Cognex.VisionPro.VisionInterop, Version=81.0.0.0, Culture=neutral, PublicKeyToken=ef0f902af9dee505, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
@@ -218,6 +214,9 @@
       <Project>{14946968-1da0-4f66-abd0-10d45d580e00}</Project>
       <Name>YuanliCore.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
