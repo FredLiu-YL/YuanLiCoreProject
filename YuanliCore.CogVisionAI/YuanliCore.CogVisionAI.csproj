@@ -184,6 +184,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CogSegmentDetector.cs" />
     <Compile Include="CogSegmentWindow.xaml.cs">
       <DependentUpon>CogSegmentWindow.xaml</DependentUpon>
     </Compile>
