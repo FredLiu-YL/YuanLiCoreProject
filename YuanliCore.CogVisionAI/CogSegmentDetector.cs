@@ -1,14 +1,20 @@
-﻿using Cognex.VisionPro.Blob;
+﻿using Cognex.VisionPro;
+using Cognex.VisionPro.Blob;
 using Cognex.VisionPro.ViDiEL;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Interop;
+using System.Windows;
+using System.Windows.Media.Imaging;
 using YuanliCore.ImageProcess;
 using YuanliCore.ImageProcess.AI;
 using YuanliCore.ImageProcess.Blob;
 using YuanliCore.Interface;
+using YuanliCore.CameraLib;
 
 namespace YuanliCore.CogVisionAI
 {
@@ -38,6 +44,69 @@ namespace YuanliCore.CogVisionAI
              blobparams.RunParams.ConnectivityMinPixels = 13;*/
             //RunParams = blobparams;
         }
+
+      
+
+        public BitmapSource Run(BitmapSource image)
+        {
+            segmentTool.InputImage = image.ColorFrameToColorCogImage() as ICogVisionData;
+            segmentTool.Run();
+            if (segmentTool.RunStatus.Result != CogToolResultConstants.Accept)
+            {
+                throw new Exception(segmentTool.RunStatus.Message);
+            }
+
+            // Verify that CogSegmentTool produced a result ...
+            int nSegRes = segmentTool.Results.Count;
+            if (nSegRes < 1)
+            {
+                throw new Exception("CogSegmentTool produced no results.");
+            }
+
+            // Extract heatmap and class name from CogSegmentTool results ...
+            String sName = segmentTool.Results[0].Class;
+            CogImage8Grey aHeatMap = segmentTool.Results[0].Heatmap;
+            var img = aHeatMap.ToBitmap();
+
+            IntPtr hBitmap = img.GetHbitmap();
+            BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
+                hBitmap,
+                IntPtr.Zero,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
+
+           // // 釋放 HBitmap 的資源
+           //NativeMethods.DeleteObject(hBitmap);
+
+
+            return bitmapSource;
+
+        }
+
+        public ICogImage Run(ICogImage cogImage)
+        {
+            segmentTool.InputImage = cogImage as ICogVisionData;
+            segmentTool.Run();
+            if (segmentTool.RunStatus.Result != CogToolResultConstants.Accept)
+            {
+                throw new Exception(segmentTool.RunStatus.Message);
+            }
+
+            // Verify that CogSegmentTool produced a result ...
+            int nSegRes = segmentTool.Results.Count;
+            if (nSegRes < 1)
+            {
+                throw new Exception("CogSegmentTool produced no results.");
+            }
+
+            // Extract heatmap and class name from CogSegmentTool results ...
+            String sName = segmentTool.Results[0].Class;
+            CogImage8Grey aHeatMap = segmentTool.Results[0].Heatmap;
+
+            return aHeatMap;
+        }
+
+
 
         //public override CogParameter RunParams { get; set; }
         public CogSegmentResult SegmentResult { get; set; }

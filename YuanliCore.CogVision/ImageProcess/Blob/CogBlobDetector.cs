@@ -97,7 +97,7 @@ namespace YuanliCore.ImageProcess.Blob
             return Find(cogImg1);
         }
 
-        private void Run(ICogImage cogImage)
+        public void Run(ICogImage cogImage)
         {
             CogBlobTool blobTool_1 = new CogBlobTool();
             blobTool_1.InputImage = cogImage;
