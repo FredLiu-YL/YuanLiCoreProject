@@ -59,7 +59,7 @@ namespace YuanliCore.ImageProcess.Blob
         public ICogImage CogImage { get => cogImage; set => SetValue(ref cogImage, value); }
         public BlobParams BlobParam { get => blobParam; set => SetValue(ref blobParam, value); }
         public bool IsFullSelect { get => isFullSelect; set { SetValue(ref isFullSelect, value); SetResultSelect(); } }
-
+  
 
         public double JudgeMin { get => judgeMin; set { SetValue(ref judgeMin, value); SetResultSelect(); } }
 
