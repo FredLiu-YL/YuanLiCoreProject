@@ -65,12 +65,12 @@ namespace YuanliCore.AffineTransform
             ICogTransform2D cogMat = calibNPointTool.Calibration.GetComputedUncalibratedFromCalibratedTransform();
             CogTransform2DLinear linear = cogMat.LinearTransform(0, 0);
             var arc = linear.Rotation / Math.PI * 180;
-
+            var skewarc = linear.Skew / Math.PI * 180;
 
             //將比例 旋轉  位移量 加入矩陣   ，順序必須正確
             mat.Scale(linear.ScalingX, linear.ScalingY);//mat.Scale(linear.Scaling, linear.Scaling);
-            //跟Halcon的象限有差 ，所以角度可能差一個負號 。 但計算結果方向一致 ， 待觀察
-            mat.Rotate(arc);
+            mat.Skew(-1 * skewarc, 0);
+            mat.Rotate(arc);//跟Halcon的象限有差 ，所以角度可能差一個負號 。 但計算結果方向一致 ， 待觀察
             mat.Translate(linear.TranslationX, linear.TranslationY);
 
             //釋放康奈視資源

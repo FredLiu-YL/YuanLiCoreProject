@@ -20,7 +20,6 @@ using uEye.Types;
 using uEye;
 using YuanliCore.Interface;
 
-
 namespace YuanliCore.CameraLib.IDS
 {
     public class UeyeCamera : ICamera
@@ -110,7 +109,7 @@ namespace YuanliCore.CameraLib.IDS
                 ReallocateMemory(bufferCount);
             }
         }
-
+        public System.Windows.Point PixelTable { get; set; }
         public int Width
         {
 
@@ -327,7 +326,7 @@ namespace YuanliCore.CameraLib.IDS
                 cam.Size.AOI.Set(aoi);
             }
         }
-
+        
         public void Open()
         {
             if (IsOpen) return;

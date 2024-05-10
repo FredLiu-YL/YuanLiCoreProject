@@ -20,7 +20,10 @@ namespace YuanliCore.Interface
         double ExposureTime { get; set; }
         IObservable<Frame<byte[]>> Frames { get; }
         System.Windows.Media.PixelFormat PixelFormat { get; set; }
-
+        /// <summary>
+        /// 1個Pixel平台走多少
+        /// </summary>
+        Point PixelTable { get; set; }
         void Open();
         void Close();
         BitmapSource GrabAsync();
@@ -28,7 +31,7 @@ namespace YuanliCore.Interface
 
         void Stop();
 
-      
+
 
     }
 
@@ -134,7 +137,7 @@ namespace YuanliCore.Interface
         }
     }
 
-    public static  class FrameConvert
+    public static class FrameConvert
     {
         public static Frame<byte[]> Rotate(this Frame<byte[]> frame, RotateAngles angle)
         {

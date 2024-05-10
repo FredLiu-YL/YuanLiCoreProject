@@ -169,7 +169,6 @@ namespace YuanliCore.Motion
             {
                 isBusy = false;
                 isStop = false;
-
             }
 
 

@@ -45,6 +45,7 @@ namespace YuanliCore.CameraLib
         public IObservable<Frame<byte[]>> Frames => frames;
 
         public PixelFormat PixelFormat { get => tempFrames.Format; set => throw new NotImplementedException(); }
+        public System.Windows.Point PixelTable { get; set; }
         public double Gain { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double ExposureTime { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 

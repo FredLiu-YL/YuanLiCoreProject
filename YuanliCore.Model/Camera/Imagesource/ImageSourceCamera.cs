@@ -60,7 +60,7 @@ namespace YuanliCore.CameraLib.ImageSource
         public int Height => height;
 
         public PixelFormat PixelFormat { get => format; set => throw new NotImplementedException(); }
-
+        public System.Windows.Point PixelTable { get; set; }
         public IObservable<Frame<byte[]>> Frames => frames;
 
         public double Gain { get => GetGain(); set => SetGain(value); }
