@@ -132,14 +132,13 @@ namespace YuanliCore.ImageProcess.Blob
                 double y = blobResults[i].CenterOfMassY;
                 double area = blobResults[i].Area;
 
-
                 results.Add(new BlobDetectorResult(new Point(x, y), area, 0));
             }
 
 
         }
 
-        private IEnumerable<BlobDetectorResult> Find(ICogImage cogImage)
+        public IEnumerable<BlobDetectorResult> Find(ICogImage cogImage)
         {
 
             blobTool.InputImage = cogImage;
@@ -155,16 +154,18 @@ namespace YuanliCore.ImageProcess.Blob
 
                 for (int i = 0; i < blobResults.Count; i++) {
                     var pose = blobResults[i].CenterOfMassX;
-                    var radiusH = blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxPrincipalAxisHeight); //得到最大矩形 高
-                    var radiusW = blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxPrincipalAxisWidth);//得到最大矩形 寬
+                    var radiusH = blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxExtremaAngleHeight); //得到最大矩形 高
+                    var radiusW = blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxExtremaAngleWidth);//得到最大矩形 寬
                     Vector rect = new Vector(radiusW, radiusH);
+                    var angle = blobResults[i].GetMeasure(CogBlobMeasureConstants.Angle);
+
                     var diameter = rect.Length; //算出最大矩形對角線 當作Blob直徑
                     double x = blobResults[i].CenterOfMassX;
                     double y = blobResults[i].CenterOfMassY;
                     double area = blobResults[i].Area;
 
 
-                    results.Add(new BlobDetectorResult(new Point(x, y), area, diameter));
+                    results.Add(new BlobDetectorResult(new Point(x, y), area, diameter, rect, angle));
                 }
                 Record = blobTool.CreateLastRunRecord().SubRecords[0];
             }
