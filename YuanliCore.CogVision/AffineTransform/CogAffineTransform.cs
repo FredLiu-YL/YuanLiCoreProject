@@ -46,7 +46,7 @@ namespace YuanliCore.AffineTransform
                 //throw new Exception("Calibration is not create");
             }
             calibNPointTool = new CogCalibNPointToNPointTool();
-            calibNPointTool.Calibration.DOFsToCompute = CogNPointToNPointDOFConstants.ScalingRotationAndTranslation;
+            calibNPointTool.Calibration.DOFsToCompute = CogNPointToNPointDOFConstants.ScalingAspectRotationSkewAndTranslation;//ScalingRotationAndTranslation
 
 
             System.Windows.Media.Matrix mat = System.Windows.Media.Matrix.Identity;
@@ -68,7 +68,7 @@ namespace YuanliCore.AffineTransform
 
 
             //將比例 旋轉  位移量 加入矩陣   ，順序必須正確
-            mat.Scale(linear.Scaling, linear.Scaling);
+            mat.Scale(linear.ScalingX, linear.ScalingY);//mat.Scale(linear.Scaling, linear.Scaling);
             //跟Halcon的象限有差 ，所以角度可能差一個負號 。 但計算結果方向一致 ， 待觀察
             mat.Rotate(arc);
             mat.Translate(linear.TranslationX, linear.TranslationY);

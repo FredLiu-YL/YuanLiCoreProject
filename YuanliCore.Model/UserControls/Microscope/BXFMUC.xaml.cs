@@ -248,13 +248,13 @@ namespace YuanliCore.Model.Microscope
                     {
                         if (MicroscopeParam.IsHaveDIC)
                         {
-                            Microscope.ChangeCubeAsync(1).Wait();
+                            Microscope.ChangeCubeAsync(2).Wait();
                             Microscope.ChangeFilter1Async(1).Wait();
                             Microscope.ChangeFilter2Async(1).Wait();
                         }
                         else
                         {
-                            Microscope.ChangeCubeAsync(1).Wait();
+                            Microscope.ChangeCubeAsync(2).Wait();
                         }
                     }
                     catch (Exception)
@@ -278,13 +278,13 @@ namespace YuanliCore.Model.Microscope
                     {
                         if (MicroscopeParam.IsHaveDIC)
                         {
-                            Microscope.ChangeCubeAsync(2).Wait();
+                            Microscope.ChangeCubeAsync(1).Wait();
                             Microscope.ChangeFilter1Async(1).Wait();
                             Microscope.ChangeFilter2Async(1).Wait();
                         }
                         else
                         {
-                            Microscope.ChangeCubeAsync(2).Wait();
+                            Microscope.ChangeCubeAsync(1).Wait();
                         }
                     }
                     catch (Exception)

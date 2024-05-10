@@ -51,7 +51,7 @@ namespace YuanliCore.CameraLib.ImageSource
             width = iCImaging.ImageWidth;
             height = iCImaging.ImageHeight;
 
-          
+
         }
 
         public bool IsGrabbing { get; set; }
@@ -104,7 +104,8 @@ namespace YuanliCore.CameraLib.ImageSource
             if (!IsGrabbing) throw new Exception("No video streaming");
 
             var f = Frames.Take(1).Timeout(TimeSpan.FromSeconds(3)).FirstOrDefault();
-            return f.ToBitmapSource();
+            var bmp = f.ToBitmapSource();
+            return bmp.FormatConvertTo(PixelFormats.Bgr24);
         }
 
         public void Open()
@@ -121,8 +122,14 @@ namespace YuanliCore.CameraLib.ImageSource
             {
 
                 IsGrabbing = false;
+                try
+                {
+                    refreshTask.Wait(TimeSpan.FromMilliseconds(300));
+                }
+                catch (Exception)
+                {
 
-                refreshTask.Wait(TimeSpan.FromMilliseconds(300));
+                }
                 iCImaging.LiveStop();
             }
         }
@@ -133,24 +140,38 @@ namespace YuanliCore.CameraLib.ImageSource
             IsGrabbing = true;
             try
             {
-
-
+                int reTryCount = 0;
                 while (IsGrabbing)
                 {
-                    //取像
-                    IFrameQueueBuffer snap = snapSink.SnapSingle(TimeSpan.FromSeconds(timeoutSec));
-                    Bitmap image = snap.CreateBitmapWrap();
+                    try
+                    {
+                        Frame<byte[]> frame = null;
+                        //取像
+                        IFrameQueueBuffer snap = snapSink.SnapSingle(TimeSpan.FromSeconds(timeoutSec));
+                        if (snap != null)
+                        {
+                            Bitmap image = snap.CreateBitmapWrap();
 
-                    //  var frame = image.ImageToBytes();
+                            //  var frame = image.ImageToBytes();
 
-                    var bmpsource = image.ToBitmapSource();
+                            var bmpsource = image.ToBitmapSource();
 
-                    // var frame = new WriteableBitmap(bmpsource);
-                    var frame = bmpsource.ToByteFrame();
-                    frames.OnNext(frame);
-
-                    await Task.Delay(5);
-
+                            // var frame = new WriteableBitmap(bmpsource);
+                             frame = bmpsource.ToByteFrame();
+                        }
+                        frames.OnNext(frame);
+                        await Task.Delay(5);
+                        reTryCount = 0;
+                    }
+                    catch (Exception)
+                    {
+                        //在其他下中斷點會TimeOut
+                        if (reTryCount > 3)
+                        {
+                            throw;
+                        }
+                        reTryCount += 1;
+                    }
                 }
 
             }

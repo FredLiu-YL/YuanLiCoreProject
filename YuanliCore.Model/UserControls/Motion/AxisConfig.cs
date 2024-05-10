@@ -71,6 +71,10 @@ namespace YuanliCore.Motion
         /// 取得或設定 軸解析度
         /// </summary>
         public double Ratio { get; set; } = 1;
+        /// <summary>
+        /// 到位整定容許量(um)
+        /// </summary>
+        public double Tolerance { get; set; } = 3;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

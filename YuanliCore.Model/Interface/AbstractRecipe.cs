@@ -193,7 +193,7 @@ namespace YuanliCore.Interface
                 DirectoryInfo dir = new DirectoryInfo(dirFullPath);
                 if (!dir.Exists) throw new DirectoryNotFoundException($"Directory not exists {dir.FullName}");
 
-                Name = Path.GetFileNameWithoutExtension(fileName);
+                //Name = Path.GetFileNameWithoutExtension(fileName);
 
                 JsonSerializerSettings settings = new JsonSerializerSettings()
                 {

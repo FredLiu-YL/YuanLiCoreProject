@@ -21,6 +21,10 @@ namespace YuanliCore.Model.Interface.Component
         /// </summary>
         void Initial();
         /// <summary>
+        /// 關閉
+        /// </summary>
+        void Close();
+        /// <summary>
         /// 設定參數
         /// </summary>
         /// <param name="paramID"></param>
@@ -29,6 +33,6 @@ namespace YuanliCore.Model.Interface.Component
         /// Reader讀取
         /// </summary>
         /// <returns></returns>
-        string Read();
+        Task<string> ReadAsync();
     }
 }
