@@ -26,15 +26,33 @@
             <RowDefinition Height="3.0*"/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
-        <local:CogSegmentToolControl Grid.Row="0" Image="{Binding CogImage}"  Grid.ColumnSpan="2"  />
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+        <TabControl Name="myTabControl">
+            <TabItem Header="模型">
+                <local:CogSegmentToolControl Grid.Row="0" Image="{Binding CogImage}"  Grid.ColumnSpan="2"  />
+            </TabItem>
+            <TabItem Header="抓取">
+  
+            </TabItem>
+            <TabItem Header="允收">
+
+            </TabItem>
+        </TabControl>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Cursor="">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.1*"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Height="Auto"  FontSize="20" Background="#778899" Margin="5,5,5,5" 
+                        Content="Cancel" CommandParameter="Cancel"/>
+            <Button Grid.Column="1" Height="Auto"   FontSize="20" Background="#778899"   Margin="5,5,5,5" 
+                        Content="Previous"  CommandParameter="Previous"/>
+            <Button Grid.Column="2" Height="Auto"  FontSize="20" Background="#778899"  Margin="5,5,5,5" 
+                        Content="Next"  CommandParameter="Next"/>
+            <Button Grid.Column="3" Height="Auto"  FontSize="20" Background="#778899"   Margin="5,5,5,5" 
+                        Content="OK"   CommandParameter="OK" Cursor="Hand"/>
 
         </Grid>
     </Grid>

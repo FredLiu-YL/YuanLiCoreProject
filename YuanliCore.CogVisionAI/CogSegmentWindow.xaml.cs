@@ -32,7 +32,13 @@ namespace YuanliCore.ImageProcess.AI
         private bool isFullSelect = true;
         private bool isCenterSelect;
 
+        public CogSegmentWindow()
+        {
+            //非WPF程式 執行時會丟失 WPF元件 System.Windows.Interactivity.dll  MaterialDesignColors.dll MaterialDesignThemes.Wpf.dll
+            //記得要手動複製到Debug 執行檔位置底下
+            InitializeComponent();
 
+        }
 
         public CogSegmentWindow(BitmapSource bitmap)
         {
@@ -60,7 +66,9 @@ namespace YuanliCore.ImageProcess.AI
         ///  影像 Binding
         /// </summary>
         public ICogImage CogImage { get => cogImage; set => SetValue(ref cogImage, value); }
-    //    public CogImageConvertParams ImageConvertParam { get => imageConvertParam; set => SetValue(ref imageConvertParam, value); }
+
+
+        //    public CogImageConvertParams ImageConvertParam { get => imageConvertParam; set => SetValue(ref imageConvertParam, value); }
         public bool IsFullSelect
         {
             get => isFullSelect; set

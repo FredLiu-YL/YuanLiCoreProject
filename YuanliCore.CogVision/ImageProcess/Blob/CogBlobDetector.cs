@@ -2,6 +2,7 @@
 using Cognex.VisionPro.Blob;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,6 +94,12 @@ namespace YuanliCore.ImageProcess.Blob
         public IEnumerable<BlobDetectorResult> Find(Frame<byte[]> image)
         {
             ICogImage cogImg1 = image.ColorFrameToCogImage(out ICogImage inputImage, 0.333, 0.333, 0.333);
+            //ICogImage cogImg1 = image.GrayFrameToCogImage();
+
+
+            BitmapSource bitmap = cogImg1.ToBitmap().ToBitmapSource();
+            bitmap.Save("C:\\AutoDefectDetection\\AutoDefectDetection\\bin\\Debug\\test\\test.bmp");
+            //bitmap.Save("C:\\AutoDefectDetection\\AutoDefectDetection\\bin\\Debug\\test\\test.bmp");
 
             return Find(cogImg1);
         }
@@ -132,7 +139,7 @@ namespace YuanliCore.ImageProcess.Blob
                 double y = blobResults[i].CenterOfMassY;
                 double area = blobResults[i].Area;
 
-                results.Add(new BlobDetectorResult(new Point(x, y), area, 0));
+                results.Add(new BlobDetectorResult(new System.Windows.Point(x, y), area, 0));
             }
 
 
@@ -165,7 +172,7 @@ namespace YuanliCore.ImageProcess.Blob
                     double area = blobResults[i].Area;
 
 
-                    results.Add(new BlobDetectorResult(new Point(x, y), area, diameter, rect, angle));
+                    results.Add(new BlobDetectorResult(new System.Windows.Point(x, y), area, diameter, rect, angle));
                 }
                 Record = blobTool.CreateLastRunRecord().SubRecords[0];
             }
