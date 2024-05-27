@@ -100,6 +100,20 @@ namespace YuanliCore.Motion
         /// 取得或設定複合減減速度。
         /// </summary>
         public double JerkDeceleration { get; set; } = 1;
+
+        public VelocityParams Copy()
+        {
+            return new VelocityParams
+            {
+                MaxVel = this.MaxVel,
+                AccelerationTime = this.AccelerationTime,
+                DecelerationTime = this.DecelerationTime,
+                Curve = this.Curve,
+                InitialVel = this.InitialVel,
+                JerkAcceleration = this.JerkAcceleration,
+                JerkDeceleration = this.JerkDeceleration
+            };
+        }
     }
 
     public enum VelCurves

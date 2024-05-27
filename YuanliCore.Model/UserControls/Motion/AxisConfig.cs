@@ -17,7 +17,7 @@ namespace YuanliCore.Motion
         private double initialPos;
         private VelocityParams moveVel = new VelocityParams(50000);
         private VelocityParams homeVel = new VelocityParams(50000);
-        private string axisName="";
+        private string axisName = "";
 
         /// <summary>
         /// 運動軸在卡的號碼
@@ -75,6 +75,27 @@ namespace YuanliCore.Motion
         /// 到位整定容許量(um)
         /// </summary>
         public double Tolerance { get; set; } = 3;
+
+
+        public AxisConfig Copy()
+        {
+            return new AxisConfig
+            {
+                AxisID = this.AxisID,
+                AxisName = this.AxisName,
+                LimitNEL = this.LimitNEL,
+                LimitPEL = this.LimitPEL,
+                MoveVel = this.MoveVel.Copy(),
+                HomeVel = this.HomeVel.Copy(),
+                InitialPos = this.InitialPos,
+                HomeMode = this.HomeMode,
+                HomeDirection = this.HomeDirection,
+                Direction = this.Direction,
+                Ratio = this.Ratio,
+                Tolerance = this.Tolerance
+
+            };
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
