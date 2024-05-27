@@ -13,17 +13,19 @@ using System.Windows.Media.Imaging;
 
 using YuanliCore.CameraLib;
 using System.Runtime.Remoting.Contexts;
+using YuanliCore.Interface;
 
 namespace YuanliCore.CogVisionAI
 {
     public class CogSegmentDetector
     {
         private CogSegmentTool segmentTool;
-
+        private CogBlobTool blobTool;
         public CogSegmentDetector()
         {
 
             segmentTool = new CogSegmentTool();
+            blobTool = new CogBlobTool();
             //BlobParams blobparams = new BlobParams();
             /* blobparams.RunParams.SegmentationParams.Mode = CogBlobSegmentationModeConstants.HardFixedThreshold;
              blobparams.RunParams.SegmentationParams.Polarity = CogBlobSegmentationPolarityConstants.DarkBlobs;
@@ -33,16 +35,19 @@ namespace YuanliCore.CogVisionAI
         }
         public CogSegmentDetector(CogSegmentTool GiveSegmentTool)
         {
+            segmentTool = GiveSegmentTool;
+        }
+        public CogSegmentDetector(CogBlobTool GiveblobTool)
+        {
+
+            blobTool = GiveblobTool;
+
+        }
+        public CogSegmentDetector(CogSegmentTool GiveSegmentTool, CogBlobTool GiveblobTool)
+        {
 
             segmentTool = GiveSegmentTool;
-            //BlobParams blobparams = new BlobParams();
-            /* blobparams.RunParams.SegmentationParams.Mode = CogBlobSegmentationModeConstants.HardFixedThreshold;
-             blobparams.RunParams.SegmentationParams.Polarity = CogBlobSegmentationPolarityConstants.DarkBlobs;
-             blobparams.RunParams.SegmentationParams.HardFixedThreshold = 17;
-             blobparams.RunParams.ConnectivityMinPixels = 13;*/
-            //RunParams = blobparams;
         }
-
 
         public BitmapSource Run(ICogVisionData image)
         {
@@ -79,7 +84,8 @@ namespace YuanliCore.CogVisionAI
             return bitmapSource;
 
         }
-        public BitmapSource Run(BitmapSource image)
+
+        public Frame<byte[]> Run(Frame<byte[]> image)
         {
             segmentTool.InputImage = image.ColorFrameToColorCogImage() as ICogVisionData;
             segmentTool.Run();
@@ -98,20 +104,22 @@ namespace YuanliCore.CogVisionAI
             // Extract heatmap and class name from CogSegmentTool results ...
             String sName = segmentTool.Results[0].Class;
             CogImage8Grey aHeatMap = segmentTool.Results[0].Heatmap;
-            var img = aHeatMap.ToBitmap();
 
-            IntPtr hBitmap = img.GetHbitmap();
-            BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
-                hBitmap,
-                IntPtr.Zero,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
+            var img = aHeatMap.ToBitmap().ToBitmapSource().ToByteFrame();
 
-           // // 釋放 HBitmap 的資源
-           //NativeMethods.DeleteObject(hBitmap);
+            //img.ToBitmapSource();
+            //IntPtr hBitmap = img.GetHbitmap();
+            //BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
+            //    hBitmap,
+            //    IntPtr.Zero,
+            //    Int32Rect.Empty,
+            //    BitmapSizeOptions.FromEmptyOptions());
+
+            // // 釋放 HBitmap 的資源
+            //NativeMethods.DeleteObject(hBitmap);
 
 
-            return bitmapSource;
+            return img;
 
         }
 
