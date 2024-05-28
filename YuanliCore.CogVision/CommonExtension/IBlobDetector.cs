@@ -49,12 +49,12 @@ namespace YuanliCore.Interface
             Area = area;
             Diameter = diameter;        
         }
-        public BlobDetectorResult(Point center, double area, double diameter, Vector rect,double angle)
+        public BlobDetectorResult(Point center, double area, double diameter, Size rectsize,double angle)
         {
             CenterPoint = center;
             Area = area;
             Diameter = diameter;
-            Rect= rect;
+            Rect= rectsize;
             Angle = angle;
         }
         public double Area { get; }
@@ -65,7 +65,7 @@ namespace YuanliCore.Interface
 
         public bool Judge { get; set; }
 
-        public Vector Rect { get; set; }
+        public Size Rect { get; set; }
         public double Angle { get; set; }
     }
 }

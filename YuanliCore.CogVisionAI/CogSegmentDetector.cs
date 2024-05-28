@@ -85,43 +85,43 @@ namespace YuanliCore.CogVisionAI
 
         }
 
-        public Frame<byte[]> Run(Frame<byte[]> image)
-        {
-            segmentTool.InputImage = image.ColorFrameToColorCogImage() as ICogVisionData;
-            segmentTool.Run();
-            if (segmentTool.RunStatus.Result != CogToolResultConstants.Accept)
-            {
-                throw new Exception(segmentTool.RunStatus.Message);
-            }
+        //public Frame<byte[]> Run(Frame<byte[]> image)
+        //{
+        //    segmentTool.InputImage = image.ColorFrameToColorCogImage() as ICogVisionData;
+        //    segmentTool.Run();
+        //    if (segmentTool.RunStatus.Result != CogToolResultConstants.Accept)
+        //    {
+        //        throw new Exception(segmentTool.RunStatus.Message);
+        //    }
 
-            // Verify that CogSegmentTool produced a result ...
-            int nSegRes = segmentTool.Results.Count;
-            if (nSegRes < 1)
-            {
-                throw new Exception("CogSegmentTool produced no results.");
-            }
+        //    // Verify that CogSegmentTool produced a result ...
+        //    int nSegRes = segmentTool.Results.Count;
+        //    if (nSegRes < 1)
+        //    {
+        //        throw new Exception("CogSegmentTool produced no results.");
+        //    }
 
-            // Extract heatmap and class name from CogSegmentTool results ...
-            String sName = segmentTool.Results[0].Class;
-            CogImage8Grey aHeatMap = segmentTool.Results[0].Heatmap;
+        //    // Extract heatmap and class name from CogSegmentTool results ...
+        //    String sName = segmentTool.Results[0].Class;
+        //    CogImage8Grey aHeatMap = segmentTool.Results[0].Heatmap;
 
-            var img = aHeatMap.ToBitmap().ToBitmapSource().ToByteFrame();
+        //    var img = aHeatMap.ToBitmap().ToBitmapSource().ToByteFrame();
 
-            //img.ToBitmapSource();
-            //IntPtr hBitmap = img.GetHbitmap();
-            //BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
-            //    hBitmap,
-            //    IntPtr.Zero,
-            //    Int32Rect.Empty,
-            //    BitmapSizeOptions.FromEmptyOptions());
+        //    //img.ToBitmapSource();
+        //    //IntPtr hBitmap = img.GetHbitmap();
+        //    //BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
+        //    //    hBitmap,
+        //    //    IntPtr.Zero,
+        //    //    Int32Rect.Empty,
+        //    //    BitmapSizeOptions.FromEmptyOptions());
 
-            // // 釋放 HBitmap 的資源
-            //NativeMethods.DeleteObject(hBitmap);
+        //    // // 釋放 HBitmap 的資源
+        //    //NativeMethods.DeleteObject(hBitmap);
 
 
-            return img;
+        //    return img;
 
-        }
+        //}
 
         public ICogImage Run(ICogImage cogImage)
         {
