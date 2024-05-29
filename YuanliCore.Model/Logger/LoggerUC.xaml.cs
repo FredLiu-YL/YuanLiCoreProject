@@ -116,4 +116,11 @@ namespace YuanliCore.Logger
         }
 
     }
+    public enum LogType
+    {
+        PROCESS,
+        TRIG,
+        ERROR,
+        ALARM
+    }
 }

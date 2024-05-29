@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace YuanliCore.Interface
 {
-    public  interface ITransform
+    public interface ITransform
     {
         Point TransPoint(Point point);
         Point TransInvertPoint(Point point);

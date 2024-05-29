@@ -39,11 +39,11 @@
                                     materialDesign:ColorZoneAssist.Mode="Custom"   FontSize="12"
                                      Header="Lens" Style="{StaticResource MaterialDesignGroupBox}">
                 <ListBox Margin="-7" x:Name="RadioLensChoiceChip" Style="{StaticResource MaterialDesignChoiceChipListBox}">
-                    <ListBoxItem Margin="-5,0,0,0" Content="1.25X" IsSelected="{Binding IsLens1}"/>
-                    <ListBoxItem Margin="-5,0,0,0" Content="5X" IsSelected="{Binding IsLens2}" />
-                    <ListBoxItem Margin="-5,0,0,0" Content="10X" IsSelected="{Binding IsLens3}" />
-                    <ListBoxItem Margin="-5,0,0,0" Content="50X" IsSelected="{Binding IsLens4}" />
-                    <ListBoxItem Margin="-5,0,0,0" Content="100X" IsSelected="{Binding IsLens5}"/>
+                    <ListBoxItem Margin="-5,0,0,0" Content="{Binding MicroscopeParam.LensName[0]}" IsSelected="{Binding IsLens1}"/>
+                    <ListBoxItem Margin="-5,0,0,0" Content="{Binding MicroscopeParam.LensName[1]}" IsSelected="{Binding IsLens2}" />
+                    <ListBoxItem Margin="-5,0,0,0" Content="{Binding MicroscopeParam.LensName[2]}" IsSelected="{Binding IsLens3}" />
+                    <ListBoxItem Margin="-5,0,0,0" Content="{Binding MicroscopeParam.LensName[3]}" IsSelected="{Binding IsLens4}" />
+                    <ListBoxItem Margin="-5,0,0,0" Content="{Binding MicroscopeParam.LensName[4]}" IsSelected="{Binding IsLens5}"/>
                 </ListBox>
             </GroupBox>
 
