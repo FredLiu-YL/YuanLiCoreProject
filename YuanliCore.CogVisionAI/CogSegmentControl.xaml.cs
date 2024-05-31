@@ -48,7 +48,7 @@ namespace YuanliCore.ImageProcess.AI
 
      //      ImageConvertParam = CogImageConvertParams.Default(tool, 0);
 
-            //Tool.Changed += PatMaxTool_Changed;
+            Tool.Changed += PatMaxTool_Changed;
 
         //    ((System.ComponentModel.ISupportInitialize)(editor)).BeginInit();
 
@@ -112,11 +112,11 @@ namespace YuanliCore.ImageProcess.AI
             dp.SetTool();
         }
 
-        //private static void OnPatmaxParamChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //    var dp = d as CogSegmentToolControl;
-        //    dp.RefreshPatmaxParam();
-        //}
+        private static void OnPatmaxParamChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var dp = d as CogSegmentToolControl;
+            dp.RefreshPatmaxParam();
+        }
 
         private void SetImage()
         {
@@ -126,65 +126,65 @@ namespace YuanliCore.ImageProcess.AI
         {
             editor.Subject = Tool;
         }
-        //private void RefreshPatmaxParam()
-        //{
-        //    //if (tool == null) { throw new Exception("123"); }// 先測試是否有可能會發生
+        private void RefreshPatmaxParam()
+        {
+            //if (tool == null) { throw new Exception("123"); }// 先測試是否有可能會發生
 
-        //    // 移除前次參數事件
+            // 移除前次參數事件
 
-        //    //       tool.RunParams.Changed -= RunParams_Changed;
-        //    //       if (tool.Region != null) tool.Region.Changed -= SearchRegion_Changed;
+            //       tool.RunParams.Changed -= RunParams_Changed;
+            //       if (tool.Region != null) tool.Region.Changed -= SearchRegion_Changed;
 
-        //    // 更新 tool 內的 Pax 參數
+            // 更新 tool 內的 Pax 參數
 
-        //    //        tool.RunParams = ImageConvertParam.RunParams;
-        //    //       tool.Region = ImageConvertParam.Region;
+            //        tool.RunParams = ImageConvertParam.RunParams;
+            //       tool.Region = ImageConvertParam.Region;
 
-        //    // 將新參數委派事件           
-        //    //        if (tool.RunParams != null) tool.RunParams.Changed += RunParams_Changed;
+            // 將新參數委派事件           
+            //        if (tool.RunParams != null) tool.RunParams.Changed += RunParams_Changed;
 
-        //    //        if (tool.Region != null) tool.Region.Changed += SearchRegion_Changed;
-        //}
+            //        if (tool.Region != null) tool.Region.Changed += SearchRegion_Changed;
+        }
 
         #region internal event
-        //  private void Pattern_Changed(object sender, CogChangedEventArgs e)
-        //  {
-        //      var flagName = e.GetStateFlagNames(sender);
+        private void Pattern_Changed(object sender, CogChangedEventArgs e)
+        {
+            var flagName = e.GetStateFlagNames(sender);
 
-        //  //    if (flagName.Contains("SfTrained"))
-        //  //        PatternTrainedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
+            //    if (flagName.Contains("SfTrained"))
+            //        PatternTrainedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
 
-        //      Trace.WriteLine($"Pattern_Changed => {flagName}");
-        //  }
+            Trace.WriteLine($"Pattern_Changed => {flagName}");
+        }
 
-        //  private void RunParams_Changed(object sender, CogChangedEventArgs e)
-        //  {
-        //      var flagName = e.GetStateFlagNames(sender);
+        private void RunParams_Changed(object sender, CogChangedEventArgs e)
+        {
+            var flagName = e.GetStateFlagNames(sender);
 
-        ////      ParameterChangedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
-        //      Trace.WriteLine($"RunParams_Changed => {flagName}");
-        //  }
+            //      ParameterChangedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
+            Trace.WriteLine($"RunParams_Changed => {flagName}");
+        }
 
-        //private void PatMaxTool_Changed(object sender, CogChangedEventArgs e)
-        //{
-        //    var flagName = e.GetStateFlagNames(sender);
-        //    Trace.WriteLine($"PatMaxTool_Changed => {flagName}");
-        //}
+        private void PatMaxTool_Changed(object sender, CogChangedEventArgs e)
+        {
+            var flagName = e.GetStateFlagNames(sender);
+            Trace.WriteLine($"PatMaxTool_Changed => {flagName}");
+        }
 
-        //public void SetToParam()
-        //{
+        public void SetToParam()
+        {
 
-        //    //        ImageConvertParam.Region = tool.Region;
-        //    //        ImageConvertParam.RunParams = tool.RunParams;
-        //}
+            //        ImageConvertParam.Region = tool.Region;
+            //        ImageConvertParam.RunParams = tool.RunParams;
+        }
         #endregion
 
-        //private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-        //    bool isVisible = (bool)e.NewValue;
+        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            bool isVisible = (bool)e.NewValue;
 
-        //    //if (!isVisible) SetToParam();
-        //}
+            //if (!isVisible) SetToParam();
+        }
         public void Dispose()
         {
             // 釋放 editor 的資源
