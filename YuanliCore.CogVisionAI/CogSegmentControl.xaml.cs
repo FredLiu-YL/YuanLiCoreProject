@@ -29,7 +29,7 @@ namespace YuanliCore.ImageProcess.AI
         private static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(CogSegmentTool), typeof(CogSegmentToolControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnToolChanged)));
         //     private static readonly DependencyProperty ImageConvertParamProperty = DependencyProperty.Register(nameof(ImageConvertParam), typeof(CogImageConvertParams), typeof(CogSegmentToolControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnPatmaxParamChanged)));
 
-        private CogSegmentTool tool;
+        //private CogSegmentTool tool;
         private CogSegmentEditV2 editor;
 
     //    private CogBlobTool tool;
@@ -48,7 +48,7 @@ namespace YuanliCore.ImageProcess.AI
 
      //      ImageConvertParam = CogImageConvertParams.Default(tool, 0);
 
-            Tool.Changed += PatMaxTool_Changed;
+            //Tool.Changed += PatMaxTool_Changed;
 
         //    ((System.ComponentModel.ISupportInitialize)(editor)).BeginInit();
 
@@ -67,7 +67,6 @@ namespace YuanliCore.ImageProcess.AI
         //    ((System.ComponentModel.ISupportInitialize)(editor)).EndInit();
 
             editor.Subject = Tool;
-         
 
         }
 
@@ -113,80 +112,89 @@ namespace YuanliCore.ImageProcess.AI
             dp.SetTool();
         }
 
-        private static void OnPatmaxParamChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var dp = d as CogSegmentToolControl;
-            dp.RefreshPatmaxParam();
-        }
+        //private static void OnPatmaxParamChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //{
+        //    var dp = d as CogSegmentToolControl;
+        //    dp.RefreshPatmaxParam();
+        //}
 
         private void SetImage()
         {
-         //   tool.InputImage =  Image;
+            Tool.InputImage = Image as ICogVisionData;
         }
         private void SetTool()
         {
             editor.Subject = Tool;
         }
-        private void RefreshPatmaxParam()
-        {
-            if (tool == null) { /* 先測試是否有可能會發生*/ throw new Exception("123"); }
+        //private void RefreshPatmaxParam()
+        //{
+        //    //if (tool == null) { throw new Exception("123"); }// 先測試是否有可能會發生
 
-            // 移除前次參數事件
-   
-     //       tool.RunParams.Changed -= RunParams_Changed;
-     //       if (tool.Region != null) tool.Region.Changed -= SearchRegion_Changed;
+        //    // 移除前次參數事件
 
-            // 更新 tool 內的 Pax 參數
-    
-    //        tool.RunParams = ImageConvertParam.RunParams;
-     //       tool.Region = ImageConvertParam.Region;
+        //    //       tool.RunParams.Changed -= RunParams_Changed;
+        //    //       if (tool.Region != null) tool.Region.Changed -= SearchRegion_Changed;
 
-            // 將新參數委派事件           
-    //        if (tool.RunParams != null) tool.RunParams.Changed += RunParams_Changed;
- 
-    //        if (tool.Region != null) tool.Region.Changed += SearchRegion_Changed;
-        }
+        //    // 更新 tool 內的 Pax 參數
+
+        //    //        tool.RunParams = ImageConvertParam.RunParams;
+        //    //       tool.Region = ImageConvertParam.Region;
+
+        //    // 將新參數委派事件           
+        //    //        if (tool.RunParams != null) tool.RunParams.Changed += RunParams_Changed;
+
+        //    //        if (tool.Region != null) tool.Region.Changed += SearchRegion_Changed;
+        //}
 
         #region internal event
-        private void Pattern_Changed(object sender, CogChangedEventArgs e)
-        {
-            var flagName = e.GetStateFlagNames(sender);
+        //  private void Pattern_Changed(object sender, CogChangedEventArgs e)
+        //  {
+        //      var flagName = e.GetStateFlagNames(sender);
 
-        //    if (flagName.Contains("SfTrained"))
-        //        PatternTrainedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
+        //  //    if (flagName.Contains("SfTrained"))
+        //  //        PatternTrainedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
 
-            Trace.WriteLine($"Pattern_Changed => {flagName}");
-        }
+        //      Trace.WriteLine($"Pattern_Changed => {flagName}");
+        //  }
 
-        private void RunParams_Changed(object sender, CogChangedEventArgs e)
-        {
-            var flagName = e.GetStateFlagNames(sender);
+        //  private void RunParams_Changed(object sender, CogChangedEventArgs e)
+        //  {
+        //      var flagName = e.GetStateFlagNames(sender);
 
-      //      ParameterChangedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
-            Trace.WriteLine($"RunParams_Changed => {flagName}");
-        }
+        ////      ParameterChangedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
+        //      Trace.WriteLine($"RunParams_Changed => {flagName}");
+        //  }
 
-        private void PatMaxTool_Changed(object sender, CogChangedEventArgs e)
-        {
-            var flagName = e.GetStateFlagNames(sender);
-            Trace.WriteLine($"PatMaxTool_Changed => {flagName}");
-        }
+        //private void PatMaxTool_Changed(object sender, CogChangedEventArgs e)
+        //{
+        //    var flagName = e.GetStateFlagNames(sender);
+        //    Trace.WriteLine($"PatMaxTool_Changed => {flagName}");
+        //}
 
-        public void SetToParam()
-        {
-            
-    //        ImageConvertParam.Region = tool.Region;
-    //        ImageConvertParam.RunParams = tool.RunParams;
-        }
+        //public void SetToParam()
+        //{
+
+        //    //        ImageConvertParam.Region = tool.Region;
+        //    //        ImageConvertParam.RunParams = tool.RunParams;
+        //}
         #endregion
 
-        private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //private void UserControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        //{
+        //    bool isVisible = (bool)e.NewValue;
+
+        //    //if (!isVisible) SetToParam();
+        //}
+        public void Dispose()
         {
-            bool isVisible = (bool)e.NewValue;
+            // 釋放 editor 的資源
+            if (editor != null)
+            {
+                editor.Dispose();
+                editor = null;
+            }
 
-            if (!isVisible) SetToParam();
         }
-
        
     }
 
