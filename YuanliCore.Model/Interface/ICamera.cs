@@ -12,19 +12,43 @@ using YuanliCore.CameraLib;
 
 namespace YuanliCore.Interface
 {
+    public interface IIRCamera : ICamera
+    {
+
+        int LutMin { get; set; }
+        int LutMax { get; set; }
+        int Camerabpp { get; set; }        // camera bit per pixel.  This sample code only support MONO.
+        int Cameramax { get; set; }
+    }
     public interface ICamera
     {
         int Width { get; }
         int Height { get; }
         double Gain { get; set; }
+        /// <summary>
+        /// 曝光時間
+        /// </summary>
         double ExposureTime { get; set; }
+        /// <summary>
+        /// 影像串流
+        /// </summary>
         IObservable<Frame<byte[]>> Frames { get; }
         System.Windows.Media.PixelFormat PixelFormat { get; set; }
         void Open();
         void Close();
+        /// <summary>
+        /// 取一張圖像
+        /// </summary>
+        /// <returns></returns>
         BitmapSource GrabAsync();
+        /// <summary>
+        /// 開始影像串流
+        /// </summary>
+        /// <returns></returns>
         IDisposable Grab();
-
+        /// <summary>
+        /// 停止影像串流
+        /// </summary>
         void Stop();
 
 
