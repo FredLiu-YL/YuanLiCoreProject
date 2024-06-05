@@ -73,7 +73,7 @@ namespace YuanliCore.Logger
             lock (lockobj)
             {
                 DateTime dateTime = DateTime.Now;
-                string str = $"{dateTime.ToString("G")}:{  dateTime.Millisecond}   {Message} \r\n";
+                string str = $"{dateTime.ToString("G")}:{  dateTime.Millisecond.ToString("D3")}   {Message} \r\n";
                 string path = $"{systemPath}\\MachineLog";
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
@@ -115,5 +115,12 @@ namespace YuanliCore.Logger
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
+    }
+    public enum LogType
+    {
+        PROCESS,
+        TRIG,
+        ERROR,
+        ALARM
     }
 }

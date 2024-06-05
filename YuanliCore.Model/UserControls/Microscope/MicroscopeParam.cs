@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,6 +11,7 @@ namespace YuanliCore.Model
 {
     public class MicroscopeParam : INotifyPropertyChanged
     {
+        private ObservableCollection<string> lensName = new ObservableCollection<string>();
         private int lensIndex;
         private int cubeIndex;
         private int filter1Index;
@@ -25,6 +27,12 @@ namespace YuanliCore.Model
         private int aFPEL;
         private int timeOutRetryCount;
         private bool isHaveDIC;
+
+        public ObservableCollection<string> LensName
+        {
+            get => lensName;
+            set => SetValue(ref lensName, value);
+        }
         /// <summary>
         /// 目前Lens在第幾孔
         /// </summary>

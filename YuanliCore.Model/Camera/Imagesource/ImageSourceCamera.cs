@@ -157,7 +157,7 @@ namespace YuanliCore.CameraLib.ImageSource
                             var bmpsource = image.ToBitmapSource();
 
                             // var frame = new WriteableBitmap(bmpsource);
-                             frame = bmpsource.ToByteFrame();
+                            frame = bmpsource.ToByteFrame();
                         }
                         frames.OnNext(frame);
                         await Task.Delay(5);
@@ -166,7 +166,11 @@ namespace YuanliCore.CameraLib.ImageSource
                     catch (Exception)
                     {
                         //在其他下中斷點會TimeOut
-                        if (reTryCount > 3)
+                        if (reTryCount > 5)
+                        {
+                            await Task.Delay(500);
+                        }
+                        if (reTryCount > 10)
                         {
                             throw;
                         }

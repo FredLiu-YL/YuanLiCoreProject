@@ -161,9 +161,14 @@ namespace YuanliCore.ImageProcess.Blob
 
                 for (int i = 0; i < blobResults.Count; i++) {
                     var pose = blobResults[i].CenterOfMassX;
+
                     var radiusH = blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxExtremaAngleHeight); //得到最大矩形 高
                     var radiusW = blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxExtremaAngleWidth);//得到最大矩形 寬
+                    //var radiusH = blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxPrincipalAxisHeight); //得到最大矩形 高
+                    //var radiusW = blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxPrincipalAxisWidth);//得到最大矩形 寬
                     Vector rect = new Vector(radiusW, radiusH);
+                    System.Windows.Size rectsize = new System.Windows.Size(blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxPrincipalAxisWidth),
+                                                                           blobResults[i].GetMeasure(CogBlobMeasureConstants.BoundingBoxPrincipalAxisHeight));
                     var angle = blobResults[i].GetMeasure(CogBlobMeasureConstants.Angle);
 
                     var diameter = rect.Length; //算出最大矩形對角線 當作Blob直徑
@@ -172,7 +177,7 @@ namespace YuanliCore.ImageProcess.Blob
                     double area = blobResults[i].Area;
 
 
-                    results.Add(new BlobDetectorResult(new System.Windows.Point(x, y), area, diameter, rect, angle));
+                    results.Add(new BlobDetectorResult(new System.Windows.Point(x, y), area, diameter, rectsize, angle));
                 }
                 Record = blobTool.CreateLastRunRecord().SubRecords[0];
             }

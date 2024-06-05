@@ -26,9 +26,10 @@ namespace YuanliCore.ImageProcess.AI
     public  partial class CogSegmentToolControl : UserControl
     {
         private static readonly DependencyProperty ImageProperty = DependencyProperty.Register(nameof(Image), typeof(ICogImage), typeof(CogSegmentToolControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnImageChanged)));
-  //     private static readonly DependencyProperty ImageConvertParamProperty = DependencyProperty.Register(nameof(ImageConvertParam), typeof(CogImageConvertParams), typeof(CogSegmentToolControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnPatmaxParamChanged)));
+        private static readonly DependencyProperty ToolProperty = DependencyProperty.Register(nameof(Tool), typeof(CogSegmentTool), typeof(CogSegmentToolControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnToolChanged)));
+        //     private static readonly DependencyProperty ImageConvertParamProperty = DependencyProperty.Register(nameof(ImageConvertParam), typeof(CogImageConvertParams), typeof(CogSegmentToolControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnPatmaxParamChanged)));
 
-        private CogSegmentTool tool;
+        //private CogSegmentTool tool;
         private CogSegmentEditV2 editor;
 
     //    private CogBlobTool tool;
@@ -42,12 +43,12 @@ namespace YuanliCore.ImageProcess.AI
             //    tool = new CogBlobTool();
             //    editor = new CogBlobEditV2();
             editor = new CogSegmentEditV2();
-            tool = new CogSegmentTool();
+            Tool = new CogSegmentTool();
       
 
      //      ImageConvertParam = CogImageConvertParams.Default(tool, 0);
 
-            tool.Changed += PatMaxTool_Changed;
+            Tool.Changed += PatMaxTool_Changed;
 
         //    ((System.ComponentModel.ISupportInitialize)(editor)).BeginInit();
 
@@ -65,8 +66,7 @@ namespace YuanliCore.ImageProcess.AI
 
         //    ((System.ComponentModel.ISupportInitialize)(editor)).EndInit();
 
-            editor.Subject = tool;
-         
+            editor.Subject = Tool;
 
         }
 
@@ -88,16 +88,28 @@ namespace YuanliCore.ImageProcess.AI
             set => SetValue(ImageProperty, value);
         }
 
-    //    public CogImageConvertParams ImageConvertParam
-   //     {
-    //        get => (CogImageConvertParams)GetValue(ImageConvertParamProperty);
-   //         set => SetValue(ImageConvertParamProperty, value);
-    //    }
+        public CogSegmentTool Tool
+        {
+            get => (CogSegmentTool)GetValue(ToolProperty);
+            set => SetValue(ToolProperty, value);
+
+        }
+
+        //    public CogImageConvertParams ImageConvertParam
+        //     {
+        //        get => (CogImageConvertParams)GetValue(ImageConvertParamProperty);
+        //         set => SetValue(ImageConvertParamProperty, value);
+        //    }
 
         private static void OnImageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var dp = d as CogSegmentToolControl;
             dp.SetImage();
+        }
+        private static void OnToolChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var dp = d as CogSegmentToolControl;
+            dp.SetTool();
         }
 
         private static void OnPatmaxParamChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -108,27 +120,30 @@ namespace YuanliCore.ImageProcess.AI
 
         private void SetImage()
         {
-         //   tool.InputImage =  Image;
+            Tool.InputImage = Image as ICogVisionData;
         }
-
+        private void SetTool()
+        {
+            editor.Subject = Tool;
+        }
         private void RefreshPatmaxParam()
         {
-            if (tool == null) { /* 先測試是否有可能會發生*/ throw new Exception("123"); }
+            //if (tool == null) { throw new Exception("123"); }// 先測試是否有可能會發生
 
             // 移除前次參數事件
-   
-     //       tool.RunParams.Changed -= RunParams_Changed;
-     //       if (tool.Region != null) tool.Region.Changed -= SearchRegion_Changed;
+
+            //       tool.RunParams.Changed -= RunParams_Changed;
+            //       if (tool.Region != null) tool.Region.Changed -= SearchRegion_Changed;
 
             // 更新 tool 內的 Pax 參數
-    
-    //        tool.RunParams = ImageConvertParam.RunParams;
-     //       tool.Region = ImageConvertParam.Region;
+
+            //        tool.RunParams = ImageConvertParam.RunParams;
+            //       tool.Region = ImageConvertParam.Region;
 
             // 將新參數委派事件           
-    //        if (tool.RunParams != null) tool.RunParams.Changed += RunParams_Changed;
- 
-    //        if (tool.Region != null) tool.Region.Changed += SearchRegion_Changed;
+            //        if (tool.RunParams != null) tool.RunParams.Changed += RunParams_Changed;
+
+            //        if (tool.Region != null) tool.Region.Changed += SearchRegion_Changed;
         }
 
         #region internal event
@@ -136,8 +151,8 @@ namespace YuanliCore.ImageProcess.AI
         {
             var flagName = e.GetStateFlagNames(sender);
 
-        //    if (flagName.Contains("SfTrained"))
-        //        PatternTrainedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
+            //    if (flagName.Contains("SfTrained"))
+            //        PatternTrainedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
 
             Trace.WriteLine($"Pattern_Changed => {flagName}");
         }
@@ -146,7 +161,7 @@ namespace YuanliCore.ImageProcess.AI
         {
             var flagName = e.GetStateFlagNames(sender);
 
-      //      ParameterChangedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
+            //      ParameterChangedEvent?.Invoke(this, new PatmaxParamsEventArgs(PatmaxParam));
             Trace.WriteLine($"RunParams_Changed => {flagName}");
         }
 
@@ -158,9 +173,9 @@ namespace YuanliCore.ImageProcess.AI
 
         public void SetToParam()
         {
-            
-    //        ImageConvertParam.Region = tool.Region;
-    //        ImageConvertParam.RunParams = tool.RunParams;
+
+            //        ImageConvertParam.Region = tool.Region;
+            //        ImageConvertParam.RunParams = tool.RunParams;
         }
         #endregion
 
@@ -168,9 +183,18 @@ namespace YuanliCore.ImageProcess.AI
         {
             bool isVisible = (bool)e.NewValue;
 
-            if (!isVisible) SetToParam();
+            //if (!isVisible) SetToParam();
         }
+        public void Dispose()
+        {
+            // 釋放 editor 的資源
+            if (editor != null)
+            {
+                editor.Dispose();
+                editor = null;
+            }
 
+        }
        
     }
 
