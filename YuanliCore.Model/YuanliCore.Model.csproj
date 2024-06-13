@@ -148,6 +148,8 @@
     <Compile Include="Account\UserRightsControl.xaml.cs">
       <DependentUpon>UserRightsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Camera\Hamamatsu\HamamatsuCamera.cs" />
+    <Compile Include="Camera\Hamamatsu\HamamatsuCamLibrary.cs" />
     <Compile Include="Camera\IDS\ueyeCamera.cs" />
     <Compile Include="Camera\Imagesource\ImageSourceCamera.cs" />
     <Compile Include="Camera\SimulateCamera.cs" />
