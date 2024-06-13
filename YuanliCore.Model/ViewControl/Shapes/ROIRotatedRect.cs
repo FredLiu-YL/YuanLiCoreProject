@@ -292,13 +292,13 @@ namespace YuanliCore.Views.CanvasShapes
             {
                 if (IsResizeEnabled)
                 {
-                    pen = new Pen(Brushes.Green, 1);
+                    pen = new Pen(Brushes.Green, StrokeThickness / 2);
                     dc.DrawGeometry(Brushes.Transparent, pen, ResizeGeometry);
                 }
 
                 if (IsRotateEnabled)
                 {
-                    pen = new Pen(Brushes.Orange, 1);
+                    pen = new Pen(Brushes.Orange, StrokeThickness / 2);
                     dc.DrawGeometry(Brushes.Transparent, pen, RotateGeometry);
                 }
 

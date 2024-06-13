@@ -18,7 +18,7 @@ namespace YuanliCore.Views.CanvasShapes
         private LineGeometry _lineGeometry = new LineGeometry();
         RectangleGeometry P1Geometry = new RectangleGeometry();
         RectangleGeometry P2Geometry = new RectangleGeometry();
-        RectangleGeometry MoveGeometry = new RectangleGeometry(); 
+        RectangleGeometry MoveGeometry = new RectangleGeometry();
         private Point lastMousePosition;
 
         /// <summary>
@@ -82,8 +82,8 @@ namespace YuanliCore.Views.CanvasShapes
         {
             get
             {
-                Point startPoint = new Point(X1  - 1,  Y1 -  1);
-                Point endPoint = new Point(X2  - 1,  Y2 -  1);
+                Point startPoint = new Point(X1 - 1, Y1 - 1);
+                Point endPoint = new Point(X2 - 1, Y2 - 1);
                 var Length = RectLen;
 
                 P1Geometry.Rect = new Rect(startPoint.X - Length / 2, startPoint.Y - Length / 2, Length, Length);
@@ -98,10 +98,10 @@ namespace YuanliCore.Views.CanvasShapes
         {
             get
             {
-                Point startPoint = new Point(X1 -  1, Y1 -  1);
-                Point endPoint = new Point(X2 -  1, Y2 -  1);
+                Point startPoint = new Point(X1 - 1, Y1 - 1);
+                Point endPoint = new Point(X2 - 1, Y2 - 1);
 
-                var Length = RectLen; 
+                var Length = RectLen;
 
                 P2Geometry.Rect = new Rect(endPoint.X - Length / 2, endPoint.Y - Length / 2, Length, Length);
 
@@ -132,15 +132,18 @@ namespace YuanliCore.Views.CanvasShapes
         /// </summary>
         public void GeometryAction()
         {
-            pairs.Add(Resize1Geometry, Pos => {
-                X1 = Pos.X ; Y1 = Pos.Y ;
+            pairs.Add(Resize1Geometry, Pos =>
+            {
+                X1 = Pos.X; Y1 = Pos.Y;
             });
 
-            pairs.Add(Resize2Geometry, Pos => {
-                X2 = Pos.X ; Y2 = Pos.Y ;
+            pairs.Add(Resize2Geometry, Pos =>
+            {
+                X2 = Pos.X; Y2 = Pos.Y;
             });
 
-            pairs.Add(TranslateGeometry, Pos => {
+            pairs.Add(TranslateGeometry, Pos =>
+            {
                 double width = X2 - X1;
                 double height = Y2 - Y1;
 
@@ -160,8 +163,8 @@ namespace YuanliCore.Views.CanvasShapes
             ShapeLeft = Math.Min(X1, X2) - len;
             ShapeTop = Math.Min(Y1, Y2) - len;
 
-            DeltaX = Math.Abs(X1 - X2); 
-            DeltaY = Math.Abs(Y2 - Y1); 
+            DeltaX = Math.Abs(X1 - X2);
+            DeltaY = Math.Abs(Y2 - Y1);
             Theta = Math.Atan2(Y2 - Y1, X2 - X1) * 180 / Math.PI * -1;
             Distance = Math.Sqrt(Math.Pow(DeltaX, 2) + Math.Pow(DeltaY, 2));
         }
@@ -210,7 +213,7 @@ namespace YuanliCore.Views.CanvasShapes
 
             if (IsInteractived)
             {
-                pen = new Pen(Brushes.Green, 1);
+                pen = new Pen(Brushes.Green, StrokeThickness / 2);
                 dc.DrawGeometry(Brushes.Transparent, pen, Resize1Geometry);
                 dc.DrawGeometry(Brushes.Transparent, pen, Resize2Geometry);
                 dc.DrawGeometry(Brushes.Transparent, pen, TranslateGeometry);

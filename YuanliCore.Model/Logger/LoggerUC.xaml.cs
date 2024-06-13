@@ -120,7 +120,7 @@ namespace YuanliCore.Logger
     {
         PROCESS,
         TRIG,
-        ERROR,
-        ALARM
+        ERROR,//緊急停止、軸卡異常
+        ALARM //真空異常 上傳失敗 等...
     }
 }
