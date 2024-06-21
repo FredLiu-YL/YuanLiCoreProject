@@ -124,7 +124,8 @@ namespace YuanliCore.Views.CanvasShapes
         /// </summary>
         public void GeometryAction()
         {
-            pairs.Add(_TranslateGeometry, Pos => {
+            pairs.Add(_TranslateGeometry, Pos =>
+            {
                 var position = Pos - new Point(X - ShapeLeft - 1, Y - ShapeTop - 1);
                 X += position.X;
                 Y += position.Y;
@@ -166,7 +167,7 @@ namespace YuanliCore.Views.CanvasShapes
             {
                 GeometryGroup geometry = new GeometryGroup();
                 _ellipseGeometry = new EllipseGeometry(new Rect(0, 0, 2 * Radius, 2 * Radius));
-                
+
                 geometry.Children.Add(_ellipseGeometry);
                 thisgeometry = geometry;
                 return geometry;
@@ -208,11 +209,11 @@ namespace YuanliCore.Views.CanvasShapes
             {
                 if (IsResizeEnabled)
                 {
-                    pen = new Pen(Brushes.Green, 1);
+                    pen = new Pen(Brushes.Green, StrokeThickness / 2);
                     dc.DrawGeometry(Brushes.Transparent, pen, ResizeGeometry);
                 }
 
-                if(IsMoveEnabled)
+                if (IsMoveEnabled)
                     dc.DrawGeometry(Brushes.Transparent, transparentPen, TranslateGeometry);
             }
         }
@@ -239,7 +240,7 @@ namespace YuanliCore.Views.CanvasShapes
 
         public override bool ShapeContains(Point point)
         {
-            return thisgeometry.FillContains(Point.Subtract(point,(Vector)LeftTop));
+            return thisgeometry.FillContains(Point.Subtract(point, (Vector)LeftTop));
         }
 
         public override Point[] GetEdgePoints(Size ImageSize)
@@ -254,7 +255,7 @@ namespace YuanliCore.Views.CanvasShapes
 
             double anglestep = 0.01;
             double currentAngle = 0;
-            Point[] EdgePoints = Enumerable.Range(0, (int)(360 / anglestep)).Select(index=> 
+            Point[] EdgePoints = Enumerable.Range(0, (int)(360 / anglestep)).Select(index =>
             {
                 double radians = (Math.PI / 180) * currentAngle + anglestep * index;
                 double x = X + Radius * Math.Sin(radians);
@@ -263,7 +264,7 @@ namespace YuanliCore.Views.CanvasShapes
             }).Distinct().ToArray();
 
             return EdgePoints;
- 
+
         }
     }
 }
