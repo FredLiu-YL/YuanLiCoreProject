@@ -12,6 +12,12 @@ namespace YuanliCore.Model
     public class MicroscopeParam : INotifyPropertyChanged
     {
         private ObservableCollection<string> lensName = new ObservableCollection<string>();
+        private ObservableCollection<int> bFIntensity = new ObservableCollection<int>();
+        private ObservableCollection<int> bFApeture = new ObservableCollection<int>();
+        private ObservableCollection<int> bFAFParamTable = new ObservableCollection<int>();
+        private ObservableCollection<int> dFIntensity = new ObservableCollection<int>();
+        private ObservableCollection<int> dFApeture = new ObservableCollection<int>();
+        private ObservableCollection<int> dFAFParamTable = new ObservableCollection<int>();
         private int lensIndex;
         private int cubeIndex;
         private int filter1Index;
@@ -27,11 +33,62 @@ namespace YuanliCore.Model
         private int aFPEL;
         private int timeOutRetryCount;
         private bool isHaveDIC;
-
+        /// <summary>
+        /// Lens名稱
+        /// </summary>
         public ObservableCollection<string> LensName
         {
             get => lensName;
             set => SetValue(ref lensName, value);
+        }
+
+        /// <summary>
+        /// 明視野光亮度
+        /// </summary>
+        public ObservableCollection<int> BFIntensity
+        {
+            get => bFIntensity;
+            set => SetValue(ref bFIntensity, value);
+        }
+        /// <summary>
+        /// 明視野光圈
+        /// </summary>
+        public ObservableCollection<int> BFApeture
+        {
+            get => bFApeture;
+            set => SetValue(ref bFApeture, value);
+        }
+        /// <summary>
+        /// 明視野自動對焦參數組
+        /// </summary>
+        public ObservableCollection<int> BFAFParamTable
+        {
+            get => bFAFParamTable;
+            set => SetValue(ref bFAFParamTable, value);
+        }
+        /// <summary>
+        /// 暗視野光亮度
+        /// </summary>
+        public ObservableCollection<int> DFIntensity
+        {
+            get => dFIntensity;
+            set => SetValue(ref dFIntensity, value);
+        }
+        /// <summary>
+        /// 暗視野光圈
+        /// </summary>
+        public ObservableCollection<int> DFApeture
+        {
+            get => dFApeture;
+            set => SetValue(ref dFApeture, value);
+        }
+        /// <summary>
+        /// 暗視野自動對焦參數組
+        /// </summary>
+        public ObservableCollection<int> DFAFParamTable
+        {
+            get => dFAFParamTable;
+            set => SetValue(ref dFAFParamTable, value);
         }
         /// <summary>
         /// 目前Lens在第幾孔

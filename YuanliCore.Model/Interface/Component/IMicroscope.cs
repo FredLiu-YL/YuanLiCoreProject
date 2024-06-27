@@ -129,6 +129,12 @@ namespace YuanliCore.Model.Interface
         /// <param name="idx"></param>
         Task ChangeLightSpreadAsync(int idx);
         /// <summary>
+        /// 更換自動對焦
+        /// </summary>
+        /// <param name="idx"></param>
+        /// <returns></returns>
+        Task ChangeAFParameterTable(int idx);
+        /// <summary>
         /// 一直對焦
         /// </summary>
         void AFTrace();

@@ -141,6 +141,7 @@ namespace YuanliCore.Model.Microscope
                     try
                     {
                         Microscope.ChangeLensAsync(1).Wait();
+                        ChangeDefaultParam();
                     }
                     catch (Exception)
                     {
@@ -162,6 +163,7 @@ namespace YuanliCore.Model.Microscope
                     try
                     {
                         Microscope.ChangeLensAsync(2).Wait();
+                        ChangeDefaultParam();
                     }
                     catch (Exception)
                     {
@@ -183,6 +185,7 @@ namespace YuanliCore.Model.Microscope
                     try
                     {
                         Microscope.ChangeLensAsync(3).Wait();
+                        ChangeDefaultParam();
                     }
                     catch (Exception)
                     {
@@ -204,6 +207,7 @@ namespace YuanliCore.Model.Microscope
                     try
                     {
                         Microscope.ChangeLensAsync(4).Wait();
+                        ChangeDefaultParam();
                     }
                     catch (Exception)
                     {
@@ -225,6 +229,7 @@ namespace YuanliCore.Model.Microscope
                     try
                     {
                         Microscope.ChangeLensAsync(5).Wait();
+                        ChangeDefaultParam();
                     }
                     catch (Exception)
                     {
@@ -256,6 +261,7 @@ namespace YuanliCore.Model.Microscope
                         {
                             Microscope.ChangeCubeAsync(2).Wait();
                         }
+                        ChangeDefaultParam();
                     }
                     catch (Exception)
                     {
@@ -286,6 +292,7 @@ namespace YuanliCore.Model.Microscope
                         {
                             Microscope.ChangeCubeAsync(1).Wait();
                         }
+                        ChangeDefaultParam();
                     }
                     catch (Exception)
                     {
@@ -316,11 +323,46 @@ namespace YuanliCore.Model.Microscope
                     {
 
                     }
+                    ChangeDefaultParam();
                 }
                 SetValue(ref isObservation3, value);
             }
         }
+        private void ChangeDefaultParam()
+        {
+            try
+            {
+                bool isDF = false;
+                int paramIdx = Microscope.LensIndex - 1;
+                if (paramIdx <= 0) paramIdx = 0;
+                if (Microscope.CubeIndex == 2)
+                {
+                    isDF = true;
+                }
+                int intensity = 0;
+                int apeture = 0;
+                int aFParamTable = 0;
+                if (isDF)
+                {
+                    intensity = MicroscopeParam.DFIntensity[paramIdx];
+                    apeture = MicroscopeParam.DFApeture[paramIdx];
+                    aFParamTable = MicroscopeParam.DFAFParamTable[paramIdx];
+                }
+                else
+                {
+                    intensity = MicroscopeParam.BFIntensity[paramIdx];
+                    apeture = MicroscopeParam.BFApeture[paramIdx];
+                    aFParamTable = MicroscopeParam.BFAFParamTable[paramIdx];
+                }
+                Microscope.ChangeLightAsync(intensity).Wait();
+                Microscope.ChangeApertureAsync(apeture).Wait();
+                Microscope.ChangeAFParameterTable(aFParamTable).Wait();
+            }
+            catch (Exception ex)
+            {
+            }
 
+        }
 
 
         public ICommand ApertureChange => new RelayCommand<string>(async key =>
