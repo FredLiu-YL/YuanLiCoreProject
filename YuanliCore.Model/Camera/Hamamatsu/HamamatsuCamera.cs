@@ -378,7 +378,7 @@ namespace Hamamatsu
             }
 
             if (bUpdatePicture)
-                CreateBitmap(lutMin, lutMax);
+                CreateBitmap(m_image,lutMin, lutMax);
 
         }
         public void GetPixelFormat()
@@ -426,27 +426,27 @@ namespace Hamamatsu
             }
 
 
-            CreateBitmap(LutMin, LutMax);
+            CreateBitmap(m_image,LutMin, LutMax);
 
         }
 
-        private void CreateBitmap(int lutmin, int lutmax)
+        private void CreateBitmap(HamamatsuImage image,int lutmin, int lutmax)
         {
             try
             {
 
 
-                if (m_image.isValid())
+                if (image.isValid())
                 {
 
 
-                    Rectangle rc = new Rectangle(0, 0, m_image.width, m_image.height);
+                    Rectangle rc = new Rectangle(0, 0, image.width, image.height);
                     lock (BitmapLock)
                     {
 
                         m_bitmap = new Bitmap(Width, Height, pixelFormat);
 
-                        SubACQError err =  Copydib(ref m_bitmap, m_image.bufframe, ref rc, lutmin, lutmax, Camerabpp);
+                        SubACQError err =  Copydib(ref m_bitmap, image.bufframe, ref rc, lutmin, lutmax, Camerabpp);
 
 
                         var bitmap = m_bitmap.ToBitmapSource();
